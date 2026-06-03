@@ -621,25 +621,13 @@
   }
 
   /* ============================================
-     CMS LOADER — Projects & Testimonials
+     CMS LOADER — Testimonials only
      - Fetches from Supabase if configured
      - Falls back gracefully to hardcoded HTML if not
      ============================================ */
   async function loadCMS() {
     if (!sb) return;
 
-    // Projects → Portfolio Bento
-    try {
-      const { data: projects } = await sb
-        .from('projects')
-        .select('*')
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true });
-
-      if (projects && projects.length) renderProjects(projects);
-    } catch (e) { /* silent — keep hardcoded */ }
-
-    // Testimonials → Testimonials Bento
     try {
       const { data: tests } = await sb
         .from('testimonials')
@@ -649,44 +637,6 @@
 
       if (tests && tests.length) renderTestimonials(tests);
     } catch (e) { /* silent — keep hardcoded */ }
-  }
-
-  function renderProjects(items) {
-    const grid = document.querySelector('.bento-grid:not(.testimonials-grid)');
-    if (!grid) return;
-    const sizeClass = {
-      lg: 'hero-dashboard',
-      tall: 'premium-logo',
-      sm: 'modern-landing',
-      wide: 'crypto-dash'
-    };
-    grid.innerHTML = items.map((p, i) => {
-      const sk = sizeClass[p.size] || 'modern-landing';
-      const img = p.image_url
-        ? `<img src="${p.image_url}" alt="" onerror="this.style.display='none'">`
-        : '';
-      return `
-        <div class="bento-item ${sk}" data-project>
-          <div class="bento-image-wrapper">${img}</div>
-          <div class="bento-content">
-            <span class="category"
-                  data-ar="${esc(p.category_ar)}"
-                  data-en="${esc(p.category_en)}"
-                  data-fr="${esc(p.category_fr)}">${esc(p.category_ar)}</span>
-            <h3 data-ar="${esc(p.title_ar)}"
-                data-en="${esc(p.title_en)}"
-                data-fr="${esc(p.title_fr)}">${esc(p.title_ar)}</h3>
-            <p data-ar="${esc(p.description_ar)}"
-               data-en="${esc(p.description_en)}"
-               data-fr="${esc(p.description_fr)}">${esc(p.description_ar)}</p>
-          </div>
-        </div>`;
-    }).join('');
-    // Re-apply current language to new nodes
-    document.querySelectorAll('.bento-grid:not(.testimonials-grid) [data-ar]').forEach((el) => {
-      const v = el.dataset[currentLang];
-      if (v !== undefined) el.textContent = v;
-    });
   }
 
   function renderTestimonials(items) {
@@ -922,53 +872,6 @@
     const lang = saved || html.getAttribute('lang') || 'ar';
     setLang(lang);
     // typer سيبدأ بعد انتهاء الـ Preloader (في runPreloader)
-  })();
-
-  /* ============================================
-     STAT COUNTERS — أنميشن عدّ تصاعدي 0 → target
-     يبدأ عند دخول الـ stats للشاشة
-     ============================================ */
-  (function statCounters() {
-    const els = document.querySelectorAll('.stat-number[data-target]');
-    if (!els.length || !('IntersectionObserver' in window)) {
-      // fallback: عرض القيمة مباشرة
-      els.forEach((el) => {
-        el.textContent = el.dataset.target || '0';
-      });
-      return;
-    }
-
-    function animate(el) {
-      const target = parseInt(el.dataset.target, 10) || 0;
-      const duration = prefersReducedMotion ? 0 : 2000; // 2 ثانية
-      if (!duration) {
-        el.textContent = String(target);
-        return;
-      }
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
-        el.textContent = String(Math.floor(eased * target));
-        if (p < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          el.textContent = String(target);
-        }
-      }
-      requestAnimationFrame(tick);
-    }
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          animate(e.target);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.4, rootMargin: '0px 0px -40px 0px' });
-
-    els.forEach((el) => io.observe(el));
   })();
 
   /* ============================================

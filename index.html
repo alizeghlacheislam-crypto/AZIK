@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 
   <!-- Supabase JS client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -74,7 +74,6 @@
 
       <ul class="nav-links">
         <li><a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a></li>
-        <li><a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a></li>
         <li><a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a></li>
         <li><a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a></li>
         <li><a href="#faq" data-ar="أسئلة" data-en="FAQ" data-fr="FAQ">أسئلة</a></li>
@@ -110,7 +109,6 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a>
-      <a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a>
       <a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a>
       <a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a>
       <a href="#faq" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a>
@@ -149,8 +147,8 @@
       <div class="hero-actions">
         <a href="#pricing" class="btn btn-primary magnetic"
            data-ar="ابدأ مشروعك الآن" data-en="Start your project" data-fr="Démarrer maintenant">ابدأ مشروعك الآن</a>
-        <a href="#portfolio" class="btn btn-ghost"
-           data-ar="شاهد أعمالنا" data-en="See our work" data-fr="Voir nos travaux">شاهد أعمالنا</a>
+        <a href="#contact" class="btn btn-ghost"
+           data-ar="تواصل معنا" data-en="Contact us" data-fr="Contactez-nous">تواصل معنا</a>
       </div>
     </div>
   </header>
@@ -184,13 +182,12 @@
     </div>
   </section>
 
-  <!-- غلاف بفيديو واحد للأقسام الثلاثة يمنع التكرار ويوفر أداء المعالج -->
-  <div class="main-scenery-wrapper">
-    <!-- فيديو واحد مشترك وممتد -->
-    <video autoplay loop muted playsinline preload="metadata" poster="shared-poster.jpg" class="shared-video-bg">
-      <source src="hero-bg-6.mp4" type="video/mp4">
+  <!-- Sections BG Wrapper — فيديو واحد يخدم 5 أقسام (services → faq) -->
+  <div class="sections-bg-wrapper">
+    <video autoplay loop muted playsinline preload="metadata" class="sections-bg-video">
+      <source src="sections-bg.mp4" type="video/mp4">
     </video>
-    <div class="shared-overlay"></div>
+    <div class="sections-bg-overlay"></div>
 
   <!-- Services -->
   <section class="services" id="services">
@@ -320,132 +317,6 @@
     </div>
   </section>
 
-  <!-- Stats — أرقام تتحدث -->
-  <section class="stats" id="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number-wrap">
-            <span class="stat-number" data-target="120">0</span><span class="stat-suffix">+</span>
-          </div>
-          <div class="stat-label"
-               data-ar="مشروع منجز" data-en="Projects delivered" data-fr="Projets livrés">مشروع منجز</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-number-wrap">
-            <span class="stat-number" data-target="85">0</span><span class="stat-suffix">+</span>
-          </div>
-          <div class="stat-label"
-               data-ar="عميل سعيد" data-en="Happy clients" data-fr="Clients satisfaits">عميل سعيد</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-number-wrap">
-            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-          </div>
-          <div class="stat-label"
-               data-ar="سنوات خبرة" data-en="Years experience" data-fr="Ans d'expérience">سنوات خبرة</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-number-wrap">
-            <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
-          </div>
-          <div class="stat-label"
-               data-ar="رضا العملاء" data-en="Client satisfaction" data-fr="Satisfaction client">رضا العملاء</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="sub-title" data-ar="معرض الأعمال" data-en="Selected Work" data-fr="Réalisations">معرض الأعمال</span>
-        <h2>
-          <span data-ar="نظرة على" data-en="A glimpse of our" data-fr="Un aperçu de nos">نظرة على</span>
-          <span class="accent" data-ar="مشاريعنا الأخيرة" data-en="recent projects" data-fr="projets récents">مشاريعنا الأخيرة</span>
-        </h2>
-        <p data-ar="مزيج من الإبداع البصري والهندسة الرقمية في مكان واحد."
-           data-en="A blend of visual creativity and digital engineering — in one place."
-           data-fr="Un mélange de créativité visuelle et d'ingénierie digitale.">
-          مزيج من الإبداع البصري والهندسة الرقمية في مكان واحد.
-        </p>
-      </div>
-
-      <div class="bento-grid">
-
-        <div class="bento-item reveal hero-dashboard" data-project data-spotlight>
-          <div class="bento-image-wrapper">
-            <img src="work1.jpg" alt="لقطة شاشة من تصميم لوحة تحكم نظام نيفا المالي Neval — واجهة SaaS لإدارة المحافظ الرقمية وتحليل البيانات" onerror="this.style.display='none'">
-          </div>
-          <div class="bento-content">
-            <span class="category" data-ar="لوحة تحكم / SaaS" data-en="Dashboard / SaaS" data-fr="Dashboard / SaaS">لوحة تحكم / SaaS</span>
-            <h3 data-ar="نظام نيفا المالي — Neval Dashboard"
-                data-en="Neval Financial — Dashboard"
-                data-fr="Système Neval — Dashboard">نظام نيفا المالي — Neval Dashboard</h3>
-            <p data-ar="تصميم واجهة مستخدم متكاملة لإدارة المحافظ الرقمية وتحليل البيانات."
-               data-en="End-to-end UI for managing digital portfolios and analyzing data."
-               data-fr="Interface complète pour la gestion de portefeuilles et l'analyse de données.">
-              تصميم واجهة مستخدم متكاملة لإدارة المحافظ الرقمية وتحليل البيانات.
-            </p>
-          </div>
-        </div>
-
-        <div class="bento-item reveal premium-logo" data-project data-spotlight>
-          <div class="bento-image-wrapper">
-            <img src="work2.jpg" alt="تصميم شعار وهوية بصرية لشركة سهم للاستثمار — لوغو هندسي يعكس الثقة والنمو" onerror="this.style.display='none'">
-          </div>
-          <div class="bento-content">
-            <span class="category" data-ar="شعار وهوية بصرية" data-en="Logo & Identity" data-fr="Logo & Identité">شعار وهوية بصرية</span>
-            <h3 data-ar="هوية شركة سهم للاستثمار"
-                data-en="Sahm Investment — Brand"
-                data-fr="Sahm Investissement — Identité">هوية شركة سهم للاستثمار</h3>
-            <p data-ar="شعار هندسي يعكس الثقة والنمو المستقبلي."
-               data-en="A geometric logo conveying trust and future growth."
-               data-fr="Un logo géométrique reflétant confiance et croissance.">
-              شعار هندسي يعكس الثقة والنمو المستقبلي.
-            </p>
-          </div>
-        </div>
-
-        <div class="bento-item reveal modern-landing" data-project data-spotlight>
-          <div class="bento-image-wrapper">
-            <img src="work3.jpg" alt="تصميم صفحة هبوط لتطبيق كوانتوم الرقمي — واجهة UI/UX تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات" onerror="this.style.display='none'">
-          </div>
-          <div class="bento-content">
-            <span class="category" data-ar="صفحة هبوط / UI/UX" data-en="Landing / UI/UX" data-fr="Landing / UI/UX">صفحة هبوط / UI/UX</span>
-            <h3 data-ar="تطبيق كوانتوم الرقمي" data-en="Quantum Digital App" data-fr="Application Quantum">تطبيق كوانتوم الرقمي</h3>
-            <p data-ar="واجهة تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات."
-               data-en="A dark-themed interactive UI engineered to boost sales."
-               data-fr="Une interface interactive en thème sombre.">
-              واجهة تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات.
-            </p>
-          </div>
-        </div>
-
-        <div class="bento-item reveal crypto-dash" data-project data-spotlight>
-          <div class="bento-image-wrapper">
-            <img src="work4.jpg" alt="تصميم منصة تداول العملات المشفرة — Dashboard متجاوب لمتابعة الأسعار اللحظية والتحليلات" onerror="this.style.display='none'">
-          </div>
-          <div class="bento-content">
-            <span class="category" data-ar="تطبيق ويب / Dashboard" data-en="Web App / Dashboard" data-fr="App Web / Dashboard">تطبيق ويب / Dashboard</span>
-            <h3 data-ar="منصة تداول العملات المشفرة"
-                data-en="Crypto Trading Platform"
-                data-fr="Plateforme de trading crypto">منصة تداول العملات المشفرة</h3>
-            <p data-ar="واجهة مستخدم سريعة الاستجابة لمتابعة الأسعار اللحظية."
-               data-en="A highly responsive UI for tracking real-time prices."
-               data-fr="Une interface réactive pour suivre les cours en temps réel.">
-              واجهة مستخدم سريعة الاستجابة لمتابعة الأسعار اللحظية.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- Testimonials Bento Grid -->
   <section class="testimonials" id="testimonials">
@@ -537,8 +408,6 @@
     </div>
   </section>
 
-  </div><!-- /.main-scenery-wrapper -->
-
   <!-- Infinite Marquee — كلمات الهوية بخط مفرّغ ضخم -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track" id="marqueeTrack">
@@ -559,12 +428,6 @@
 
   <!-- Pricing -->
   <section class="pricing" id="pricing">
-    <!-- فيديو الخلفية: حركة سينمائية -->
-    <video autoplay loop muted playsinline preload="metadata" poster="pricing-poster.jpg" class="pricing-video-bg">
-      <source src="hero-bg-5.mp4" type="video/mp4">
-    </video>
-    <div class="pricing-overlay"></div>
-
     <div class="container">
       <div class="section-header reveal">
         <span class="sub-title" data-ar="باقات الأسعار" data-en="Pricing" data-fr="Tarifs">باقات الأسعار</span>
@@ -782,12 +645,14 @@
     </div>
   </section>
 
+  </div><!-- /.sections-bg-wrapper -->
+
   <!-- غلاف مشترك يدمج Contact + Footer بخلفية فيديو واحدة -->
   <div class="contact-footer-wrapper">
 
     <!-- فيديو واحد مشترك بين القسمين -->
     <video autoplay loop muted playsinline preload="metadata" poster="contact-footer-poster.jpg" class="contact-footer-video">
-      <source src="hero-bg-3.mp4" type="video/mp4">
+      <source src="contact-bg.mp4" type="video/mp4">
     </video>
     <div class="contact-footer-overlay"></div>
 
@@ -997,6 +862,6 @@
           data-fr="Contactez-nous sur WhatsApp">تواصل عبر واتساب</span>
   </a>
 
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>

@@ -624,49 +624,68 @@ section {
 }
 
 /* ==============================================
-   تنسيق الغلاف المشترك لمنع تكرار وتحميل الفيديوهات
+   SECTIONS BG WRAPPER — فيديو واحد لـ 5 أقسام
+   (services + testimonials + pricing + faq)
+   مرآة لنمط .contact-footer-wrapper
    ============================================== */
-.main-scenery-wrapper {
+.sections-bg-wrapper {
   position: relative;
   background-color: #090A0F;
   overflow: hidden;
+  width: 100%;
 }
 
-.shared-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.sections-bg-video {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
   z-index: 1;
   pointer-events: none;
-  /* قناع تلاشي من الأعلى والأسفل للاندماج مع السواد */
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+  /* تلاشي من الأعلى والأسفل لاندماج سلس مع Hero و Contact */
+  mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
 }
 
-.shared-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 30%, #090A0F 100%);
+.sections-bg-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: radial-gradient(circle at center, rgba(9,10,15,0.55) 30%, #090A0F 100%);
   z-index: 2;
+  pointer-events: none;
 }
 
-/* تفريغ الأقسام الداخلية لتظهر الخلفية المشتركة */
+/* الأقسام الأربعة شفافة لإظهار الفيديو المشترك خلفها */
 .services,
-.portfolio,
-.testimonials {
+.testimonials,
+.pricing,
+.faq {
   position: relative;
   z-index: 3;
   background: transparent !important;
 }
 
-/* تلاشي ناعم موحَّد لبقية الفيديوهات الفردية */
-.hero-video-bg,
-.pricing-video-bg,
-.contact-video-bg,
-.footer-video-bg {
+/* Light Mode — تكيّف الفيديو والـ overlay */
+html[data-theme="light"] .sections-bg-video {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+  mix-blend-mode: multiply;
+}
+html[data-theme="light"] .sections-bg-overlay {
+  background: radial-gradient(circle at center, rgba(244,245,248,0.7) 30%, #F4F5F8 100%);
+}
+html[data-theme="light"] .sections-bg-wrapper {
+  background-color: #F4F5F8;
+}
+
+/* تلاشي ناعم لفيديو الـ Hero فقط (الباقي يستخدم wrapper-based mask) */
+.hero-video-bg {
   mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
 }
@@ -864,100 +883,8 @@ html[data-theme="light"] .main-scenery-wrapper {
   max-width: 1200px;
   margin: 0 auto;
 }
-.hero-dashboard  { grid-column: span 2; grid-row: span 2; }
-.premium-logo    { grid-column: span 1; grid-row: span 2; }
-.modern-landing  { grid-column: span 1; grid-row: span 1; }
-.crypto-dash     { grid-column: span 2; grid-row: span 1; }
-
-.bento-item {
-  position: relative;
-  background: var(--glass-bg-bot);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  transition: border-color .4s, transform .4s var(--ease), background .5s, box-shadow .4s;
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow-soft);
-}
-.bento-item:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  transform: translateY(-5px);
-  box-shadow: 0 24px 60px -20px var(--accent-glow);
-}
-
-.bento-image-wrapper {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 30% 30%, var(--accent-soft), transparent 60%),
-    linear-gradient(160deg, var(--surface), var(--bg-2));
-}
-.bento-image-wrapper img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: var(--bento-img-opacity);
-  transition: transform .7s cubic-bezier(0.25, 1, 0.5, 1), opacity .5s;
-}
-.bento-item:hover .bento-image-wrapper img {
-  transform: scale(1.06);
-  opacity: var(--bento-img-opacity-hover);
-}
-
-.bento-content {
-  position: relative;
-  z-index: 1;
-  padding: 28px;
-  background: linear-gradient(to top,
-              var(--bg) 0%,
-              color-mix(in srgb, var(--bg) 60%, transparent) 60%,
-              transparent 100%);
-  pointer-events: none;
-}
-.bento-content .category {
-  display: inline-block;
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
-}
-.bento-content h3 {
-  color: var(--text);
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 8px;
-  line-height: 1.35;
-}
-.bento-content p {
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity .3s, max-height .3s, margin-top .3s;
-}
-.bento-item:hover .bento-content p {
-  opacity: 1;
-  max-height: 120px;
-  margin-top: 6px;
-}
-
 @media (max-width: 900px) {
   .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  .hero-dashboard, .premium-logo, .modern-landing, .crypto-dash {
-    grid-column: span 1;
-    grid-row: span 1;
-    min-height: 320px;
-  }
-  .bento-content p { opacity: 1; max-height: none; margin-top: 6px; }
 }
 
 /* ============================================
@@ -1070,62 +997,6 @@ html[data-theme="light"] .main-scenery-wrapper {
     grid-row: span 1;
     min-height: 220px;
   }
-}
-
-/* ============================================
-   PRICING SECTION — Video Background
-   ============================================ */
-.pricing {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background-color: #090A0F;
-  z-index: 4;
-}
-
-/* فيديو خلفية الأسعار */
-.pricing-video-bg {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.32;
-  /* تلاشي مزدوج من الأعلى والأسفل للاندماج السلس */
-  -webkit-mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
-          mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
-}
-
-/* طبقة تظليل قسم الأسعار */
-.pricing-overlay {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 2;
-  background: rgba(9, 10, 15, 0.78);
-  pointer-events: none;
-}
-
-/* المحتوى فوق الفيديو */
-.pricing > .container {
-  position: relative;
-  z-index: 3;
-}
-
-/* تكيّف Light Mode */
-html[data-theme="light"] .pricing-video-bg {
-  filter: invert(1) hue-rotate(180deg) brightness(1.1);
-  mix-blend-mode: multiply;
-}
-html[data-theme="light"] .pricing-overlay {
-  background: rgba(245, 246, 250, 0.82) !important;
 }
 
 /* ============================================
@@ -2499,59 +2370,6 @@ body.loaded .hero .hero-content {
 }
 
 /* ==============================================
-   STATS — أرقام تتحدث
-   ============================================== */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
-  padding: 48px;
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-soft);
-}
-
-.stat-item {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.stat-number-wrap {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
-  font-family: 'Inter', 'Cairo', sans-serif;
-  font-size: clamp(48px, 6vw, 72px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--accent-color);
-  font-variant-numeric: tabular-nums;
-}
-.stat-suffix {
-  font-size: 0.7em;
-  font-weight: 800;
-  color: var(--accent-color);
-}
-
-.stat-label {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .stats-grid { padding: 32px 20px; gap: 24px; }
-}
-
-/* ==============================================
    FAQ — أسئلة شائعة
    ============================================== */
 .faq-list {
@@ -2665,6 +2483,7 @@ body.loaded .hero .hero-content {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   user-select: none;
+  pointer-events: none;
   /* JS سيضبط السرعة الديناميكية على هذا المتغير */
   --marquee-duration: 35s;
 }
@@ -2674,7 +2493,9 @@ body.loaded .hero .hero-content {
   width: max-content;
   white-space: nowrap;
   animation: marqueeScroll var(--marquee-duration) linear infinite;
+  animation-play-state: running !important;
   will-change: transform;
+  pointer-events: none;
 }
 
 .marquee-group {
@@ -2712,11 +2533,6 @@ body.loaded .hero .hero-content {
 @keyframes marqueeScroll {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
-}
-
-/* Pause on hover (للسماح بالقراءة) */
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 
 /* Light Mode — stroke أغمق ليبرز على الأبيض */
