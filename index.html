@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090A0F">
+  <meta name="description" content="استوديو تصميم رقمي فاخر يحوّل الأفكار إلى هويات بصرية ومواقع ولوحات تحكم استثنائية.">
+  <title>AZIK — استوديو تصميم رقمي فاخر</title>
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AZIK — استوديو تصميم رقمي فاخر">
+  <meta property="og:description" content="استوديو تصميم رقمي فاخر يحوّل الأفكار إلى هويات بصرية ومواقع ولوحات تحكم استثنائية.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:locale" content="ar_DZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AZIK — استوديو تصميم رقمي فاخر">
+  <meta name="twitter:description" content="استوديو تصميم رقمي فاخر يحوّل الأفكار إلى تجارب بصرية استثنائية.">
+  <meta name="twitter:image" content="logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=5">
+
+  <!-- Supabase JS client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (function () {
+      try {
+        const t = localStorage.getItem('azik-theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+        const l = localStorage.getItem('azik-lang');
+        if (l === 'en' || l === 'fr') {
+          document.documentElement.setAttribute('lang', l);
+          document.documentElement.setAttribute('dir', 'ltr');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="preloading">
+
+  <!-- Premium Preloader — شاشة تحميل سينمائية -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <img src="logo.png" alt="" class="preloader-logo">
+      <div class="preloader-counter" id="preloaderCounter">00</div>
+      <div class="preloader-bar"><div class="preloader-bar-fill" id="preloaderBar"></div></div>
+      <div class="preloader-label">AZIK Studio</div>
+    </div>
+  </div>
+
+  <a href="#main" class="skip-link"
+     data-ar="تخطّى إلى المحتوى" data-en="Skip to content" data-fr="Aller au contenu">تخطّى إلى المحتوى</a>
+
+  <canvas id="sparks-canvas" aria-hidden="true"></canvas>
+
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="AZIK">
+        <img src="logo.png" alt="AZIK" class="logo-img" width="150" height="50">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a></li>
+        <li><a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a></li>
+        <li><a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a></li>
+        <li><a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a></li>
+        <li><a href="#faq" data-ar="أسئلة" data-en="FAQ" data-fr="FAQ">أسئلة</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn active" data-lang="ar" aria-label="العربية" type="button">ع</button>
+          <button class="lang-btn" data-lang="en" aria-label="English" type="button">EN</button>
+          <button class="lang-btn" data-lang="fr" aria-label="Français" type="button">FR</button>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع" type="button">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+
+        <a href="#pricing" class="btn btn-primary btn-sm hide-mobile"
+           data-ar="ابدأ مشروعك" data-en="Start a project" data-fr="Démarrer">ابدأ مشروعك</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu" type="button">
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+            <path d="M1 1h18M1 7h18M1 13h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a>
+      <a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a>
+      <a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a>
+      <a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a>
+      <a href="#faq" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a>
+      <a href="#pricing" class="btn btn-primary"
+         data-ar="ابدأ مشروعك" data-en="Start a project" data-fr="Démarrer">ابدأ مشروعك</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Live 3D Video Background -->
+  <header class="hero" id="main">
+    <!-- فيديو الخلفية الثلاثي الأبعاد المتحرك تلقائياً وبشكل مستمر -->
+    <video autoplay loop muted playsinline preload="metadata" poster="hero-poster.jpg" class="hero-video-bg">
+      <source src="hero-bg.mp4" type="video/mp4">
+    </video>
+
+    <!-- طبقة تظليل خفيفة لضمان وضوح وقراءة النصوص الفخمة -->
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <span class="eyebrow"
+            data-ar="استوديو تصميم رقمي · الجزائر"
+            data-en="Digital Design Studio · Algeria"
+            data-fr="Studio de Design Numérique · Algérie">استوديو تصميم رقمي · الجزائر</span>
+      <h1>
+        <span data-ar="نصمّم لك" data-en="We craft" data-fr="Nous créons">نصمّم لك</span><br>
+        <span class="typing-wrap">
+          <span class="typing-text accent" id="typingText"></span><span class="typing-cursor" aria-hidden="true">|</span>
+        </span>
+      </h1>
+      <p class="hero-sub"
+         data-ar="من الشعار إلى الموقع إلى لوحة التحكم — نصمّم تجارب رقمية متماسكة تعكس روح علامتك التجارية وتُحوّل الزوار إلى عملاء."
+         data-en="From logo to website to dashboard — we craft cohesive digital experiences that reflect your brand and turn visitors into customers."
+         data-fr="Du logo au site web au tableau de bord — nous créons des expériences digitales cohérentes qui reflètent votre marque et convertissent vos visiteurs en clients.">
+        من الشعار إلى الموقع إلى لوحة التحكم — نصمّم تجارب رقمية متماسكة تعكس روح علامتك التجارية وتُحوّل الزوار إلى عملاء.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary magnetic"
+           data-ar="ابدأ مشروعك الآن" data-en="Start your project" data-fr="Démarrer maintenant">ابدأ مشروعك الآن</a>
+        <a href="#portfolio" class="btn btn-ghost"
+           data-ar="شاهد أعمالنا" data-en="See our work" data-fr="Voir nos travaux">شاهد أعمالنا</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Trusted By — شريط شعارات عملاء (نصّية حتى يأتي التصميم النهائي) -->
+  <section class="trusted-strip" aria-label="Trusted by leading brands">
+    <div class="container">
+      <p class="trusted-label"
+         data-ar="موثوق به من طرف علامات تجارية رائدة"
+         data-en="Trusted by leading brands"
+         data-fr="La confiance de marques leaders">
+        موثوق به من طرف علامات تجارية رائدة
+      </p>
+      <div class="trusted-logos">
+        <div class="trusted-track">
+          <span class="trusted-logo">Atlas Capital</span>
+          <span class="trusted-logo">Souk Digital</span>
+          <span class="trusted-logo">Maghreb Lab</span>
+          <span class="trusted-logo">Quantum App</span>
+          <span class="trusted-logo">Neval</span>
+          <span class="trusted-logo">Sahm</span>
+          <!-- نسخة مكررة للـ marquee السلس على الموبايل -->
+          <span class="trusted-logo" aria-hidden="true">Atlas Capital</span>
+          <span class="trusted-logo" aria-hidden="true">Souk Digital</span>
+          <span class="trusted-logo" aria-hidden="true">Maghreb Lab</span>
+          <span class="trusted-logo" aria-hidden="true">Quantum App</span>
+          <span class="trusted-logo" aria-hidden="true">Neval</span>
+          <span class="trusted-logo" aria-hidden="true">Sahm</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- غلاف بفيديو واحد للأقسام الثلاثة يمنع التكرار ويوفر أداء المعالج -->
+  <div class="main-scenery-wrapper">
+    <!-- فيديو واحد مشترك وممتد -->
+    <video autoplay loop muted playsinline preload="metadata" poster="shared-poster.jpg" class="shared-video-bg">
+      <source src="hero-bg-6.mp4" type="video/mp4">
+    </video>
+    <div class="shared-overlay"></div>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="خدماتنا" data-en="Our services" data-fr="Nos services">خدماتنا</span>
+        <h2>
+          <span data-ar="ثلاث خدمات." data-en="Three services." data-fr="Trois services.">ثلاث خدمات.</span>
+          <span class="accent" data-ar="عقل تصميم واحد." data-en="One design mind." data-fr="Un seul esprit créatif.">عقل تصميم واحد.</span>
+        </h2>
+        <p data-ar="كل خدمة مُصمَّمة بدقة لتلبية احتياجات علامتك التجارية الرقمية."
+           data-en="Each service crafted precisely to meet your digital brand's needs."
+           data-fr="Chaque service conçu avec précision pour répondre aux besoins de votre marque digitale.">
+          كل خدمة مُصمَّمة بدقة لتلبية احتياجات علامتك التجارية الرقمية.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal" data-spotlight>
+          <div class="icon-wrap">
+            <img src="logo-3d.png" alt="" class="float-icon" onerror="this.style.display='none'">
+          </div>
+          <span class="service-tag" data-ar="الهوية البصرية" data-en="Brand identity" data-fr="Identité visuelle">الهوية البصرية</span>
+          <h3 data-ar="تصميم الشعارات" data-en="Logo design" data-fr="Design de logo">تصميم الشعارات</h3>
+          <p data-ar="شعارات أصلية تحكي قصة علامتك، مع نظام بصري متكامل: ألوان، خطوط، استخدامات."
+             data-en="Original logos that tell your brand's story, paired with a complete visual system."
+             data-fr="Des logos originaux qui racontent l'histoire de votre marque.">
+            شعارات أصلية تحكي قصة علامتك، مع نظام بصري متكامل: ألوان، خطوط، استخدامات.
+          </p>
+          <a href="#pricing" class="card-link">
+            <span data-ar="اطلب الآن" data-en="Request now" data-fr="Commander">اطلب الآن</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="service-card reveal" data-spotlight>
+          <div class="icon-wrap">
+            <img src="web-3d.png" alt="" class="float-icon" onerror="this.style.display='none'">
+          </div>
+          <span class="service-tag" data-ar="المواقع الإلكترونية" data-en="Web design" data-fr="Conception web">المواقع الإلكترونية</span>
+          <h3 data-ar="صفحات الهبوط" data-en="Landing pages" data-fr="Landing pages">صفحات الهبوط</h3>
+          <p data-ar="مواقع سريعة، متجاوبة، ومصمَّمة للتحويل. من الفكرة إلى الإطلاق، بكود نظيف وتجربة استثنائية."
+             data-en="Fast, responsive websites built for conversion — from idea to launch."
+             data-fr="Des sites rapides, responsives et conçus pour convertir.">
+            مواقع سريعة، متجاوبة، ومصمَّمة للتحويل. من الفكرة إلى الإطلاق، بكود نظيف وتجربة استثنائية.
+          </p>
+          <a href="#pricing" class="card-link">
+            <span data-ar="اطلب الآن" data-en="Request now" data-fr="Commander">اطلب الآن</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="service-card reveal" data-spotlight>
+          <div class="icon-wrap">
+            <img src="dash-3d.png" alt="" class="float-icon" onerror="this.style.display='none'">
+          </div>
+          <span class="service-tag" data-ar="لوحات التحكم" data-en="Dashboards" data-fr="Tableaux de bord">لوحات التحكم</span>
+          <h3 data-ar="تصميم Dashboards" data-en="Dashboard design" data-fr="Design de Dashboards">تصميم Dashboards</h3>
+          <p data-ar="واجهات بيانات أنيقة وعملية: تحليلات، تقارير، أدوات تحكم. تصميم يجعل الأرقام مفهومة في لحظة."
+             data-en="Elegant, practical data interfaces — analytics, reports, controls."
+             data-fr="Interfaces de données élégantes et fonctionnelles.">
+            واجهات بيانات أنيقة وعملية: تحليلات، تقارير، أدوات تحكم. تصميم يجعل الأرقام مفهومة في لحظة.
+          </p>
+          <a href="#pricing" class="card-link">
+            <span data-ar="اطلب الآن" data-en="Request now" data-fr="Commander">اطلب الآن</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Process — كيف نعمل -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="كيف نعمل" data-en="How we work" data-fr="Notre méthode">كيف نعمل</span>
+        <h2>
+          <span data-ar="من الفكرة" data-en="From idea" data-fr="De l'idée">من الفكرة</span>
+          <span class="accent" data-ar="إلى الإطلاق." data-en="to launch." data-fr="au lancement.">إلى الإطلاق.</span>
+        </h2>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-step" data-spotlight>
+          <div class="process-number">01</div>
+          <h3 data-ar="استشارة وفهم" data-en="Discovery" data-fr="Découverte">استشارة وفهم</h3>
+          <p data-ar="نستمع لرؤيتك ونحلّل جمهورك وأهدافك بدقة."
+             data-en="We listen to your vision and analyze your audience and goals."
+             data-fr="Nous écoutons votre vision et analysons vos objectifs.">
+            نستمع لرؤيتك ونحلّل جمهورك وأهدافك بدقة.
+          </p>
+        </article>
+
+        <article class="process-step" data-spotlight>
+          <div class="process-number">02</div>
+          <h3 data-ar="تصميم وإبداع" data-en="Design" data-fr="Conception">تصميم وإبداع</h3>
+          <p data-ar="نحوّل الأفكار إلى تصاميم بصرية مدروسة بأدق التفاصيل."
+             data-en="We turn ideas into thoughtfully crafted visual designs."
+             data-fr="Nous transformons les idées en designs soignés.">
+            نحوّل الأفكار إلى تصاميم بصرية مدروسة بأدق التفاصيل.
+          </p>
+        </article>
+
+        <article class="process-step" data-spotlight>
+          <div class="process-number">03</div>
+          <h3 data-ar="مراجعة وتعديل" data-en="Refine" data-fr="Révision">مراجعة وتعديل</h3>
+          <p data-ar="نراجع معك ونعدّل حتى تصبح النتيجة مطابقة لرؤيتك."
+             data-en="We review together and refine until it matches your vision."
+             data-fr="Nous révisons ensemble jusqu'à la perfection.">
+            نراجع معك ونعدّل حتى تصبح النتيجة مطابقة لرؤيتك.
+          </p>
+        </article>
+
+        <article class="process-step" data-spotlight>
+          <div class="process-number">04</div>
+          <h3 data-ar="تسليم وإطلاق" data-en="Launch" data-fr="Lancement">تسليم وإطلاق</h3>
+          <p data-ar="نسلّم الملفات كاملة وندعمك بعد الإطلاق."
+             data-en="We deliver all files and support you after launch."
+             data-fr="Nous livrons tout et vous accompagnons après le lancement.">
+            نسلّم الملفات كاملة وندعمك بعد الإطلاق.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats — أرقام تتحدث -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number-wrap">
+            <span class="stat-number" data-target="120">0</span><span class="stat-suffix">+</span>
+          </div>
+          <div class="stat-label"
+               data-ar="مشروع منجز" data-en="Projects delivered" data-fr="Projets livrés">مشروع منجز</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-wrap">
+            <span class="stat-number" data-target="85">0</span><span class="stat-suffix">+</span>
+          </div>
+          <div class="stat-label"
+               data-ar="عميل سعيد" data-en="Happy clients" data-fr="Clients satisfaits">عميل سعيد</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-wrap">
+            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
+          </div>
+          <div class="stat-label"
+               data-ar="سنوات خبرة" data-en="Years experience" data-fr="Ans d'expérience">سنوات خبرة</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number-wrap">
+            <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
+          </div>
+          <div class="stat-label"
+               data-ar="رضا العملاء" data-en="Client satisfaction" data-fr="Satisfaction client">رضا العملاء</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="معرض الأعمال" data-en="Selected Work" data-fr="Réalisations">معرض الأعمال</span>
+        <h2>
+          <span data-ar="نظرة على" data-en="A glimpse of our" data-fr="Un aperçu de nos">نظرة على</span>
+          <span class="accent" data-ar="مشاريعنا الأخيرة" data-en="recent projects" data-fr="projets récents">مشاريعنا الأخيرة</span>
+        </h2>
+        <p data-ar="مزيج من الإبداع البصري والهندسة الرقمية في مكان واحد."
+           data-en="A blend of visual creativity and digital engineering — in one place."
+           data-fr="Un mélange de créativité visuelle et d'ingénierie digitale.">
+          مزيج من الإبداع البصري والهندسة الرقمية في مكان واحد.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+
+        <div class="bento-item reveal hero-dashboard" data-project data-spotlight>
+          <div class="bento-image-wrapper">
+            <img src="work1.jpg" alt="لقطة شاشة من تصميم لوحة تحكم نظام نيفا المالي Neval — واجهة SaaS لإدارة المحافظ الرقمية وتحليل البيانات" onerror="this.style.display='none'">
+          </div>
+          <div class="bento-content">
+            <span class="category" data-ar="لوحة تحكم / SaaS" data-en="Dashboard / SaaS" data-fr="Dashboard / SaaS">لوحة تحكم / SaaS</span>
+            <h3 data-ar="نظام نيفا المالي — Neval Dashboard"
+                data-en="Neval Financial — Dashboard"
+                data-fr="Système Neval — Dashboard">نظام نيفا المالي — Neval Dashboard</h3>
+            <p data-ar="تصميم واجهة مستخدم متكاملة لإدارة المحافظ الرقمية وتحليل البيانات."
+               data-en="End-to-end UI for managing digital portfolios and analyzing data."
+               data-fr="Interface complète pour la gestion de portefeuilles et l'analyse de données.">
+              تصميم واجهة مستخدم متكاملة لإدارة المحافظ الرقمية وتحليل البيانات.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-item reveal premium-logo" data-project data-spotlight>
+          <div class="bento-image-wrapper">
+            <img src="work2.jpg" alt="تصميم شعار وهوية بصرية لشركة سهم للاستثمار — لوغو هندسي يعكس الثقة والنمو" onerror="this.style.display='none'">
+          </div>
+          <div class="bento-content">
+            <span class="category" data-ar="شعار وهوية بصرية" data-en="Logo & Identity" data-fr="Logo & Identité">شعار وهوية بصرية</span>
+            <h3 data-ar="هوية شركة سهم للاستثمار"
+                data-en="Sahm Investment — Brand"
+                data-fr="Sahm Investissement — Identité">هوية شركة سهم للاستثمار</h3>
+            <p data-ar="شعار هندسي يعكس الثقة والنمو المستقبلي."
+               data-en="A geometric logo conveying trust and future growth."
+               data-fr="Un logo géométrique reflétant confiance et croissance.">
+              شعار هندسي يعكس الثقة والنمو المستقبلي.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-item reveal modern-landing" data-project data-spotlight>
+          <div class="bento-image-wrapper">
+            <img src="work3.jpg" alt="تصميم صفحة هبوط لتطبيق كوانتوم الرقمي — واجهة UI/UX تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات" onerror="this.style.display='none'">
+          </div>
+          <div class="bento-content">
+            <span class="category" data-ar="صفحة هبوط / UI/UX" data-en="Landing / UI/UX" data-fr="Landing / UI/UX">صفحة هبوط / UI/UX</span>
+            <h3 data-ar="تطبيق كوانتوم الرقمي" data-en="Quantum Digital App" data-fr="Application Quantum">تطبيق كوانتوم الرقمي</h3>
+            <p data-ar="واجهة تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات."
+               data-en="A dark-themed interactive UI engineered to boost sales."
+               data-fr="Une interface interactive en thème sombre.">
+              واجهة تفاعلية بثيم غامق وتأثيرات بصرية لزيادة المبيعات.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-item reveal crypto-dash" data-project data-spotlight>
+          <div class="bento-image-wrapper">
+            <img src="work4.jpg" alt="تصميم منصة تداول العملات المشفرة — Dashboard متجاوب لمتابعة الأسعار اللحظية والتحليلات" onerror="this.style.display='none'">
+          </div>
+          <div class="bento-content">
+            <span class="category" data-ar="تطبيق ويب / Dashboard" data-en="Web App / Dashboard" data-fr="App Web / Dashboard">تطبيق ويب / Dashboard</span>
+            <h3 data-ar="منصة تداول العملات المشفرة"
+                data-en="Crypto Trading Platform"
+                data-fr="Plateforme de trading crypto">منصة تداول العملات المشفرة</h3>
+            <p data-ar="واجهة مستخدم سريعة الاستجابة لمتابعة الأسعار اللحظية."
+               data-en="A highly responsive UI for tracking real-time prices."
+               data-fr="Une interface réactive pour suivre les cours en temps réel.">
+              واجهة مستخدم سريعة الاستجابة لمتابعة الأسعار اللحظية.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Bento Grid -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="آراء العملاء" data-en="Testimonials" data-fr="Témoignages">آراء العملاء</span>
+        <h2>
+          <span data-ar="عملاء" data-en="Clients who" data-fr="Des clients">عملاء</span>
+          <span class="accent" data-ar="يثقون بنا." data-en="trust us." data-fr="qui nous font confiance.">يثقون بنا.</span>
+        </h2>
+        <p data-ar="قصص نجاح حقيقية من شركات اختارتنا لبناء هويتها الرقمية."
+           data-en="Real success stories from companies that chose us to build their digital brand."
+           data-fr="Histoires de réussite de marques qui nous ont choisis pour bâtir leur présence digitale.">
+          قصص نجاح حقيقية من شركات اختارتنا لبناء هويتها الرقمية.
+        </p>
+      </div>
+
+      <div class="bento-grid testimonials-grid">
+
+        <div class="testimonial-card reveal t-large">
+          <div class="stars" aria-label="5 / 5">★★★★★</div>
+          <p class="quote"
+             data-ar="من أول جلسة، حسّيت بليهم يفهمو رؤيتنا. الهوية اللي صمموها رفعت مستوى الماركة كاملة، والنتيجة فاقت توقعاتي بمراحل."
+             data-en="From the first call, I knew they understood our vision. The identity they delivered elevated our entire brand — well beyond expectations."
+             data-fr="Dès le premier échange, j'ai senti qu'ils comprenaient notre vision. L'identité livrée a élevé toute la marque, bien au-delà de mes attentes.">
+            من أول جلسة، حسّيت بليهم يفهمو رؤيتنا. الهوية اللي صمموها رفعت مستوى الماركة كاملة، والنتيجة فاقت توقعاتي بمراحل.
+          </p>
+          <div class="author">
+            <div class="avatar">YM</div>
+            <div class="author-info">
+              <span class="name" data-ar="ياسين مرابطي" data-en="Yacine Merabti" data-fr="Yacine Merabti">ياسين مرابطي</span>
+              <span class="company" data-ar="مؤسس · Atlas Capital" data-en="Founder · Atlas Capital" data-fr="Fondateur · Atlas Capital">مؤسس · Atlas Capital</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal t-tall">
+          <div class="stars" aria-label="5 / 5">★★★★★</div>
+          <p class="quote"
+             data-ar="موقع رفع تحويلاتي للضعف في أول شهر بعد الإطلاق."
+             data-en="Our conversions doubled in the first month after launch."
+             data-fr="Nos conversions ont doublé dès le premier mois.">
+            موقع رفع تحويلاتي للضعف في أول شهر بعد الإطلاق.
+          </p>
+          <div class="author">
+            <div class="avatar">SB</div>
+            <div class="author-info">
+              <span class="name" data-ar="سارة بن عيسى" data-en="Sara Benaissa" data-fr="Sara Benaissa">سارة بن عيسى</span>
+              <span class="company" data-ar="مديرة تسويق · Souk Digital" data-en="Marketing · Souk Digital" data-fr="Marketing · Souk Digital">مديرة تسويق · Souk Digital</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal t-small">
+          <div class="stars" aria-label="5 / 5">★★★★★</div>
+          <p class="quote"
+             data-ar="Dashboard يفهم البيانات بنظرة واحدة."
+             data-en="A dashboard you grasp at a glance."
+             data-fr="Un dashboard que l'on comprend d'un coup d'œil.">
+            Dashboard يفهم البيانات بنظرة واحدة.
+          </p>
+          <div class="author">
+            <div class="avatar">KZ</div>
+            <div class="author-info">
+              <span class="name" data-ar="كريم زغلاش" data-en="Karim Zeghlache" data-fr="Karim Zeghlache">كريم زغلاش</span>
+              <span class="company" data-ar="CTO · Maghreb Lab" data-en="CTO · Maghreb Lab" data-fr="CTO · Maghreb Lab">CTO · Maghreb Lab</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal t-wide">
+          <div class="stars" aria-label="5 / 5">★★★★★</div>
+          <p class="quote"
+             data-ar="تجربة مستخدم مذهلة، مدروسة بأدق التفاصيل، وفريق محترف من البداية حتى التسليم. أنصح بهم بقوة."
+             data-en="Stunning UX, attention to every detail, and a pro team from kickoff to delivery. Highly recommended."
+             data-fr="UX impressionnante, attention aux moindres détails, équipe pro du début à la livraison. Hautement recommandé.">
+            تجربة مستخدم مذهلة، مدروسة بأدق التفاصيل، وفريق محترف من البداية حتى التسليم. أنصح بهم بقوة.
+          </p>
+          <div class="author">
+            <div class="avatar">LB</div>
+            <div class="author-info">
+              <span class="name" data-ar="لينا بوزيدي" data-en="Lina Bouzidi" data-fr="Lina Bouzidi">لينا بوزيدي</span>
+              <span class="company" data-ar="مديرة المنتج · Quantum App" data-en="Product Lead · Quantum App" data-fr="Product Lead · Quantum App">مديرة المنتج · Quantum App</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.main-scenery-wrapper -->
+
+  <!-- Infinite Marquee — كلمات الهوية بخط مفرّغ ضخم -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-group">
+        <span>CREATIVE</span><span class="dot">●</span>
+        <span>LUXURY</span><span class="dot">●</span>
+        <span>DIGITAL STUDIO</span><span class="dot">●</span>
+        <span>UI/UX</span><span class="dot">●</span>
+      </div>
+      <div class="marquee-group">
+        <span>CREATIVE</span><span class="dot">●</span>
+        <span>LUXURY</span><span class="dot">●</span>
+        <span>DIGITAL STUDIO</span><span class="dot">●</span>
+        <span>UI/UX</span><span class="dot">●</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <!-- فيديو الخلفية: حركة سينمائية -->
+    <video autoplay loop muted playsinline preload="metadata" poster="pricing-poster.jpg" class="pricing-video-bg">
+      <source src="hero-bg-5.mp4" type="video/mp4">
+    </video>
+    <div class="pricing-overlay"></div>
+
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="باقات الأسعار" data-en="Pricing" data-fr="Tarifs">باقات الأسعار</span>
+        <h2>
+          <span data-ar="باقات" data-en="Transparent" data-fr="Des forfaits">باقات</span>
+          <span class="accent" data-ar="واضحة، بلا مفاجآت." data-en="pricing, no surprises." data-fr="clairs, sans surprise.">واضحة، بلا مفاجآت.</span>
+        </h2>
+        <p data-ar="اختر الباقة المناسبة لمشروعك، وتواصل مباشرة عبر واتساب لطلب الخدمة."
+           data-en="Pick the right package and reach us instantly via WhatsApp."
+           data-fr="Choisissez le forfait adapté et contactez-nous directement via WhatsApp.">
+          اختر الباقة المناسبة لمشروعك، وتواصل مباشرة عبر واتساب لطلب الخدمة.
+        </p>
+      </div>
+
+      <!-- Limited Offer Banner -->
+      <div class="pricing-offer reveal" role="note" aria-live="polite">
+        <span class="pricing-offer-pulse" aria-hidden="true"></span>
+        <svg class="pricing-offer-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2 L13.4 9.6 L21 11 L13.4 12.4 L12 20 L10.6 12.4 L3 11 L10.6 9.6 Z"/>
+          <path d="M19 3 L19.7 5.3 L22 6 L19.7 6.7 L19 9 L18.3 6.7 L16 6 L18.3 5.3 Z" opacity="0.7"/>
+          <path d="M5 14 L5.7 16.3 L8 17 L5.7 17.7 L5 20 L4.3 17.7 L2 17 L4.3 16.3 Z" opacity="0.7"/>
+        </svg>
+        <p class="pricing-offer-text"
+           data-ar="عرض خاص هذا الشهر: خصم 15% على باقات المواقع — الأماكن محدودة"
+           data-en="This month: 15% off website packages — limited slots"
+           data-fr="Ce mois-ci : -15% sur les forfaits sites — places limitées">
+          عرض خاص هذا الشهر: خصم 15% على باقات المواقع — الأماكن محدودة
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card reveal">
+          <div class="price-tag" data-ar="باقة الهوية" data-en="Identity pack" data-fr="Forfait Identité">باقة الهوية</div>
+          <h3 data-ar="الشعار والهوية البصرية" data-en="Logo & Brand Identity" data-fr="Logo & Identité">الشعار والهوية البصرية</h3>
+          <p class="price-sub"
+             data-ar="للعلامات الناشئة التي تريد بداية احترافية."
+             data-en="For emerging brands that need a confident start."
+             data-fr="Pour les marques émergentes qui veulent un démarrage pro.">
+            للعلامات الناشئة التي تريد بداية احترافية.
+          </p>
+          <div class="price-amount">
+            <span class="from" data-ar="ابتداءً من" data-en="From" data-fr="À partir de">ابتداءً من</span>
+            <span class="num">45,000</span>
+            <span class="currency" data-ar="د.ج" data-en="DZD" data-fr="DZD">د.ج</span>
+          </div>
+          <div class="price-note" data-ar="مدة التنفيذ: 7–10 أيام" data-en="Delivery: 7–10 days" data-fr="Délai : 7–10 jours">مدة التنفيذ: 7–10 أيام</div>
+          <ul class="features">
+            <li><span class="check">✓</span><span data-ar="شعار أصلي بـ 3 اتجاهات" data-en="Original logo, 3 directions" data-fr="Logo original, 3 directions">شعار أصلي بـ 3 اتجاهات</span></li>
+            <li><span class="check">✓</span><span data-ar="لوحة ألوان وأنظمة خطوط" data-en="Color palette & type system" data-fr="Palette & typographie">لوحة ألوان وأنظمة خطوط</span></li>
+            <li><span class="check">✓</span><span data-ar="دليل استخدام الهوية (PDF)" data-en="Brand guidelines (PDF)" data-fr="Charte graphique (PDF)">دليل استخدام الهوية (PDF)</span></li>
+            <li><span class="check">✓</span><span data-ar="ملفات مصدرية كاملة" data-en="Full source files" data-fr="Fichiers sources complets">ملفات مصدرية كاملة</span></li>
+          </ul>
+          <a href="https://wa.me/213791704281" target="_blank" rel="noopener" class="btn btn-ghost full magnetic" data-wa="identity">
+            <span class="wa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.575-1.516-3.39-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg></span>
+            <span data-ar="طلب عبر واتساب" data-en="Order via WhatsApp" data-fr="Commander via WhatsApp">طلب عبر واتساب</span>
+          </a>
+        </div>
+
+        <div class="price-card featured reveal">
+          <span class="price-badge" data-ar="الأكثر طلباً" data-en="Most popular" data-fr="Plus populaire">الأكثر طلباً</span>
+          <div class="price-tag" data-ar="باقة صفحات الهبوط" data-en="Landing pack" data-fr="Forfait Landing">باقة صفحات الهبوط</div>
+          <h3 data-ar="موقع احترافي للتحويل" data-en="Conversion-Ready Website" data-fr="Site optimisé conversion">موقع احترافي للتحويل</h3>
+          <p class="price-sub"
+             data-ar="موقع كامل سريع ومتجاوب مصمَّم لتحويل الزوار إلى عملاء."
+             data-en="A complete, fast, responsive site engineered to convert visitors into customers."
+             data-fr="Un site complet, rapide et responsive, conçu pour convertir.">
+            موقع كامل سريع ومتجاوب مصمَّم لتحويل الزوار إلى عملاء.
+          </p>
+          <div class="price-amount">
+            <span class="from" data-ar="ابتداءً من" data-en="From" data-fr="À partir de">ابتداءً من</span>
+            <span class="num">95,000</span>
+            <span class="currency" data-ar="د.ج" data-en="DZD" data-fr="DZD">د.ج</span>
+          </div>
+          <div class="price-note" data-ar="مدة التنفيذ: 3–5 أسابيع" data-en="Delivery: 3–5 weeks" data-fr="Délai : 3–5 semaines">مدة التنفيذ: 3–5 أسابيع</div>
+          <ul class="features">
+            <li><span class="check">✓</span><span data-ar="تصميم UX/UI كامل" data-en="Full UX/UI design" data-fr="UX/UI complet">تصميم UX/UI كامل</span></li>
+            <li><span class="check">✓</span><span data-ar="تطوير متجاوب (موبايل + ديسكتوب)" data-en="Responsive build" data-fr="Développement responsive">تطوير متجاوب (موبايل + ديسكتوب)</span></li>
+            <li><span class="check">✓</span><span data-ar="تحسين SEO أساسي + سرعة فائقة" data-en="Core SEO + speed optimization" data-fr="SEO + optimisation vitesse">تحسين SEO أساسي + سرعة فائقة</span></li>
+            <li><span class="check">✓</span><span data-ar="نموذج تواصل + ربط واتساب" data-en="Contact form + WhatsApp" data-fr="Formulaire + WhatsApp">نموذج تواصل + ربط واتساب</span></li>
+            <li><span class="check">✓</span><span data-ar="دعم 30 يوماً بعد الإطلاق" data-en="30 days post-launch support" data-fr="30 jours de support">دعم 30 يوماً بعد الإطلاق</span></li>
+          </ul>
+          <a href="https://wa.me/213791704281" target="_blank" rel="noopener" class="btn btn-primary full magnetic" data-wa="landing">
+            <span class="wa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.575-1.516-3.39-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg></span>
+            <span data-ar="طلب عبر واتساب" data-en="Order via WhatsApp" data-fr="Commander via WhatsApp">طلب عبر واتساب</span>
+          </a>
+        </div>
+
+        <div class="price-card reveal">
+          <div class="price-tag" data-ar="باقة Dashboard" data-en="Dashboard pack" data-fr="Forfait Dashboard">باقة Dashboard</div>
+          <h3 data-ar="لوحة تحكم متكاملة" data-en="Full Dashboard System" data-fr="Dashboard complet">لوحة تحكم متكاملة</h3>
+          <p class="price-sub"
+             data-ar="للمنصات والشركات التي تحتاج واجهات بيانات احترافية."
+             data-en="For platforms and SaaS that need professional data interfaces."
+             data-fr="Pour les plateformes qui exigent des interfaces de données pro.">
+            للمنصات والشركات التي تحتاج واجهات بيانات احترافية.
+          </p>
+          <div class="price-amount">
+            <span class="from" data-ar="ابتداءً من" data-en="From" data-fr="À partir de">ابتداءً من</span>
+            <span class="num">180,000</span>
+            <span class="currency" data-ar="د.ج" data-en="DZD" data-fr="DZD">د.ج</span>
+          </div>
+          <div class="price-note" data-ar="مدة التنفيذ: 4–8 أسابيع" data-en="Delivery: 4–8 weeks" data-fr="Délai : 4–8 semaines">مدة التنفيذ: 4–8 أسابيع</div>
+          <ul class="features">
+            <li><span class="check">✓</span><span data-ar="تصميم UX لـ 15+ شاشة" data-en="UX for 15+ screens" data-fr="UX pour 15+ écrans">تصميم UX لـ 15+ شاشة</span></li>
+            <li><span class="check">✓</span><span data-ar="مكتبة مكوّنات قابلة لإعادة الاستخدام" data-en="Reusable component library" data-fr="Bibliothèque de composants">مكتبة مكوّنات قابلة لإعادة الاستخدام</span></li>
+            <li><span class="check">✓</span><span data-ar="نظام رسوم بيانية وتحليلات" data-en="Charts & analytics system" data-fr="Graphiques & analytics">نظام رسوم بيانية وتحليلات</span></li>
+            <li><span class="check">✓</span><span data-ar="وضع داكن/فاتح + إمكانية وصول" data-en="Dark/light mode + accessibility" data-fr="Mode clair/sombre + accessibilité">وضع داكن/فاتح + إمكانية وصول</span></li>
+            <li><span class="check">✓</span><span data-ar="تسليم Figma منظم + توثيق" data-en="Organized Figma + documentation" data-fr="Figma organisé + documentation">تسليم Figma منظم + توثيق</span></li>
+          </ul>
+          <a href="https://wa.me/213791704281" target="_blank" rel="noopener" class="btn btn-ghost full magnetic" data-wa="dashboard">
+            <span class="wa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.575-1.516-3.39-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg></span>
+            <span data-ar="طلب عبر واتساب" data-en="Order via WhatsApp" data-fr="Commander via WhatsApp">طلب عبر واتساب</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — أسئلة شائعة -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</span>
+        <h2>
+          <span data-ar="أسئلة" data-en="Questions" data-fr="Questions">أسئلة</span>
+          <span class="accent" data-ar="يطرحها عملاؤنا." data-en="our clients ask." data-fr="fréquentes.">يطرحها عملاؤنا.</span>
+        </h2>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-q"
+                  data-ar="كم تستغرق مدة تنفيذ المشروع؟"
+                  data-en="How long does a project take?"
+                  data-fr="Combien de temps prend un projet ?">كم تستغرق مدة تنفيذ المشروع؟</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-a"
+             data-ar="تختلف حسب نوع المشروع: الشعار 7–10 أيام، الموقع 3–5 أسابيع، لوحة التحكم 4–8 أسابيع."
+             data-en="It depends: logo 7–10 days, website 3–5 weeks, dashboard 4–8 weeks."
+             data-fr="Cela dépend : logo 7–10 jours, site 3–5 semaines, dashboard 4–8 semaines.">
+            تختلف حسب نوع المشروع: الشعار 7–10 أيام، الموقع 3–5 أسابيع، لوحة التحكم 4–8 أسابيع.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-q"
+                  data-ar="ما هي طرق الدفع المتاحة؟"
+                  data-en="What payment methods do you accept?"
+                  data-fr="Quels moyens de paiement ?">ما هي طرق الدفع المتاحة؟</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-a"
+             data-ar="ندعم الدفع عبر CCP، التحويل البنكي، والدفع نقداً. عادة دفعة أولى عند البدء والباقي عند التسليم."
+             data-en="We support CCP, bank transfer, and cash. Usually a deposit upfront and the rest on delivery."
+             data-fr="Nous acceptons CCP, virement et espèces. Généralement un acompte puis le solde à la livraison.">
+            ندعم الدفع عبر CCP، التحويل البنكي، والدفع نقداً. عادة دفعة أولى عند البدء والباقي عند التسليم.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-q"
+                  data-ar="هل أحصل على ملفات المصدر؟"
+                  data-en="Do I get the source files?"
+                  data-fr="Ai-je les fichiers sources ?">هل أحصل على ملفات المصدر؟</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-a"
+             data-ar="نعم، تحصل على كل الملفات المصدرية كاملة وتملكها بالكامل بعد التسليم."
+             data-en="Yes, you receive all source files and own them fully after delivery."
+             data-fr="Oui, vous recevez tous les fichiers sources et en êtes pleinement propriétaire.">
+            نعم، تحصل على كل الملفات المصدرية كاملة وتملكها بالكامل بعد التسليم.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-q"
+                  data-ar="كم عدد التعديلات المسموح بها؟"
+                  data-en="How many revisions are included?"
+                  data-fr="Combien de révisions sont incluses ?">كم عدد التعديلات المسموح بها؟</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-a"
+             data-ar="نعمل معك حتى الوصول للنتيجة المطلوبة ضمن نطاق المشروع المتفق عليه."
+             data-en="We work with you until the result is right, within the agreed project scope."
+             data-fr="Nous travaillons jusqu'au résultat souhaité, dans le cadre convenu.">
+            نعمل معك حتى الوصول للنتيجة المطلوبة ضمن نطاق المشروع المتفق عليه.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-q"
+                  data-ar="هل تقدّمون دعماً بعد التسليم؟"
+                  data-en="Do you offer post-delivery support?"
+                  data-fr="Offrez-vous un support après livraison ?">هل تقدّمون دعماً بعد التسليم؟</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-a"
+             data-ar="نعم، نوفّر دعماً لمدة 30 يوماً بعد إطلاق المواقع، ونبقى متاحين لأي مشروع مستقبلي."
+             data-en="Yes, 30 days of post-launch support for websites, and we stay available for future projects."
+             data-fr="Oui, 30 jours de support après le lancement, et nous restons disponibles.">
+            نعم، نوفّر دعماً لمدة 30 يوماً بعد إطلاق المواقع، ونبقى متاحين لأي مشروع مستقبلي.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- غلاف مشترك يدمج Contact + Footer بخلفية فيديو واحدة -->
+  <div class="contact-footer-wrapper">
+
+    <!-- فيديو واحد مشترك بين القسمين -->
+    <video autoplay loop muted playsinline preload="metadata" poster="contact-footer-poster.jpg" class="contact-footer-video">
+      <source src="hero-bg-3.mp4" type="video/mp4">
+    </video>
+    <div class="contact-footer-overlay"></div>
+
+  <!-- Contact Form (Supabase-backed) -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="sub-title"
+              data-ar="تواصل معنا" data-en="Get in touch" data-fr="Contactez-nous">تواصل معنا</span>
+        <h2>
+          <span data-ar="ابدأ" data-en="Start" data-fr="Démarrons">ابدأ</span>
+          <span class="accent" data-ar="مشروعك معنا." data-en="your project with us." data-fr="votre projet ensemble.">مشروعك معنا.</span>
+        </h2>
+        <p data-ar="عبّئ النموذج وسنرد عليك خلال 24 ساعة بخطة أولية وتقدير زمني."
+           data-en="Fill the form — we'll reply within 24 hours with a plan and timeline."
+           data-fr="Remplissez le formulaire — réponse sous 24 h avec un plan et un calendrier.">
+          عبّئ النموذج وسنرد عليك خلال 24 ساعة بخطة أولية وتقدير زمني.
+        </p>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-grid">
+          <label class="field">
+            <span class="field-label" data-ar="الاسم الكامل" data-en="Full name" data-fr="Nom complet">الاسم الكامل</span>
+            <input type="text" name="name" required autocomplete="name"
+                   data-placeholder-ar="مثلاً: محمد بن علي"
+                   data-placeholder-en="e.g. John Doe"
+                   data-placeholder-fr="Ex : Jean Dupont">
+          </label>
+
+          <label class="field field-email">
+            <span class="field-label" data-ar="البريد الإلكتروني" data-en="Email" data-fr="Email">البريد الإلكتروني</span>
+            <input type="email" name="email" required autocomplete="email"
+                   data-placeholder-ar="you@example.com"
+                   data-placeholder-en="you@example.com"
+                   data-placeholder-fr="vous@exemple.com">
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span class="field-label" data-ar="اسم الشركة (اختياري)" data-en="Company name (optional)" data-fr="Nom de l'entreprise (optionnel)">اسم الشركة (اختياري)</span>
+            <input type="text" name="company" autocomplete="organization"
+                   data-placeholder-ar="مثلاً: AZIK Studio"
+                   data-placeholder-en="e.g. AZIK Studio"
+                   data-placeholder-fr="Ex : AZIK Studio">
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-ar="نوع المشروع" data-en="Project type" data-fr="Type de projet">نوع المشروع</span>
+            <select name="project_type" required>
+              <option value="logo" data-ar="شعار وهوية بصرية" data-en="Logo & Brand Identity" data-fr="Logo & Identité">شعار وهوية بصرية</option>
+              <option value="landing" data-ar="صفحة هبوط / موقع" data-en="Landing page / Website" data-fr="Landing page / Site">صفحة هبوط / موقع</option>
+              <option value="dashboard" data-ar="لوحة تحكم Dashboard" data-en="Dashboard" data-fr="Dashboard">لوحة تحكم Dashboard</option>
+              <option value="other" data-ar="مشروع آخر" data-en="Other project" data-fr="Autre projet">مشروع آخر</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span class="field-label" data-ar="الميزانية التقريبية" data-en="Approximate budget" data-fr="Budget approximatif">الميزانية التقريبية</span>
+            <select name="budget">
+              <option value="not_sure" data-ar="غير محدد" data-en="Not sure yet" data-fr="À discuter">غير محدد</option>
+              <option value="under_50k" data-ar="أقل من 50,000 د.ج" data-en="Under 50,000 DZD" data-fr="Moins de 50 000 DZD">أقل من 50,000 د.ج</option>
+              <option value="50k_150k" data-ar="50,000 - 150,000 د.ج" data-en="50,000 - 150,000 DZD" data-fr="50 000 - 150 000 DZD">50,000 - 150,000 د.ج</option>
+              <option value="150k_500k" data-ar="150,000 - 500,000 د.ج" data-en="150,000 - 500,000 DZD" data-fr="150 000 - 500 000 DZD">150,000 - 500,000 د.ج</option>
+              <option value="over_500k" data-ar="أكثر من 500,000 د.ج" data-en="Over 500,000 DZD" data-fr="Plus de 500 000 DZD">أكثر من 500,000 د.ج</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-ar="المدة المرغوبة" data-en="Desired timeline" data-fr="Délai souhaité">المدة المرغوبة</span>
+            <select name="timeline">
+              <option value="flexible" data-ar="مرن - بدون استعجال" data-en="Flexible — no rush" data-fr="Flexible — sans urgence">مرن - بدون استعجال</option>
+              <option value="urgent" data-ar="عاجل (أقل من أسبوعين)" data-en="Urgent (< 2 weeks)" data-fr="Urgent (< 2 semaines)">عاجل (أقل من أسبوعين)</option>
+              <option value="within_month" data-ar="خلال شهر" data-en="Within 1 month" data-fr="Sous 1 mois">خلال شهر</option>
+              <option value="within_3months" data-ar="خلال 3 أشهر" data-en="Within 3 months" data-fr="Sous 3 mois">خلال 3 أشهر</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="field-label" data-ar="رسالتك" data-en="Your message" data-fr="Votre message">رسالتك</span>
+          <textarea name="message" rows="5" required
+                    data-placeholder-ar="احكِ لنا عن مشروعك بإيجاز: الهدف، الجمهور، المتطلبات الخاصة..."
+                    data-placeholder-en="Brief us on your project: goal, audience, specific requirements..."
+                    data-placeholder-fr="Parlez-nous de votre projet : objectif, audience, exigences spécifiques..."></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary magnetic form-submit">
+          <span data-ar="إرسال الطلب" data-en="Send request" data-fr="Envoyer la demande">إرسال الطلب</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 2 11 13"/>
+            <path d="M22 2 15 22l-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="AZIK">
+          <img src="logo.png" alt="AZIK" class="logo-img" width="120" height="40">
+        </a>
+        <p data-ar="استوديو تصميم رقمي يحوّل الأفكار إلى تجارب بصرية تُروى."
+           data-en="A digital design studio turning ideas into visual experiences worth telling."
+           data-fr="Un studio de design qui transforme les idées en expériences visuelles mémorables.">
+          استوديو تصميم رقمي يحوّل الأفكار إلى تجارب بصرية تُروى.
+        </p>
+
+        <div class="footer-contact">
+          <div class="contact-item">
+            <span class="contact-label"
+                  data-ar="تواصل عبر واتساب"
+                  data-en="WhatsApp"
+                  data-fr="WhatsApp">تواصل عبر واتساب</span>
+            <button class="phone-copy" type="button"
+                    data-phone="0791704281"
+                    aria-label="نسخ رقم الواتساب">
+              <span class="wa-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.575-1.516-3.39-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg></span>
+              <span class="phone-text">0791704281</span>
+              <svg class="copy-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span class="copy-feedback">تم النسخ ✓</span>
+            </button>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-label"
+                  data-ar="تواصل عبر الإيميل"
+                  data-en="Email"
+                  data-fr="Email">تواصل عبر الإيميل</span>
+            <button class="phone-copy email-copy" type="button"
+                    data-email="islamalizeghlache15@gmail.com"
+                    aria-label="نسخ البريد الإلكتروني">
+              <span class="email-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              <span class="phone-text">islamalizeghlache15@gmail.com</span>
+              <svg class="copy-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span class="copy-feedback">تم النسخ ✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-ar="© 2026 AZIK Studio — كل الحقوق محفوظة."
+              data-en="© 2026 AZIK Studio — All rights reserved."
+              data-fr="© 2026 AZIK Studio — Tous droits réservés.">© 2026 AZIK Studio — كل الحقوق محفوظة.</span>
+        <span data-ar="صُمِّم وبُرمج بحب في الجزائر."
+              data-en="Designed & coded with care in Algeria."
+              data-fr="Conçu & codé avec soin en Algérie.">صُمِّم وبُرمج بحب في الجزائر.</span>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /.contact-footer-wrapper -->
+
+  <!-- Thank You Popup -->
+  <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div class="popup-card">
+      <div class="popup-logo">
+        <img src="logo.png" alt="AZIK" class="popup-logo-img" width="220" height="72">
+      </div>
+      <h3 id="popupTitle"
+          data-ar="شكراً لثقتك في AZIK!"
+          data-en="Thanks for trusting AZIK!"
+          data-fr="Merci de votre confiance, AZIK !">شكراً لثقتك في AZIK!</h3>
+      <p data-ar="يتم تحويلك الآن إلى واتساب لبدء مشروعك..."
+         data-en="Redirecting you to WhatsApp to start your project..."
+         data-fr="Redirection vers WhatsApp pour démarrer votre projet...">
+        يتم تحويلك الآن إلى واتساب لبدء مشروعك...
+      </p>
+      <div class="popup-progress"><div class="popup-progress-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/213791704281"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="floating-whatsapp"
+     aria-label="تواصل عبر واتساب"
+     data-aria-ar="تواصل عبر واتساب"
+     data-aria-en="Chat on WhatsApp"
+     data-aria-fr="Contactez-nous sur WhatsApp">
+    <svg class="floating-whatsapp-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.575-1.516-3.39-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/>
+    </svg>
+    <span class="floating-whatsapp-tooltip"
+          data-ar="تواصل عبر واتساب"
+          data-en="Chat on WhatsApp"
+          data-fr="Contactez-nous sur WhatsApp">تواصل عبر واتساب</span>
+  </a>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>

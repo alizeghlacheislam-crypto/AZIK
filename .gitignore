@@ -1,0 +1,72 @@
+# ============================================
+# AZIK Studio — .gitignore
+# ============================================
+
+# ---------- Operating System ----------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ---------- Editors & IDEs ----------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.history/
+
+# ---------- Logs ----------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---------- Node (in case you add tooling later) ----------
+node_modules/
+package-lock.json
+yarn.lock
+.npm
+.pnp/
+.pnp.js
+
+# ---------- Build outputs (in case you add a bundler later) ----------
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
+# ---------- Environment & secrets ----------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ---------- Deployment / hosting ----------
+.netlify/
+.vercel/
+.firebase/
+.cache/
+
+# ---------- Temporary files ----------
+*.tmp
+*.temp
+*.bak
+*.old
+
+# ---------- Project specifics ----------
+# Old prototype files (not used in production)
+azik.html
+azik-services.html
+
+# Reserve original PNG copy (if any)
+"تصميم بدون عنوان.png"

@@ -1,0 +1,3040 @@
+/* ============================================
+   AZIK — Premium · Dark/Light · Liquid Cursor · Sparks · Typing · Testimonials · Popup
+   ============================================ */
+
+/* ---------- THEME TOKENS ---------- */
+/* 1. الوضع الداكن الافتراضي المستقر للموقع */
+:root,
+[data-theme="dark"] {
+  /* النظام القديم (المحفوظ للتوافق) */
+  --bg: #090A0F;
+  --bg-2: #0E1018;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #F5F5F7;
+  --muted: #9CA3AF;
+  --dim: #6B7280;
+  --accent: #6366F1;
+  --accent-2: #818CF8;
+  --orange: #FB923C;
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --orange-glow: rgba(251, 146, 60, 0.35);
+  --glass-bg-top: rgba(255, 255, 255, 0.04);
+  --glass-bg-bot: rgba(255, 255, 255, 0.01);
+  --nav-bg: rgba(9, 10, 15, 0.7);
+  --spotlight: rgba(99, 102, 241, 0.18);
+  --shadow-soft: 0 14px 38px -16px rgba(0, 0, 0, 0.6);
+  --grain-opacity: 0.5;
+  --grain-blend: overlay;
+  --bento-img-opacity: 0.55;
+  --bento-img-opacity-hover: 0.8;
+  --radius: 24px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* النظام الجديد الفاخر — يضمن وضوح القراءة */
+  --bg-main: #090A0F;
+  --bg-surface: #12141C;
+  --bg-surface-hover: #1A1D29;
+  --text-primary: #FFFFFF;
+  --text-secondary: #8E93A6;
+  --text-muted: #64687A;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --accent-color: #E2B755;        /* ذهبي ملكي فاخر */
+  --accent-contrast: #090A0F;     /* لون النص داخل الزر */
+  --btn-radius: 50px;             /* زر بيضاوي انسيابي */
+  --card-shadow: transparent;
+  --overlay-bg: rgba(9, 10, 15, 0.5);
+
+  /* Brand Orange — يطابق تدرّج حرف A في الشعار */
+  --brand-orange-start: #FF4D1C;
+  --brand-orange-end:   #FFA31A;
+  --brand-orange:       #FF6B00;
+  --brand-orange-gradient: linear-gradient(180deg, #FF4D1C 0%, #FFA31A 100%);
+}
+
+/* 2. الوضع الفاتح النظيف والمدروس بدقة لحل كل المشاكل */
+[data-theme="light"] {
+  /* النظام القديم */
+  --bg: #F4F5F8;
+  --bg-2: #FFFFFF;
+  --surface: rgba(15, 17, 26, 0.03);
+  --surface-2: rgba(15, 17, 26, 0.015);
+  --surface-hover: rgba(15, 17, 26, 0.06);
+  --border: rgba(15, 17, 26, 0.08);
+  --border-strong: rgba(15, 17, 26, 0.18);
+  --text: #0F111A;
+  --muted: #4A4F63;
+  --dim: #7C8296;
+  --accent: #6366F1;
+  --accent-2: #4F46E5;
+  --orange: #F97316;
+  --accent-soft: rgba(99, 102, 241, 0.08);
+  --accent-glow: rgba(99, 102, 241, 0.22);
+  --orange-glow: rgba(251, 146, 60, 0.25);
+  --glass-bg-top: rgba(255, 255, 255, 0.7);
+  --glass-bg-bot: rgba(255, 255, 255, 0.4);
+  --nav-bg: rgba(244, 245, 248, 0.75);
+  --spotlight: rgba(99, 102, 241, 0.14);
+  --shadow-soft: 0 18px 40px -20px rgba(15, 17, 26, 0.18);
+  --grain-opacity: 0.18;
+  --grain-blend: multiply;
+  --bento-img-opacity: 0.85;
+  --bento-img-opacity-hover: 1;
+
+  /* النظام الجديد الفاخر */
+  --bg-main: #F4F5F8;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #EBF0F5;
+  --text-primary: #0F111A;
+  --text-secondary: #4A4F63;
+  --text-muted: #7C8296;
+  --border-color: rgba(15, 17, 26, 0.08);
+  --border-hover: rgba(15, 17, 26, 0.15);
+  --accent-color: #B58926;        /* ذهبي أعمق ليكون واضحاً على الخلفية البيضاء */
+  --accent-contrast: #FFFFFF;     /* لون النص داخل الزر */
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --overlay-bg: rgba(244, 245, 248, 0.85);
+
+  /* Brand Orange (نفس الألوان — يطابق الشعار في كلا الوضعين) */
+  --brand-orange-start: #FF4D1C;
+  --brand-orange-end:   #FFA31A;
+  --brand-orange:       #FF6B00;
+  --brand-orange-gradient: linear-gradient(180deg, #FF4D1C 0%, #FFA31A 100%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  font-size: clamp(15px, 1.6vw, 16px);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .5s var(--ease), color .5s var(--ease);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(1100px 700px at 80% -10%, var(--accent-soft), transparent 60%),
+    radial-gradient(800px 500px at 0% 20%, var(--orange-glow), transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  mix-blend-mode: var(--grain-blend);
+  z-index: 1;
+}
+
+#sparks-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 3;
+}
+@media (min-width: 768px) { .container { padding: 0 40px; } }
+
+.accent {
+  background: var(--brand-orange-gradient);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-orange); /* fallback لو المتصفح لا يدعم background-clip */
+}
+.hide-mobile { display: none; }
+@media (min-width: 768px) { .hide-mobile { display: inline-flex; } }
+
+/* المؤشر الأصلي للنظام مرئي — لا custom cursor */
+
+@media (max-width: 768px) {
+  #sparks-canvas { display: none; }
+  button, a, .btn { cursor: pointer; }
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(18px) saturate(140%);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  transition: background-color .5s var(--ease), border-color .5s var(--ease);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  gap: 16px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) { .nav-inner { padding: 14px 40px; } }
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform .3s var(--ease);
+  animation: logoGlow 4.5s ease-in-out infinite;
+}
+.logo:hover {
+  transform: scale(1.06);
+  animation-play-state: paused;
+  filter:
+    drop-shadow(0 0 16px rgba(251, 146, 60, 0.7))
+    drop-shadow(0 0 40px rgba(251, 146, 60, 0.5))
+    drop-shadow(0 0 72px rgba(99, 102, 241, 0.35));
+}
+.logo-img {
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Soft triple-layer pulse (orange close → orange far → indigo halo) */
+@keyframes logoGlow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 8px rgba(251, 146, 60, 0.45))
+      drop-shadow(0 0 24px rgba(251, 146, 60, 0.30))
+      drop-shadow(0 0 48px rgba(99, 102, 241, 0.18));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 14px rgba(251, 146, 60, 0.65))
+      drop-shadow(0 0 36px rgba(251, 146, 60, 0.42))
+      drop-shadow(0 0 64px rgba(99, 102, 241, 0.28));
+  }
+}
+
+/* Softer pulse in Light Mode for visual comfort */
+[data-theme="light"] .logo {
+  animation-name: logoGlowLight;
+}
+@keyframes logoGlowLight {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 6px rgba(251, 146, 60, 0.30))
+      drop-shadow(0 0 18px rgba(251, 146, 60, 0.20))
+      drop-shadow(0 0 36px rgba(99, 102, 241, 0.12));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 10px rgba(251, 146, 60, 0.45))
+      drop-shadow(0 0 26px rgba(251, 146, 60, 0.30))
+      drop-shadow(0 0 48px rgba(99, 102, 241, 0.20));
+  }
+}
+
+.nav-links {
+  display: none;
+  gap: 28px;
+  list-style: none;
+}
+@media (min-width: 1024px) { .nav-links { display: flex; } }
+.nav-links a {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+  padding: 6px 4px;
+}
+.nav-links a:hover { color: var(--text); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Language switcher */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 2px;
+  height: 42px;
+}
+.lang-btn {
+  min-width: 32px;
+  height: 34px;
+  padding: 0 9px;
+  border-radius: 8px;
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 14px -4px var(--accent-glow);
+}
+@media (max-width: 480px) {
+  .lang-switcher { padding: 2px; }
+  .lang-btn { min-width: 28px; padding: 0 7px; font-size: 10px; }
+}
+
+.theme-toggle {
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  display: inline-flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: background .3s, border-color .3s;
+}
+.theme-toggle:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+.theme-toggle .icon {
+  position: absolute;
+  transition: opacity .35s var(--ease), transform .45s var(--ease);
+}
+[data-theme="dark"] .icon-sun  { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+[data-theme="dark"] .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
+[data-theme="light"] .icon-moon { opacity: 0; transform: rotate(90deg) scale(0.5); }
+[data-theme="light"] .icon-sun  { opacity: 1; transform: rotate(0) scale(1); color: #F59E0B; }
+
+.menu-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+}
+@media (min-width: 1024px) { .menu-toggle { display: none; } }
+
+.mobile-menu {
+  display: none;
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--border);
+  flex-direction: column;
+  gap: 6px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 14px 0;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu .btn { margin-top: 12px; align-self: flex-start; border-bottom: none; }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: transform .25s var(--ease), background .25s, color .25s,
+              border-color .25s, box-shadow .25s, filter .25s;
+  white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 28px -8px var(--accent-glow);
+}
+.btn-primary:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 14px 38px -10px var(--accent-glow);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.btn-ghost:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+.btn-sm { padding: 9px 18px; font-size: 13px; }
+.btn.full { width: 100%; }
+
+/* أيقونات WhatsApp — تأخذ لون النص (currentColor) */
+.wa-icon,
+.wa-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #22D366;
+  line-height: 0;
+}
+.wa-icon svg,
+.wa-dot svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* عند زر الواتساب الأخضر الرئيسي → أبيض ناصع */
+.btn[data-wa] .wa-icon,
+.btn[data-wa] .wa-icon svg {
+  color: currentColor;
+}
+
+/* ============================================
+   HERO + TYPING EFFECT
+   ============================================ */
+/* ==============================================
+   النسخة الرسمية الثابتة — Hero Full-Screen
+   ============================================== */
+
+/* 1. واجهة الـ Hero — كامل الشاشة بالضبط */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 2. فيديو الخلفية — تمدد كامل + تلاشي سفلي للاندماج مع قسم الخدمات */
+.hero-video-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1;
+  pointer-events: none;
+  /* قناع تلاشي تدريجي من الأسفل */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+
+/* 3. طبقة التظليل — تغطي كامل الفيديو */
+.hero-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2;
+  background: rgba(9, 10, 15, 0.7);
+  pointer-events: none;
+}
+/* ============ Light Mode — تكييف الـ Hero ============ */
+
+/* عندما يتحول الموقع للوضع الفاتح، اعكس ألوان فيديو الخلفية */
+html[data-theme="light"] .hero-video-bg {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+  mix-blend-mode: multiply; /* اندماج ناعم مع الخلفية البيضاء */
+}
+
+/* طبقة التظليل تصبح فاتحة ومريحة للعين */
+html[data-theme="light"] .hero-overlay {
+  background: rgba(245, 246, 250, 0.8) !important;
+}
+
+/* نصوص الواجهة تصبح داكنة للقراءة الواضحة */
+html[data-theme="light"] .hero-content h1,
+html[data-theme="light"] .hero-content p,
+html[data-theme="light"] .hero-content .eyebrow {
+  color: #090A0F !important;
+}
+
+/* أيقونات 3D — ظل ناعم وسطوع مخفف في الوضع الفاتح */
+html[data-theme="light"] .float-icon {
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05)) brightness(0.95);
+}
+
+/* الشرارات الكهربائية — قلب الألوان في الوضع الفاتح لتبقى مرئية على الخلفية البيضاء */
+html[data-theme="light"] #sparks-canvas {
+  filter: invert(1);
+}
+
+/* 4. محتوى النصوص والأزرار — فوق الكل */
+.hero-content {
+  position: relative !important;
+  z-index: 3 !important;
+  text-align: center;
+  width: 100%;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22D3A5;
+  box-shadow: 0 0 12px #22D3A5;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 7vw, 72px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.typing-wrap {
+  display: inline-block;
+  position: relative;
+  min-height: 1.2em;
+}
+.typing-text {
+  display: inline;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent); /* fallback */
+}
+.typing-cursor {
+  display: inline-block;
+  margin-inline-start: 4px;
+  color: var(--accent);
+  font-weight: 300;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero-sub {
+  max-width: 620px;
+  margin: 0 auto 40px;
+  color: var(--muted);
+  font-size: clamp(15px, 2vw, 18px);
+}
+
+.hero-actions {
+  display: flex; gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 72px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  max-width: 800px;
+  margin-inline: auto;
+}
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat .num {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat .label {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--dim);
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+section {
+  display: block;                /* block صريح — لا flex/grid يدفعها للأعلى */
+  margin: 0;                     /* صفر margin مطلق */
+  margin-top: 0;                 /* صريح كما طلبت */
+  clear: both;                   /* يمنع أي float أو overlap */
+  padding: clamp(72px, 10vw, 120px) 0;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* ==============================================
+   تنسيق الغلاف المشترك لمنع تكرار وتحميل الفيديوهات
+   ============================================== */
+.main-scenery-wrapper {
+  position: relative;
+  background-color: #090A0F;
+  overflow: hidden;
+}
+
+.shared-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  /* قناع تلاشي من الأعلى والأسفل للاندماج مع السواد */
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+}
+
+.shared-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, #090A0F 100%);
+  z-index: 2;
+}
+
+/* تفريغ الأقسام الداخلية لتظهر الخلفية المشتركة */
+.services,
+.portfolio,
+.testimonials {
+  position: relative;
+  z-index: 3;
+  background: transparent !important;
+}
+
+/* تلاشي ناعم موحَّد لبقية الفيديوهات الفردية */
+.hero-video-bg,
+.pricing-video-bg,
+.contact-video-bg,
+.footer-video-bg {
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+}
+
+/* تكيّف Light Mode للفيديو المشترك */
+html[data-theme="light"] .shared-video-bg {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+  mix-blend-mode: multiply;
+}
+html[data-theme="light"] .shared-overlay {
+  background: radial-gradient(circle at center, transparent 30%, #F8FAFC 100%);
+}
+html[data-theme="light"] .main-scenery-wrapper {
+  background-color: #F8FAFC;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+.sub-title {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+}
+.section-header h2 {
+  font-size: clamp(30px, 4.5vw, 50px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-header p {
+  color: var(--muted);
+  font-size: clamp(15px, 2vw, 17px);
+}
+
+/* ============================================
+   SERVICES — 3D Icons + Spotlight
+   ============================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  position: relative;
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: transform .4s var(--ease), border-color .4s, background .5s;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-soft);
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+}
+/* ✨ Legendary Spotlight — إضاءة نيون تتبع الماوس بدقة */
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.30) 0%,
+    rgba(226, 183, 85, 0.14) 30%,
+    rgba(251, 146, 60, 0.06) 55%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+.service-card:hover::before { opacity: 1; }
+
+/* وميض حافة (border-glow) يلاحق الماوس — تأثير زجاجي ساحر */
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(226, 183, 85, 0.55) 0%,
+    rgba(99, 102, 241, 0.35) 40%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  pointer-events: none;
+  z-index: 1;
+}
+.service-card:hover::after { opacity: 1; }
+
+/* Light Mode — أنعم وبألوان مائية */
+[data-theme="light"] .service-card::before {
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(197, 152, 55, 0.10) 30%,
+    transparent 60%
+  );
+  mix-blend-mode: multiply;
+}
+.service-card > * { position: relative; z-index: 1; }
+
+.icon-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 180px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 40%, var(--accent-soft), transparent 65%),
+    linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+}
+.float-icon {
+  width: 100px;
+  height: auto;
+  filter: drop-shadow(0 10px 24px var(--accent-glow));
+  animation: floatAnimation 4s ease-in-out infinite;
+}
+.service-card:nth-child(2) .float-icon { animation-delay: -1s; }
+.service-card:nth-child(3) .float-icon { animation-delay: -2s; }
+
+@keyframes floatAnimation {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.service-tag {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.service-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.service-card p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.card-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.card-link span {
+  transition: transform .3s var(--ease);
+  display: inline-block;
+}
+.service-card:hover .card-link span { transform: translate(-4px, -4px); }
+
+/* ============================================
+   PORTFOLIO — Bento Grid
+   ============================================ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 280px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-dashboard  { grid-column: span 2; grid-row: span 2; }
+.premium-logo    { grid-column: span 1; grid-row: span 2; }
+.modern-landing  { grid-column: span 1; grid-row: span 1; }
+.crypto-dash     { grid-column: span 2; grid-row: span 1; }
+
+.bento-item {
+  position: relative;
+  background: var(--glass-bg-bot);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: border-color .4s, transform .4s var(--ease), background .5s, box-shadow .4s;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-soft);
+}
+.bento-item:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px -20px var(--accent-glow);
+}
+
+.bento-image-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 30%, var(--accent-soft), transparent 60%),
+    linear-gradient(160deg, var(--surface), var(--bg-2));
+}
+.bento-image-wrapper img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: var(--bento-img-opacity);
+  transition: transform .7s cubic-bezier(0.25, 1, 0.5, 1), opacity .5s;
+}
+.bento-item:hover .bento-image-wrapper img {
+  transform: scale(1.06);
+  opacity: var(--bento-img-opacity-hover);
+}
+
+.bento-content {
+  position: relative;
+  z-index: 1;
+  padding: 28px;
+  background: linear-gradient(to top,
+              var(--bg) 0%,
+              color-mix(in srgb, var(--bg) 60%, transparent) 60%,
+              transparent 100%);
+  pointer-events: none;
+}
+.bento-content .category {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+.bento-content h3 {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+.bento-content p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity .3s, max-height .3s, margin-top .3s;
+}
+.bento-item:hover .bento-content p {
+  opacity: 1;
+  max-height: 120px;
+  margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+  .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .hero-dashboard, .premium-logo, .modern-landing, .crypto-dash {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: 320px;
+  }
+  .bento-content p { opacity: 1; max-height: none; margin-top: 6px; }
+}
+
+/* ============================================
+   TESTIMONIALS — Bento Grid with Edge Glow
+   ============================================ */
+.testimonials-grid {
+  grid-auto-rows: 240px;
+}
+.testimonials-grid .t-large { grid-column: span 2; grid-row: span 2; }
+.testimonials-grid .t-tall  { grid-column: span 1; grid-row: span 2; }
+.testimonials-grid .t-small { grid-column: span 1; grid-row: span 1; }
+.testimonials-grid .t-wide  { grid-column: span 2; grid-row: span 1; }
+
+.testimonial-card {
+  position: relative;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform .4s var(--ease), border-color .4s, background .5s;
+  box-shadow: var(--shadow-soft);
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Gradient edge glow on hover */
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--accent), var(--orange));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  pointer-events: none;
+}
+.testimonial-card:hover::after { opacity: 1; }
+
+.stars {
+  color: #FBBF24;
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.4));
+}
+
+.testimonial-card .quote {
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 20px;
+  flex: 1;
+}
+.testimonial-card.t-large .quote {
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.testimonial-card .author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.testimonial-card .avatar {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--orange));
+  color: #fff;
+  font-weight: 800;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 14px -4px var(--accent-glow);
+}
+.testimonial-card .author-info {
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.testimonial-card .name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+}
+.testimonial-card .company {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .testimonials-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .testimonials-grid .t-large,
+  .testimonials-grid .t-tall,
+  .testimonials-grid .t-small,
+  .testimonials-grid .t-wide {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: 220px;
+  }
+}
+
+/* ============================================
+   PRICING SECTION — Video Background
+   ============================================ */
+.pricing {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #090A0F;
+  z-index: 4;
+}
+
+/* فيديو خلفية الأسعار */
+.pricing-video-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.32;
+  /* تلاشي مزدوج من الأعلى والأسفل للاندماج السلس */
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+}
+
+/* طبقة تظليل قسم الأسعار */
+.pricing-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2;
+  background: rgba(9, 10, 15, 0.78);
+  pointer-events: none;
+}
+
+/* المحتوى فوق الفيديو */
+.pricing > .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* تكيّف Light Mode */
+html[data-theme="light"] .pricing-video-bg {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+  mix-blend-mode: multiply;
+}
+html[data-theme="light"] .pricing-overlay {
+  background: rgba(245, 246, 250, 0.82) !important;
+}
+
+/* ============================================
+   PRICING OFFER BANNER — لافتة العرض المحدود
+   ============================================ */
+.pricing-offer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 740px;
+  margin: 0 auto 44px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg,
+              rgba(226, 183, 85, 0.13),
+              rgba(99, 102, 241, 0.07));
+  border: 1px solid rgba(226, 183, 85, 0.40);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 28px -10px rgba(226, 183, 85, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* وميض دوري داخل اللافتة */
+.pricing-offer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-start: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(226, 183, 85, 0.15),
+              transparent);
+  animation: offerShimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes offerShimmer {
+  0% { inset-inline-start: -50%; }
+  100% { inset-inline-start: 100%; }
+}
+
+/* أيقونة الـ Sparkle داخل اللافتة */
+.pricing-offer-icon {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--brand-orange);
+  filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.45));
+}
+
+.pricing-offer-text {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: clamp(13px, 1.6vw, 15px);
+  font-weight: 600;
+  color: var(--accent-color);
+  text-align: center;
+  margin: 0;
+  line-height: 1.55;
+  flex: 1;
+  letter-spacing: 0.01em;
+}
+
+/* النقطة النابضة */
+.pricing-offer-pulse {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  flex-shrink: 0;
+  box-shadow: 0 0 12px var(--accent-color);
+  animation: offerDot 1.8s ease-in-out infinite;
+  z-index: 1;
+}
+.pricing-offer-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  opacity: 0;
+  animation: offerRing 1.8s ease-out infinite;
+}
+
+@keyframes offerDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(0.85); }
+}
+@keyframes offerRing {
+  0%   { opacity: 0.85; transform: scale(0.8); }
+  100% { opacity: 0;    transform: scale(2.3); }
+}
+
+/* Light Mode — أنعم وبتباين كافٍ */
+[data-theme="light"] .pricing-offer {
+  background: linear-gradient(135deg,
+              rgba(181, 137, 38, 0.10),
+              rgba(99, 102, 241, 0.05));
+  border-color: rgba(181, 137, 38, 0.30);
+  box-shadow:
+    0 8px 28px -10px rgba(181, 137, 38, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+[data-theme="light"] .pricing-offer::before {
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(181, 137, 38, 0.12),
+              transparent);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .pricing-offer {
+    padding: 12px 18px;
+    margin-bottom: 32px;
+    border-radius: 16px;
+    gap: 10px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pricing-offer::before,
+  .pricing-offer-pulse,
+  .pricing-offer-pulse::after {
+    animation: none;
+  }
+}
+
+/* ============================================
+   PRICING — Featured Border Glow
+   ============================================ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.price-card {
+  position: relative;
+  padding: 40px 32px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: transform .4s var(--ease), border-color .4s, background .5s, box-shadow .4s;
+  box-shadow: var(--shadow-soft);
+}
+.price-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.price-card.featured {
+  border-color: rgba(99, 102, 241, 0.5);
+  background:
+    linear-gradient(180deg, var(--accent-soft), transparent),
+    linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.35),
+    0 0 32px -4px rgba(99, 102, 241, 0.45),
+    0 0 80px -10px rgba(99, 102, 241, 0.3);
+  animation: borderGlow 3.5s ease-in-out infinite;
+}
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.35),
+      0 0 32px -4px rgba(99, 102, 241, 0.4),
+      0 0 80px -10px rgba(99, 102, 241, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.55),
+      0 0 44px -2px rgba(99, 102, 241, 0.6),
+      0 0 110px -8px rgba(99, 102, 241, 0.45);
+  }
+}
+
+.price-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px -6px var(--accent-glow);
+}
+
+.price-tag {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.price-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.price-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.price-amount {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.price-amount .from { font-size: 13px; color: var(--dim); }
+.price-amount .num {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.price-amount .currency { font-size: 14px; color: var(--muted); }
+.price-note {
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.features {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 32px;
+  flex: 1;
+}
+.features li {
+  display: flex; align-items: start; gap: 12px;
+  font-size: 14px;
+  color: var(--text);
+}
+.features li .check {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.magnetic { will-change: transform; }
+
+/* ============================================
+   CONTACT + FOOTER — Shared Video Wrapper
+   ============================================ */
+.contact-footer-wrapper {
+  position: relative;
+  background-color: #090A0F;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact-footer-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  /* قناع تلاشي من الأعلى ليمتزج بسواد الموقع */
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12%);
+}
+
+.contact-footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 10, 15, 0.4);
+  z-index: 2;
+}
+
+/* تفريغ الأقسام الداخلية لإظهار الفيديو المشترك */
+.contact,
+.footer {
+  position: relative;
+  z-index: 3;
+  background: transparent !important;
+}
+
+/* تكيّف Light Mode */
+html[data-theme="light"] .contact-footer-video {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+  mix-blend-mode: multiply;
+}
+html[data-theme="light"] .contact-footer-overlay {
+  background: rgba(245, 246, 250, 0.4);
+}
+html[data-theme="light"] .contact-footer-wrapper {
+  background-color: #F8FAFC;
+}
+
+.contact-form {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 700px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: text;
+  transition: border-color .25s var(--ease), background .25s, box-shadow .25s;
+  outline: none;
+}
+@media (max-width: 768px) {
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea { cursor: text; }
+  .contact-form select { cursor: pointer; }
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--dim);
+}
+.contact-form input:hover,
+.contact-form select:hover,
+.contact-form textarea:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: var(--surface-hover);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.6;
+}
+.contact-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 16px center;
+  background-size: 12px;
+  padding-inline-start: 16px;
+  padding-inline-end: 44px;
+}
+[dir="rtl"] .contact-form select { background-position: left 16px center; }
+[dir="ltr"] .contact-form select { background-position: right 16px center; }
+
+/* إصلاح لون قائمة الخيارات في الوضع الداكن */
+[data-theme="dark"] select,
+[data-theme="dark"] select option {
+  background-color: #131520 !important; /* خلفية داكنة متناسقة مع الموقع */
+  color: #ffffff !important;            /* نصوص بيضاء واضحة جداً */
+}
+
+/* نفس المعالجة للوضع الفاتح للاتساق */
+[data-theme="light"] select option {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+/* Email field — envelope icon + live validation */
+.field-email input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 18px;
+  padding-inline-start: 46px;
+  transition: border-color .25s var(--ease), box-shadow .25s, background .25s;
+}
+[dir="rtl"] .field-email input { background-position: right 14px center; }
+[dir="ltr"] .field-email input { background-position: left 14px center; }
+
+/* Valid: green border + check mark at end */
+.field-email input:user-valid {
+  border-color: rgba(34, 211, 102, 0.55);
+  box-shadow: 0 0 0 3px rgba(34, 211, 102, 0.12);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322D366' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322D366' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 18px, 16px;
+  padding-inline-end: 44px;
+}
+[dir="rtl"] .field-email input:user-valid {
+  background-position: right 14px center, left 14px center;
+}
+[dir="ltr"] .field-email input:user-valid {
+  background-position: left 14px center, right 14px center;
+}
+
+/* Invalid (only after the user has typed) */
+.field-email input:user-invalid {
+  border-color: rgba(239, 68, 68, 0.55);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.form-submit {
+  margin-top: 4px;
+  align-self: flex-start;
+  padding: 14px 28px;
+  font-size: 15px;
+}
+[dir="ltr"] .form-submit svg { transform: scaleX(-1); }
+
+.form-status {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 4px;
+  min-height: 22px;
+  transition: color .25s;
+}
+.form-status.success { color: #22D366; }
+.form-status.error   { color: #EF4444; }
+.form-status.loading { color: var(--muted); }
+
+.contact-form.submitting input,
+.contact-form.submitting select,
+.contact-form.submitting textarea,
+.contact-form.submitting button {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .contact-form { padding: 28px 22px; }
+}
+
+/* ============================================
+   THANK YOU POPUP
+   ============================================ */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 10, 15, 0.75);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  padding: 20px;
+}
+[data-theme="light"] .popup-overlay {
+  background: rgba(15, 23, 42, 0.5);
+}
+.popup-overlay.active {
+  display: flex;
+  animation: popupFadeIn 0.25s var(--ease);
+}
+@keyframes popupFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-card {
+  background: var(--bg-2);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 28px;
+  padding: 40px 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow:
+    0 24px 80px -20px var(--accent-glow),
+    0 0 0 1px rgba(99, 102, 241, 0.4);
+  transform: scale(0.85);
+  opacity: 0;
+  animation: popupPopIn 0.45s var(--ease) 0.05s forwards;
+}
+@keyframes popupPopIn {
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-logo {
+  display: inline-flex;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 24px var(--orange-glow));
+}
+.popup-logo-img {
+  width: 220px;
+  height: 72px;
+  object-fit: contain;
+}
+.popup-card h3 {
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.popup-card p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.popup-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--surface);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.popup-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--orange));
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.popup-overlay.active .popup-progress-bar {
+  animation: popupProgress 2s linear forwards;
+}
+@keyframes popupProgress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 56px 0 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 32px; }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-brand p { color: var(--muted); font-size: 14px; max-width: 420px; }
+.footer-brand .logo-img { width: 120px; height: 40px; }
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 8px;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.email-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.email-copy {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.email-copy:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+}
+.contact-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 700;
+}
+.phone-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background .25s, border-color .25s, transform .25s var(--ease);
+  align-self: flex-start;
+  direction: ltr;
+  position: relative;
+}
+.phone-copy:hover {
+  background: var(--surface-hover);
+  border-color: rgba(34, 211, 102, 0.5);
+  transform: translateY(-2px);
+}
+.phone-copy .wa-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #22D366;
+  box-shadow: 0 0 12px #22D366;
+  flex-shrink: 0;
+}
+.phone-copy .phone-text {
+  font-variant-numeric: tabular-nums;
+}
+.phone-copy .copy-svg {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  color: var(--muted);
+  transition: color .25s, opacity .25s;
+}
+.phone-copy:hover .copy-svg { color: var(--accent); }
+.phone-copy .copy-feedback {
+  position: absolute;
+  inset-inline-end: 8px;
+  inset-block-start: -10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+  box-shadow: 0 6px 18px -4px var(--accent-glow);
+  white-space: nowrap;
+}
+.phone-copy.copied {
+  background: rgba(34, 211, 102, 0.12);
+  border-color: rgba(34, 211, 102, 0.5);
+  animation: copyPulse 0.5s var(--ease) 1;
+}
+.phone-copy.email-copy.copied {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+.phone-copy.copied .copy-svg { opacity: 0; }
+
+/* النص "تم النسخ" مخفي — استُبدل بالشرارات والاهتزاز والصوت */
+.copy-feedback {
+  display: none !important;
+}
+
+@keyframes copyPulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-copy.copied { animation: none; }
+}
+
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  color: var(--dim); font-size: 13px;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.theme-toggle:focus-visible,
+.lang-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0 0 12px 0;
+  z-index: 10000;
+}
+.skip-link:focus { left: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .float-icon, .typing-cursor, .price-card.featured { animation: none; }
+  #sparks-canvas { display: none; }
+  a, button, .btn { cursor: pointer; }
+}
+
+/* ============================================
+   RESPONSIVE TWEAKS
+   ============================================ */
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: 1fr; gap: 16px; padding: 22px 0; }
+  .stat { padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .stat:last-child { border-bottom: none; }
+  section { padding: 64px 0; }
+  .service-card { padding: 28px 24px; }
+  .price-card { padding: 32px 24px; }
+  .icon-wrap { max-height: 150px; }
+  .float-icon { width: 80px; }
+  .logo-img { width: 124px; height: 42px; }
+  .footer-brand .logo-img { width: 108px; height: 36px; }
+  .popup-card { padding: 32px 24px; }
+  .popup-logo-img { width: 174px; height: 58px; }
+}
+
+/* --- حل مشكلة الشعار في الوضع الفاتح والداكن --- */
+
+/* 1. تنظيف أي خلفيات أو تشويه قديم حول الشعار */
+.logo-img {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    mix-blend-mode: lighten; /* يجعل الخلفية السوداء للشعار تختفي في الوضع الداكن */
+}
+
+/* 2. السحر كله هنا: عندما يتفعل الوضع الفاتح (Light Mode) */
+[data-theme="light"] .logo-img {
+    mix-blend-mode: normal; /* إلغاء خاصية الدمج القديمة */
+    filter: invert(1) hue-rotate(180deg) brightness(0.8);
+    /*
+       invert(1): يقلب الخلفية السوداء للشعار لتصبح بيضاء شفافة، ويقلب النصوص لتناسب الخلفية الفاتحة.
+       hue-rotate(180deg): يحافظ على تدرج الألوان النيون الزرقاء والخضراء الأصلية لشعارك دون أن تتشوه.
+    */
+}
+
+/* 3. إعادة الشعار لوضعه الأصلي المضيء في الوضع الداكن (Dark Mode) */
+[data-theme="dark"] .logo-img {
+    filter: none !important;
+}
+
+/* ==============================================
+   نظام الألوان الموحَّد — حل مشاكل التضارب في Light/Dark
+   ============================================== */
+
+/* 3.1. تطبيق المتغيرات على body */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 3.2. الكروت وبطاقات البنتو تستجيب فوراً */
+.service-card,
+.bento-item,
+.testimonial-card,
+.price-card {
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s var(--ease);
+}
+
+.service-card:hover,
+.bento-item:hover,
+.testimonial-card:hover {
+  background-color: var(--bg-surface-hover) !important;
+  border-color: var(--border-hover) !important;
+}
+
+/* 3.3. وضوح نصوص العناوين والفقرات */
+h1, h2, h3, h4,
+.name {
+  color: var(--text-primary) !important;
+}
+
+p,
+.company,
+.contact-label {
+  color: var(--text-secondary) !important;
+}
+
+.sub-title,
+.eyebrow,
+.price-note {
+  color: var(--accent-color) !important;
+}
+
+/* 3.4. حقول الإدخال (Inputs) في كلا الوضعين */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* ==============================================
+   BRAND ORANGE — توحيد لون كل الأيقونات
+   استثناءات: WhatsApp icons (تبقى بيضاء على خضراء)
+   ============================================== */
+
+/* 1. Theme toggle (شمس/قمر) */
+.icon-sun,
+.icon-moon {
+  color: var(--brand-orange) !important;
+}
+[data-theme="light"] .icon-sun,
+[data-theme="light"] .icon-moon {
+  color: var(--brand-orange) !important;
+}
+
+/* 2. Hamburger menu */
+.menu-toggle,
+.menu-toggle svg,
+.menu-toggle svg path {
+  color: var(--brand-orange) !important;
+  stroke: var(--brand-orange) !important;
+}
+
+/* 3. Stars rating — تدرّج برتقالي ساطع */
+.stars {
+  background: var(--brand-orange-gradient);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-orange); /* fallback */
+  filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.35));
+}
+[data-theme="light"] .stars {
+  filter: drop-shadow(0 0 4px rgba(255, 107, 0, 0.2));
+}
+
+/* 4. Check icons في pricing features */
+.features li .check {
+  background: rgba(255, 107, 0, 0.12) !important;
+  color: var(--brand-orange) !important;
+}
+.features li.muted .check {
+  background: rgba(255, 107, 0, 0.06) !important;
+  color: rgba(255, 107, 0, 0.4) !important;
+}
+
+/* 5. FAQ icons (+/-) */
+.faq-icon {
+  border-color: rgba(255, 107, 0, 0.4) !important;
+}
+.faq-icon::before,
+.faq-icon::after {
+  background: var(--brand-orange) !important;
+}
+.faq-item[open] .faq-icon {
+  background: var(--brand-orange) !important;
+  border-color: var(--brand-orange) !important;
+}
+.faq-item[open] .faq-icon::before,
+.faq-item[open] .faq-icon::after {
+  background: #FFFFFF !important;
+}
+
+/* 6. Copy icons (svg copy buttons) */
+.phone-copy .copy-svg {
+  color: var(--brand-orange) !important;
+  opacity: 0.7;
+}
+.phone-copy:hover .copy-svg {
+  color: var(--brand-orange) !important;
+  opacity: 1;
+}
+
+/* 7. Email envelope icon */
+.email-icon {
+  background: rgba(255, 107, 0, 0.12) !important;
+  color: var(--brand-orange) !important;
+  box-shadow: 0 0 12px rgba(255, 107, 0, 0.25) !important;
+}
+[data-theme="light"] .email-icon {
+  background: rgba(255, 107, 0, 0.10) !important;
+  box-shadow: 0 0 8px rgba(255, 107, 0, 0.15) !important;
+}
+
+/* ⚠️ استثناءات: تبقى كما هي للوضوح على الأزرار الخضراء */
+/* .wa-icon و .wa-dot على أزرار الواتساب → يبقون أخضر/أبيض */
+/* .floating-whatsapp svg → يبقى أبيض على دائرة خضراء */
+/* .form-submit svg → يبقى أبيض على خلفية برتقالية (مكتوب أعلاه) */
+
+/* ==============================================
+   PREMIUM PRELOADER — شاشة تحميل سينمائية
+   ============================================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #090A0F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.95s cubic-bezier(0.86, 0, 0.07, 1);
+  will-change: transform;
+}
+.preloader.done {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 24px;
+  text-align: center;
+}
+
+.preloader-logo {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 0 28px rgba(251, 146, 60, 0.45));
+  animation: preloaderPulse 2.4s ease-in-out infinite;
+}
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.95; }
+  50%      { transform: scale(1.04); opacity: 1; }
+}
+
+.preloader-counter {
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: clamp(80px, 14vw, 160px);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2B755 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.preloader-counter::after {
+  content: '%';
+  font-size: 0.35em;
+  -webkit-text-fill-color: #FB923C;
+  margin-inline-start: 6px;
+  margin-top: 0.15em;
+}
+
+.preloader-bar {
+  width: clamp(180px, 30vw, 280px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.preloader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FB923C 0%, #E2B755 50%, #6366F1 100%);
+  box-shadow: 0 0 12px rgba(226, 183, 85, 0.5);
+  transition: width 0.08s linear;
+}
+
+.preloader-label {
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* قفل scroll أثناء التحميل */
+body.preloading {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Hero يظهر بـ fade-in بعد اختفاء الـ Preloader */
+body:not(.loaded) .hero .hero-content {
+  opacity: 0;
+}
+body.loaded .hero .hero-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+/* prefers-reduced-motion: تخطّي سريع */
+@media (prefers-reduced-motion: reduce) {
+  .preloader,
+  .preloader-logo {
+    animation: none !important;
+  }
+  body:not(.loaded) .hero .hero-content {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .preloader-logo { height: 48px; }
+  .preloader-counter { font-size: clamp(70px, 18vw, 110px); }
+  .preloader-label { font-size: 10px; letter-spacing: 0.3em; }
+}
+
+/* ==============================================
+   LEGENDARY SPOTLIGHT — Bento + Testimonials + Pricing
+   إضاءة نيون تتبع الماوس على كل الكروت
+   ============================================== */
+
+.bento-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.28) 0%,
+    rgba(226, 183, 85, 0.14) 30%,
+    rgba(251, 146, 60, 0.06) 55%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+.bento-item:hover::before { opacity: 1; }
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(226, 183, 85, 0.22) 0%,
+    rgba(99, 102, 241, 0.12) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+.testimonial-card:hover::before { opacity: 1; }
+.testimonial-card > * { position: relative; z-index: 1; }
+
+.price-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.25) 0%,
+    rgba(226, 183, 85, 0.12) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+.price-card:hover::before { opacity: 1; }
+.price-card > * { position: relative; z-index: 1; }
+
+[data-theme="light"] .bento-item::before,
+[data-theme="light"] .testimonial-card::before,
+[data-theme="light"] .price-card::before {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.14) 0%,
+    rgba(197, 152, 55, 0.09) 35%,
+    transparent 65%
+  );
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card::before,
+  .service-card::after,
+  .bento-item::before,
+  .testimonial-card::before,
+  .price-card::before {
+    transition: none;
+  }
+}
+
+/* ==============================================
+   SCROLL REVEAL — fade + slide-in عند الظهور
+   ============================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* تعطيل في reduced-motion — تظهر فوراً بدون animation */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==============================================
+   TRUSTED BY — شريط الشعارات النصية
+   ============================================== */
+.trusted-strip {
+  position: relative;
+  z-index: 5;
+  padding: 32px 0;
+  background-color: var(--bg-main);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.trusted-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 22px 0;
+}
+
+.trusted-logos {
+  overflow: hidden;
+  width: 100%;
+}
+
+.trusted-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px 56px;
+  list-style: none;
+}
+
+/* Desktop — إخفاء النسخة المكرّرة (تظهر فقط للـ marquee على الموبايل) */
+.trusted-track > [aria-hidden="true"] {
+  display: none;
+}
+
+.trusted-logo {
+  font-family: 'Inter', 'Cairo', sans-serif;
+  font-size: clamp(15px, 1.7vw, 19px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+  opacity: 0.55;
+  filter: grayscale(1);
+  transition: opacity .35s var(--ease),
+              color .35s var(--ease),
+              filter .35s var(--ease),
+              transform .35s var(--ease);
+  cursor: default;
+}
+
+.trusted-logo:hover {
+  opacity: 1;
+  filter: grayscale(0);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* Light Mode — نص أغمق قليلاً لقابلية القراءة */
+[data-theme="light"] .trusted-logo {
+  color: var(--text-secondary);
+}
+
+/* Mobile — Marquee سلس */
+@media (max-width: 700px) {
+  .trusted-strip { padding: 24px 0; }
+  .trusted-label { margin-bottom: 16px; }
+
+  .trusted-track {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: max-content;
+    gap: 0;
+    animation: trustedScroll 28s linear infinite;
+    will-change: transform;
+  }
+  /* إظهار النسخة المكرّرة لإكمال loop سلس */
+  .trusted-track > [aria-hidden="true"] {
+    display: inline-block;
+  }
+  .trusted-logo {
+    padding: 0 28px;
+    opacity: 0.6; /* mobile لا يوجد hover — نخلّيه أوضح قليلاً */
+  }
+}
+
+@keyframes trustedScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* تعطيل في reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .trusted-track { animation: none; }
+  .trusted-logo:hover { transform: none; }
+}
+
+/* ==============================================
+   PROCESS — من الفكرة إلى الإطلاق (4 خطوات)
+   ============================================== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.process-step {
+  position: relative;
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: transform .4s var(--ease), border-color .4s, background .5s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-soft);
+}
+.process-step:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+}
+.process-step > * { position: relative; z-index: 1; }
+
+.process-number {
+  font-family: 'Inter', 'Cairo', sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-color);
+          text-stroke: 1.5px var(--accent-color);
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.process-step h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.process-step p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* Spotlight effect (مثل service-card) */
+.process-step::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(226, 183, 85, 0.22) 0%,
+    rgba(99, 102, 241, 0.12) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
+.process-step:hover::before { opacity: 1; }
+
+[data-theme="light"] .process-step::before {
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99, 102, 241, 0.14) 0%,
+    rgba(197, 152, 55, 0.09) 35%,
+    transparent 65%
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ==============================================
+   STATS — أرقام تتحدث
+   ============================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  padding: 48px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-number-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: 'Inter', 'Cairo', sans-serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent-color);
+  font-variant-numeric: tabular-nums;
+}
+.stat-suffix {
+  font-size: 0.7em;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.stat-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .stats-grid { padding: 32px 20px; gap: 24px; }
+}
+
+/* ==============================================
+   FAQ — أسئلة شائعة
+   ============================================== */
+.faq-list {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--glass-bg-top), var(--glass-bg-bot));
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color .3s, background .3s;
+  backdrop-filter: blur(12px);
+}
+.faq-item:hover { border-color: var(--border-strong); }
+.faq-item[open] {
+  border-color: rgba(226, 183, 85, 0.35);
+  background: linear-gradient(180deg,
+              rgba(226, 183, 85, 0.04),
+              var(--glass-bg-bot));
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 600;
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: var(--text);
+  user-select: none;
+  transition: color .25s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { display: none; }
+.faq-item summary:hover { color: var(--accent-color); }
+
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  position: relative;
+  flex-shrink: 0;
+  transition: background .3s, border-color .3s, transform .3s var(--ease);
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  inset: 50% 50% auto auto;
+  background: var(--text);
+  border-radius: 2px;
+  transform: translate(50%, -50%);
+  transition: transform .3s var(--ease), background .3s;
+}
+.faq-icon::before { width: 10px; height: 1.6px; }
+.faq-icon::after  { width: 1.6px; height: 10px; }
+
+.faq-item[open] .faq-icon {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: rotate(180deg);
+}
+.faq-item[open] .faq-icon::before,
+.faq-item[open] .faq-icon::after {
+  background: var(--accent-contrast, #090A0F);
+}
+.faq-item[open] .faq-icon::after {
+  transform: translate(50%, -50%) scaleY(0);
+}
+
+.faq-a {
+  padding: 0 26px 24px 26px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* تحريك ناعم عند الفتح (Chrome/Safari) */
+.faq-item[open] .faq-a {
+  animation: faqFadeIn .35s var(--ease);
+}
+@keyframes faqFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .faq-item summary { padding: 18px 20px; }
+  .faq-a { padding: 0 20px 20px 20px; }
+}
+
+/* ==============================================
+   INFINITE MARQUEE — كلمات الهوية بخط مفرّغ
+   ============================================== */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 36px 0;
+  background-color: #090A0F;
+  z-index: 4;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  /* JS سيضبط السرعة الديناميكية على هذا المتغير */
+  --marquee-duration: 35s;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: marqueeScroll var(--marquee-duration) linear infinite;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-inline-end: 60px;
+}
+
+.marquee-group > span {
+  font-family: 'Inter', 'Cairo', sans-serif;
+  font-size: clamp(64px, 11vw, 150px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.20);
+          text-stroke: 1.5px rgba(255, 255, 255, 0.20);
+  padding: 0 30px;
+  transition: -webkit-text-stroke-color 0.5s;
+}
+
+.marquee-group > .dot {
+  -webkit-text-stroke: 0;
+          text-stroke: 0;
+  color: #FB923C;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 400;
+  padding: 0;
+  transform: translateY(-0.4em);
+  filter: drop-shadow(0 0 14px rgba(251, 146, 60, 0.55));
+}
+
+@keyframes marqueeScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Pause on hover (للسماح بالقراءة) */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Light Mode — stroke أغمق ليبرز على الأبيض */
+[data-theme="light"] .marquee {
+  background-color: #F4F5F8;
+}
+[data-theme="light"] .marquee-group > span {
+  -webkit-text-stroke: 1.5px rgba(15, 17, 26, 0.22);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  .marquee { padding: 24px 0; }
+  .marquee-group > span { padding: 0 18px; }
+}
+
+/* ==============================================
+   ROYAL GOLD BUTTONS — تنسيق الأزرار الرئيسية
+   ============================================== */
+
+/* تنسيق أزرار الـ Primary (مثل زر إرسال الطلب) */
+.btn-primary,
+.form-submit {
+  background: var(--accent-color) !important;
+  color: var(--accent-contrast) !important;
+  border: none !important;
+  border-radius: var(--btn-radius) !important;
+  padding: 14px 32px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  outline: none !important;
+}
+
+/* Hover — توهج ذهبي ناعم وحركة لأعلى */
+.btn-primary:hover,
+.form-submit:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(226, 183, 85, 0.4) !important;
+  opacity: 0.95;
+}
+
+/* أيقونة السهم داخل الزر */
+.btn-primary svg,
+.form-submit svg {
+  stroke: var(--accent-contrast) !important;
+  transition: transform 0.3s ease !important;
+}
+
+/* دفع السهم للأمام عند الـ Hover */
+.btn-primary:hover svg,
+.form-submit:hover svg {
+  transform: translateX(-5px) !important;
+}
+
+/* في الوضع LTR (إنجليزي/فرنسي) السهم يتحرك للأمام يميناً */
+[dir="ltr"] .btn-primary:hover svg,
+[dir="ltr"] .form-submit:hover svg {
+  transform: translateX(5px) !important;
+}
+
+/* تعطيل في reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover,
+  .form-submit:hover,
+  .btn-primary:hover svg,
+  .form-submit:hover svg {
+    transform: none !important;
+  }
+}
+
+/* أزرار الـ Ghost (مثل أزرار الواتساب الجانبية) — بحدود ذهبية شفافة */
+.btn-ghost {
+  background: transparent !important;
+  color: var(--accent-color) !important;
+  border: 1.5px solid var(--accent-color) !important;
+  border-radius: var(--btn-radius) !important;
+  padding: 14px 32px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  outline: none !important;
+}
+
+.btn-ghost:hover {
+  background: var(--accent-color) !important;
+  color: var(--accent-contrast) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(226, 183, 85, 0.4) !important;
+}
+
+/* نقطة الواتساب الخضراء داخل الزر تبقى ظاهرة في كل الحالات */
+.btn-ghost .wa-icon,
+.btn-primary .wa-icon {
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-ghost:hover { transform: none !important; }
+}
+
+/* ==============================================
+   BRAND ORANGE — تطبيق على الإرسال + Badge + Banner
+   ============================================== */
+
+/* زر "إرسال الطلب" — برتقالي حيوي يطابق الشعار */
+.form-submit {
+  background: var(--brand-orange-gradient) !important;
+  background-color: var(--brand-orange) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.25) !important;
+}
+.form-submit:hover {
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.45) !important;
+  filter: brightness(1.06);
+}
+.form-submit svg {
+  stroke: #FFFFFF !important;
+}
+
+/* شارة "الأكثر طلباً" — تدرّج برتقالي يربطها بالشعار */
+.price-badge {
+  background: var(--brand-orange-gradient) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 22px -6px rgba(255, 107, 0, 0.55) !important;
+}
+
+/* لافتة العرض المحدود — برتقالي بدل ذهبي */
+.pricing-offer {
+  background: linear-gradient(135deg,
+              rgba(255, 107, 0, 0.14),
+              rgba(255, 163, 26, 0.06)) !important;
+  border: 1px solid rgba(255, 107, 0, 0.40) !important;
+  box-shadow:
+    0 8px 28px -10px rgba(255, 107, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+.pricing-offer::before {
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(255, 107, 0, 0.20),
+              transparent) !important;
+}
+.pricing-offer-text {
+  background: var(--brand-orange-gradient);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-orange);
+}
+.pricing-offer-pulse {
+  background: var(--brand-orange) !important;
+  box-shadow: 0 0 12px var(--brand-orange) !important;
+}
+.pricing-offer-pulse::after {
+  border-color: var(--brand-orange) !important;
+}
+
+/* Light Mode — أنعم */
+[data-theme="light"] .pricing-offer {
+  background: linear-gradient(135deg,
+              rgba(255, 107, 0, 0.10),
+              rgba(255, 163, 26, 0.04)) !important;
+  border-color: rgba(255, 107, 0, 0.32) !important;
+}
+
+/* ==============================================
+   FLOATING WHATSAPP BUTTON — زر واتساب طافٍ
+   bottom-left في RTL، bottom-right في LTR
+   z-index: 50 (تحت الـ cursor 9999 والـ preloader 100000)
+   ============================================== */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-end: 24px; /* RTL=left, LTR=right */
+  z-index: 50;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #22D366; /* WhatsApp green */
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow:
+    0 8px 24px rgba(34, 211, 102, 0.45),
+    0 0 0 0 rgba(34, 211, 102, 0.6);
+  transition: transform 0.3s var(--ease),
+              box-shadow 0.3s ease,
+              opacity 0.5s ease;
+  animation: waPulse 2.6s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 14px 36px rgba(34, 211, 102, 0.55),
+    0 0 0 0 rgba(34, 211, 102, 0);
+  animation-play-state: paused;
+}
+
+.floating-whatsapp:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 4px;
+}
+
+.floating-whatsapp-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* النبض السينمائي */
+@keyframes waPulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 24px rgba(34, 211, 102, 0.45),
+      0 0 0 0 rgba(34, 211, 102, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 10px 28px rgba(34, 211, 102, 0.50),
+      0 0 0 18px rgba(34, 211, 102, 0);
+  }
+}
+
+/* Tooltip — يظهر فوق الزر */
+.floating-whatsapp-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  padding: 8px 14px;
+  background: #12141C;
+  color: #FFFFFF;
+  font-family: 'Cairo', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s var(--ease);
+}
+.floating-whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #12141C;
+}
+
+.floating-whatsapp:hover .floating-whatsapp-tooltip,
+.floating-whatsapp:focus-visible .floating-whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Light Mode — tooltip بخلفية فاتحة */
+[data-theme="light"] .floating-whatsapp-tooltip {
+  background: #FFFFFF;
+  color: #0F111A;
+  border: 1px solid rgba(15, 17, 26, 0.08);
+}
+[data-theme="light"] .floating-whatsapp-tooltip::after {
+  border-top-color: #FFFFFF;
+}
+
+/* Mobile — أصغر قليلاً + بدون tooltip */
+@media (max-width: 600px) {
+  .floating-whatsapp {
+    width: 54px;
+    height: 54px;
+    bottom: 18px;
+    inset-inline-end: 18px;
+  }
+  .floating-whatsapp-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .floating-whatsapp-tooltip {
+    display: none; /* لا hover على الموبايل */
+  }
+}
+
+/* أثناء الـ Preloader — مخفي ولا يتلقى clicks */
+body.preloading .floating-whatsapp {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+}
+
+/* Reduced motion — يلغي النبض والتكبير */
+@media (prefers-reduced-motion: reduce) {
+  .floating-whatsapp {
+    animation: none;
+  }
+  .floating-whatsapp:hover {
+    transform: none;
+  }
+}
