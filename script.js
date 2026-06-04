@@ -989,4 +989,120 @@
   if (canvas && ctx && !isTouch && !prefersReducedMotion) {
     requestAnimationFrame(frame);
   }
+
+  /* ============================================
+     READING PROGRESS BAR — شريط تقدّم القراءة
+     ============================================ */
+  (function readingProgress() {
+    const bar = document.querySelector('#readProgress span');
+    if (!bar) return;
+    let ticking = false;
+    function update() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = p + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  })();
+
+  /* ============================================
+     BACK TO TOP — زر العودة للأعلى
+     ============================================ */
+  (function backToTop() {
+    const btn = document.getElementById('toTop');
+    if (!btn) return;
+    let ticking = false;
+    function update() {
+      btn.classList.toggle('show', window.scrollY > 600);
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    });
+    update();
+  })();
+
+  /* ============================================
+     BEFORE / AFTER — مقارن سحب تفاعلي
+     ============================================ */
+  (function beforeAfter() {
+    const wrap = document.getElementById('baCompare');
+    if (!wrap) return;
+    const before = document.getElementById('baBefore');
+    const handle = document.getElementById('baHandle');
+    if (!before || !handle) return;
+    let dragging = false;
+
+    function setPos(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      before.style.width = pct + '%';
+      handle.style.left = pct + '%';
+      wrap.setAttribute('aria-valuenow', Math.round(pct));
+    }
+    let pendingPct = null, raf = null;
+    function schedule(pct) {
+      pendingPct = pct;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        if (pendingPct != null) setPos(pendingPct);
+      });
+    }
+    function fromEvent(e) {
+      const r = wrap.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      schedule((x / r.width) * 100);
+    }
+
+    wrap.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      try { wrap.setPointerCapture(e.pointerId); } catch (_) {}
+      fromEvent(e);
+    });
+    wrap.addEventListener('pointermove', (e) => { if (dragging) fromEvent(e); });
+    wrap.addEventListener('pointerup', () => { dragging = false; });
+    wrap.addEventListener('pointercancel', () => { dragging = false; });
+
+    wrap.addEventListener('keydown', (e) => {
+      const cur = parseFloat(wrap.getAttribute('aria-valuenow')) || 50;
+      if (e.key === 'ArrowLeft') { setPos(cur - 4); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { setPos(cur + 4); e.preventDefault(); }
+      else if (e.key === 'Home') { setPos(0); e.preventDefault(); }
+      else if (e.key === 'End') { setPos(100); e.preventDefault(); }
+    });
+
+    // لمسة جذب أولية لتوضيح أنها تفاعلية
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((ent) => {
+          if (!ent.isIntersecting) return;
+          io.disconnect();
+          const seq = [50, 64, 36, 50];
+          let i = 0;
+          const iv = setInterval(() => {
+            i++;
+            if (i >= seq.length) { clearInterval(iv); return; }
+            const from = seq[i - 1], to = seq[i], t0 = performance.now();
+            (function anim(now) {
+              const k = Math.min(1, (now - t0) / 340);
+              setPos(from + (to - from) * (1 - Math.pow(1 - k, 3)));
+              if (k < 1) requestAnimationFrame(anim);
+            })(t0);
+          }, 380);
+        });
+      }, { threshold: 0.5 });
+      io.observe(wrap);
+    }
+  })();
 })();

@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=8">
 
   <!-- Supabase JS client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -48,6 +48,9 @@
   </script>
 </head>
 <body class="preloading">
+
+  <!-- Reading progress bar — شريط تقدّم القراءة -->
+  <div class="read-progress" id="readProgress" aria-hidden="true"><span></span></div>
 
   <!-- Premium Preloader — شاشة تحميل سينمائية -->
   <div class="preloader" id="preloader" aria-hidden="true">
@@ -118,7 +121,7 @@
   </nav>
 
   <!-- Hero Section with Live 3D Video Background -->
-  <header class="hero" id="main">
+  <header class="hero" id="main" data-glow="balanced">
     <!-- فيديو الخلفية الثلاثي الأبعاد المتحرك تلقائياً وبشكل مستمر -->
     <video autoplay loop muted playsinline preload="metadata" poster="hero-poster.jpg" class="hero-video-bg">
       <source src="hero-bg.mp4" type="video/mp4">
@@ -192,7 +195,7 @@
   <!-- Services -->
   <section class="services" id="services">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" data-num="01">
         <span class="sub-title" data-ar="خدماتنا" data-en="Our services" data-fr="Nos services">خدماتنا</span>
         <h2>
           <span data-ar="ثلاث خدمات." data-en="Three services." data-fr="Trois services.">ثلاث خدمات.</span>
@@ -265,7 +268,7 @@
   <!-- Process — كيف نعمل -->
   <section class="process" id="process">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" data-num="03">
         <span class="sub-title" data-ar="كيف نعمل" data-en="How we work" data-fr="Notre méthode">كيف نعمل</span>
         <h2>
           <span data-ar="من الفكرة" data-en="From idea" data-fr="De l'idée">من الفكرة</span>
@@ -321,7 +324,7 @@
   <!-- Testimonials Bento Grid -->
   <section class="testimonials" id="testimonials">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" data-num="04">
         <span class="sub-title" data-ar="آراء العملاء" data-en="Testimonials" data-fr="Témoignages">آراء العملاء</span>
         <h2>
           <span data-ar="عملاء" data-en="Clients who" data-fr="Des clients">عملاء</span>
@@ -408,6 +411,45 @@
     </div>
   </section>
 
+  <!-- Before / After — مقارنة سحب -->
+  <section class="ba-section" id="before-after">
+    <div class="container">
+      <div class="section-header reveal" data-num="07">
+        <span class="sub-title" data-ar="قبل وبعد" data-en="Before & after" data-fr="Avant / après">قبل وبعد</span>
+        <h2>
+          <span data-ar="الفرق" data-en="The difference" data-fr="La différence">الفرق</span>
+          <span class="accent" data-ar="الذي نصنعه." data-en="we make." data-fr="qu'on apporte.">الذي نصنعه.</span>
+        </h2>
+        <p data-ar="اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا."
+           data-en="Drag the handle to reveal the transformation — from the old design to ours."
+           data-fr="Glissez la poignée pour révéler la transformation — de l'ancien design au nôtre.">
+          اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا.
+        </p>
+      </div>
+
+      <div class="ba-compare reveal" id="baCompare" role="slider" tabindex="0"
+           aria-label="مقارنة قبل وبعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <!-- بعد (الطبقة السفلية الكاملة) -->
+        <div class="ba-layer ba-after">
+          <div class="ba-media">AZIK · After</div>
+          <span class="ba-tag ba-tag-after" data-ar="بعد" data-en="After" data-fr="Après">بعد</span>
+        </div>
+        <!-- قبل (الطبقة العلوية المقصوصة) -->
+        <div class="ba-layer ba-before" id="baBefore">
+          <div class="ba-media">Old Design · Before</div>
+          <span class="ba-tag ba-tag-before" data-ar="قبل" data-en="Before" data-fr="Avant">قبل</span>
+        </div>
+        <!-- المقبض -->
+        <div class="ba-handle" id="baHandle">
+          <div class="ba-handle-line"></div>
+          <div class="ba-handle-grip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-4 6 4 6M15 6l4 6-4 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Infinite Marquee — كلمات الهوية بخط مفرّغ ضخم -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track" id="marqueeTrack">
@@ -429,7 +471,7 @@
   <!-- Pricing -->
   <section class="pricing" id="pricing">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" data-num="05">
         <span class="sub-title" data-ar="باقات الأسعار" data-en="Pricing" data-fr="Tarifs">باقات الأسعار</span>
         <h2>
           <span data-ar="باقات" data-en="Transparent" data-fr="Des forfaits">باقات</span>
@@ -442,7 +484,7 @@
         </p>
       </div>
 
-      <!-- Limited Offer Banner -->
+      <!-- ضمان واضح بدل الضغط الاصطناعي -->
       <div class="pricing-offer reveal" role="note" aria-live="polite">
         <span class="pricing-offer-pulse" aria-hidden="true"></span>
         <svg class="pricing-offer-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -451,12 +493,32 @@
           <path d="M5 14 L5.7 16.3 L8 17 L5.7 17.7 L5 20 L4.3 17.7 L2 17 L4.3 16.3 Z" opacity="0.7"/>
         </svg>
         <p class="pricing-offer-text"
-           data-ar="عرض خاص هذا الشهر: خصم 15% على باقات المواقع — الأماكن محدودة"
-           data-en="This month: 15% off website packages — limited slots"
-           data-fr="Ce mois-ci : -15% sur les forfaits sites — places limitées">
-          عرض خاص هذا الشهر: خصم 15% على باقات المواقع — الأماكن محدودة
+           data-ar="أسعار ثابتة وشاملة — بلا رسوم خفية، وتملك كل الملفات المصدرية"
+           data-en="Fixed, all-in pricing — no hidden fees, and you own every source file"
+           data-fr="Tarifs fixes et tout compris — sans frais cachés, et vous possédez tous les fichiers sources">
+          أسعار ثابتة وشاملة — بلا رسوم خفية، وتملك كل الملفات المصدرية
         </p>
       </div>
+
+      <!-- شارات الطمأنة -->
+      <ul class="trust-badges reveal" aria-label="ضمانات">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4.5"/></svg>
+          <span data-ar="ملكية كاملة للملفات" data-en="You own all files" data-fr="Fichiers 100% à vous">ملكية كاملة للملفات</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 7l2-3h14l2 3M5 7v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7"/><path d="M9 11h6"/></svg>
+          <span data-ar="بلا رسوم خفية" data-en="No hidden fees" data-fr="Sans frais cachés">بلا رسوم خفية</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span data-ar="رد خلال 24 ساعة" data-en="Reply within 24h" data-fr="Réponse sous 24h">رد خلال 24 ساعة</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg>
+          <span data-ar="دفعة أولى بسيطة للبدء" data-en="Small deposit to start" data-fr="Petit acompte pour démarrer">دفعة أولى بسيطة للبدء</span>
+        </li>
+      </ul>
 
       <div class="pricing-grid">
 
@@ -551,7 +613,7 @@
   <!-- FAQ — أسئلة شائعة -->
   <section class="faq" id="faq">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" data-num="06">
         <span class="sub-title" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</span>
         <h2>
           <span data-ar="أسئلة" data-en="Questions" data-fr="Questions">أسئلة</span>
@@ -862,6 +924,13 @@
           data-fr="Contactez-nous sur WhatsApp">تواصل عبر واتساب</span>
   </a>
 
-  <script src="script.js?v=6"></script>
+  <!-- Back to top — زر العودة للأعلى -->
+  <button class="to-top" id="toTop" type="button" aria-label="العودة للأعلى">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script src="script.js?v=8"></script>
 </body>
 </html>
