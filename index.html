@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 
   <!-- Supabase JS client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -77,6 +77,7 @@
 
       <ul class="nav-links">
         <li><a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a></li>
+        <li><a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a></li>
         <li><a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a></li>
         <li><a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a></li>
         <li><a href="#faq" data-ar="أسئلة" data-en="FAQ" data-fr="FAQ">أسئلة</a></li>
@@ -112,6 +113,7 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a>
+      <a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a>
       <a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a>
       <a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a>
       <a href="#faq" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a>
@@ -121,7 +123,7 @@
   </nav>
 
   <!-- Hero Section with Live 3D Video Background -->
-  <header class="hero" id="main" data-glow="balanced">
+  <header class="hero" id="main" data-glow="subtle">
     <!-- فيديو الخلفية الثلاثي الأبعاد المتحرك تلقائياً وبشكل مستمر -->
     <video autoplay loop muted playsinline preload="metadata" poster="hero-poster.jpg" class="hero-video-bg">
       <source src="hero-bg.mp4" type="video/mp4">
@@ -156,40 +158,8 @@
     </div>
   </header>
 
-  <!-- Trusted By — شريط شعارات عملاء (نصّية حتى يأتي التصميم النهائي) -->
-  <section class="trusted-strip" aria-label="Trusted by leading brands">
-    <div class="container">
-      <p class="trusted-label"
-         data-ar="موثوق به من طرف علامات تجارية رائدة"
-         data-en="Trusted by leading brands"
-         data-fr="La confiance de marques leaders">
-        موثوق به من طرف علامات تجارية رائدة
-      </p>
-      <div class="trusted-logos">
-        <div class="trusted-track">
-          <span class="trusted-logo">Atlas Capital</span>
-          <span class="trusted-logo">Souk Digital</span>
-          <span class="trusted-logo">Maghreb Lab</span>
-          <span class="trusted-logo">Quantum App</span>
-          <span class="trusted-logo">Neval</span>
-          <span class="trusted-logo">Sahm</span>
-          <!-- نسخة مكررة للـ marquee السلس على الموبايل -->
-          <span class="trusted-logo" aria-hidden="true">Atlas Capital</span>
-          <span class="trusted-logo" aria-hidden="true">Souk Digital</span>
-          <span class="trusted-logo" aria-hidden="true">Maghreb Lab</span>
-          <span class="trusted-logo" aria-hidden="true">Quantum App</span>
-          <span class="trusted-logo" aria-hidden="true">Neval</span>
-          <span class="trusted-logo" aria-hidden="true">Sahm</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sections BG Wrapper — فيديو واحد يخدم 5 أقسام (services → faq) -->
+  <!-- Sections BG Wrapper — خلفية موحّدة (overlay فقط، بلا فيديو) -->
   <div class="sections-bg-wrapper">
-    <video autoplay loop muted playsinline preload="metadata" class="sections-bg-video">
-      <source src="sections-bg.mp4" type="video/mp4">
-    </video>
     <div class="sections-bg-overlay"></div>
 
   <!-- Services -->
@@ -261,6 +231,122 @@
           </a>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio — أعمالنا -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal" data-num="02">
+        <span class="sub-title" data-ar="أعمالنا" data-en="Our work" data-fr="Réalisations">أعمالنا</span>
+        <h2>
+          <span data-ar="أعمال" data-en="Work we're" data-fr="Des projets">أعمال</span>
+          <span class="accent" data-ar="نفخر بها." data-en="proud of." data-fr="dont on est fiers.">نفخر بها.</span>
+        </h2>
+        <p data-ar="نماذج من مشاريع نفّذناها — من الهوية البصرية إلى المواقع ولوحات التحكم."
+           data-en="A selection of projects we delivered — from brand identities to websites and dashboards."
+           data-fr="Une sélection de projets réalisés — de l'identité visuelle aux sites et dashboards.">
+          نماذج من مشاريع نفّذناها — من الهوية البصرية إلى المواقع ولوحات التحكم.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <article class="portfolio-item p-tall reveal" data-spotlight>
+          <image-slot id="pf-1" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="هوية بصرية" data-en="Brand identity" data-fr="Identité">هوية بصرية</span>
+            <h3 data-ar="بهجة للقهوة" data-en="Bahdja Coffee" data-fr="Bahdja Coffee">بهجة للقهوة</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item p-wide reveal" data-spotlight>
+          <image-slot id="pf-2" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="متجر إلكتروني" data-en="E-commerce" data-fr="E-commerce">متجر إلكتروني</span>
+            <h3 data-ar="نسمة سْتور" data-en="Nesma Store" data-fr="Nesma Store">نسمة سْتور</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item p-small reveal" data-spotlight>
+          <image-slot id="pf-3" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="لوحة تحكم" data-en="Dashboard" data-fr="Dashboard">لوحة تحكم</span>
+            <h3 data-ar="وصّلني" data-en="Wassalni" data-fr="Wassalni">وصّلني</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item p-small reveal" data-spotlight>
+          <a class="portfolio-link js-demo"
+             href="booking_dual_role_app.html"
+             data-demo="booking_dual_role_app.html"
+             data-demo-title="عيادة الأمل — نظام حجز المواعيد"
+             aria-label="عيادة الأمل — نظام حجز المواعيد (افتح التجربة الحية)">
+            <img class="portfolio-media" src="assets/al-amal-clinic.png" alt="نظام حجز مواعيد عيادة الأمل">
+            <span class="portfolio-live" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
+              <span data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
+            </span>
+            <div class="portfolio-cap">
+              <span class="portfolio-tag" data-ar="تطبيق حجز مواعيد" data-en="Booking app" data-fr="App de réservation">تطبيق حجز مواعيد</span>
+              <h3 data-ar="عيادة الأمل" data-en="Al-Amal Clinic" data-fr="Clinique Al-Amal">عيادة الأمل</h3>
+            </div>
+          </a>
+        </article>
+
+        <article class="portfolio-item p-wide reveal" data-spotlight>
+          <image-slot id="pf-5" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="موقع تعريفي" data-en="Website" data-fr="Site web">موقع تعريفي</span>
+            <h3 data-ar="مخبر المغرب" data-en="Maghreb Lab" data-fr="Maghreb Lab">مخبر المغرب</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item p-small reveal" data-spotlight>
+          <image-slot id="pf-6" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="هوية + متجر" data-en="Brand + store" data-fr="Marque + boutique">هوية + متجر</span>
+            <h3 data-ar="سهم" data-en="Sahm" data-fr="Sahm">سهم</h3>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After — قبل وبعد -->
+  <section class="ba-section" id="before-after">
+    <div class="container">
+      <div class="section-header reveal" data-num="07">
+        <span class="sub-title" data-ar="قبل وبعد" data-en="Before & after" data-fr="Avant / après">قبل وبعد</span>
+        <h2>
+          <span data-ar="الفرق" data-en="The difference" data-fr="La différence">الفرق</span>
+          <span class="accent" data-ar="الذي نصنعه." data-en="we make." data-fr="qu'on apporte.">الذي نصنعه.</span>
+        </h2>
+        <p data-ar="اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا."
+           data-en="Drag the handle to reveal the transformation — from the old design to ours."
+           data-fr="Glissez la poignée pour révéler la transformation — de l'ancien design au nôtre.">
+          اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا.
+        </p>
+      </div>
+
+      <div class="ba-compare reveal" id="baCompare" role="slider" tabindex="0"
+           aria-label="مقارنة قبل وبعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="ba-layer ba-after">
+          <img class="ba-media" src="assets/sunvest-after.png" alt="Sunvest — التصميم الجديد بعد إعادة التصميم">
+          <span class="ba-tag ba-tag-after" data-ar="بعد" data-en="After" data-fr="Après">بعد</span>
+        </div>
+        <div class="ba-layer ba-before" id="baBefore">
+          <img class="ba-media" src="assets/sunvest-before.png" alt="Sunvest — التصميم القديم قبل إعادة التصميم">
+          <span class="ba-tag ba-tag-before" data-ar="قبل" data-en="Before" data-fr="Avant">قبل</span>
+        </div>
+        <div class="ba-handle" id="baHandle">
+          <div class="ba-handle-line"></div>
+          <div class="ba-handle-grip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-4 6 4 6M15 6l4 6-4 6"/></svg>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -408,81 +494,6 @@
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- Before / After — مقارنة سحب -->
-  <section class="ba-section" id="before-after">
-    <div class="container">
-      <div class="section-header reveal" data-num="07">
-        <span class="sub-title" data-ar="قبل وبعد" data-en="Before & after" data-fr="Avant / après">قبل وبعد</span>
-        <h2>
-          <span data-ar="الفرق" data-en="The difference" data-fr="La différence">الفرق</span>
-          <span class="accent" data-ar="الذي نصنعه." data-en="we make." data-fr="qu'on apporte.">الذي نصنعه.</span>
-        </h2>
-        <p data-ar="اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا."
-           data-en="Drag the handle to reveal the transformation — from the old design to ours."
-           data-fr="Glissez la poignée pour révéler la transformation — de l'ancien design au nôtre.">
-          اسحب المقبض لترى التحوّل — من التصميم القديم إلى هويتنا.
-        </p>
-      </div>
-
-      <div class="ba-compare reveal" id="baCompare" role="slider" tabindex="0"
-           aria-label="مقارنة قبل وبعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-        <!-- بعد (الطبقة السفلية الكاملة) -->
-        <div class="ba-layer ba-after">
-          <img class="ba-media" src="assets/sunvest-after.png" alt="Sunvest — التصميم الجديد بعد إعادة التصميم">
-          <span class="ba-tag ba-tag-after" data-ar="بعد" data-en="After" data-fr="Après">بعد</span>
-        </div>
-        <!-- قبل (الطبقة العلوية المقصوصة) -->
-        <div class="ba-layer ba-before" id="baBefore">
-          <img class="ba-media" src="assets/sunvest-before.png" alt="Sunvest — التصميم القديم قبل إعادة التصميم">
-          <span class="ba-tag ba-tag-before" data-ar="قبل" data-en="Before" data-fr="Avant">قبل</span>
-        </div>
-        <!-- المقبض -->
-        <div class="ba-handle" id="baHandle">
-          <div class="ba-handle-line"></div>
-          <div class="ba-handle-grip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-4 6 4 6M15 6l4 6-4 6"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Live Work — تجربة حية -->
-  <section class="live-work" id="live-work">
-    <div class="container">
-      <div class="section-header reveal" data-num="08">
-        <span class="sub-title" data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
-        <h2>
-          <span data-ar="جرّب" data-en="Try" data-fr="Essayez">جرّب</span>
-          <span class="accent" data-ar="مشروعاً صنعناه." data-en="something we built." data-fr="ce qu'on a créé.">مشروعاً صنعناه.</span>
-        </h2>
-        <p data-ar="اضغط على البطاقة لفتح التطبيق داخل الصفحة وتجربته بنفسك."
-           data-en="Tap the card to open the live app inside this page and try it yourself."
-           data-fr="Cliquez sur la carte pour ouvrir l'application en direct et l'essayer.">
-          اضغط على البطاقة لفتح التطبيق داخل الصفحة وتجربته بنفسك.
-        </p>
-      </div>
-
-      <article class="portfolio-item live-card reveal">
-        <a class="portfolio-link js-demo"
-           href="booking_dual_role_app.html"
-           data-demo="booking_dual_role_app.html"
-           data-demo-title="عيادة الأمل — نظام حجز المواعيد"
-           aria-label="عيادة الأمل — نظام حجز المواعيد (افتح التجربة الحية)">
-          <img class="portfolio-media" src="assets/al-amal-clinic.png" alt="نظام حجز مواعيد عيادة الأمل">
-          <span class="portfolio-live" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
-            <span data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
-          </span>
-          <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="تطبيق حجز مواعيد" data-en="Booking app" data-fr="App de réservation">تطبيق حجز مواعيد</span>
-            <h3 data-ar="عيادة الأمل" data-en="Al-Amal Clinic" data-fr="Clinique Al-Amal">عيادة الأمل</h3>
-          </div>
-        </a>
-      </article>
     </div>
   </section>
 
@@ -986,6 +997,7 @@
     </svg>
   </button>
 
-  <script src="script.js?v=9"></script>
+  <script src="image-slot.js"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

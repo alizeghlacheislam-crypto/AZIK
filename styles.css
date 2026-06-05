@@ -3136,18 +3136,24 @@ html[data-theme="light"] .to-top {
 }
 
 /* ==============================================
-   LIVE WORK — بطاقة تجربة حية واحدة بدل bento كامل
+   PORTFOLIO — أعمالنا (Bento Grid + image-slot)
    ============================================== */
-.live-work {
+.portfolio {
   position: relative;
   z-index: 3;
   background: transparent !important;
 }
-.live-card {
-  position: relative;
-  max-width: 760px;
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 260px;
+  grid-auto-flow: row dense;
+  gap: 20px;
+  max-width: 1200px;
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
+}
+.portfolio-item {
+  position: relative;
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid var(--border, rgba(255,255,255,0.08));
@@ -3158,10 +3164,33 @@ html[data-theme="light"] .to-top {
   box-shadow: var(--shadow-soft, 0 14px 38px -16px rgba(0,0,0,0.6));
   transition: transform .45s var(--ease), border-color .4s, box-shadow .4s;
 }
-.live-card:hover {
+.portfolio-item:hover {
   transform: translateY(-6px);
   border-color: rgba(255, 107, 0, 0.5);
   box-shadow: 0 28px 60px -24px rgba(0, 0, 0, 0.65);
+}
+.p-tall  { grid-row: span 2; }
+.p-wide  { grid-column: span 2; }
+.p-small { grid-column: span 1; grid-row: span 1; }
+
+@media (max-width: 900px) {
+  .portfolio-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; }
+  .p-tall  { grid-row: span 1; }
+  .p-wide  { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  .portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+  .p-wide  { grid-column: span 1; }
+}
+
+/* عناصر image-slot الفارغة — تصبغ بلون نص خفيف */
+image-slot.portfolio-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: rgba(245, 245, 247, 0.55);
 }
 .portfolio-link {
   position: absolute;
