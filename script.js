@@ -1105,4 +1105,47 @@
       io.observe(wrap);
     }
   })();
+
+  /* ============================================
+     LIVE DEMO MODAL — يفتح التطبيق داخل iframe في الصفحة
+     ============================================ */
+  (function demoModal() {
+    const modal = document.getElementById('demoModal');
+    const frame = document.getElementById('demoFrame');
+    const titleEl = document.getElementById('demoTitle');
+    const openBtn = document.getElementById('demoOpen');
+    if (!modal || !frame) return;
+
+    let lastFocus = null;
+
+    function openDemo(url, title) {
+      lastFocus = document.activeElement;
+      titleEl.textContent = title || 'تجربة حية';
+      if (openBtn) openBtn.href = url;
+      if (frame.getAttribute('src') !== url) frame.setAttribute('src', url);
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDemo() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.js-demo').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openDemo(el.dataset.demo || el.getAttribute('href'), el.dataset.demoTitle);
+      });
+    });
+
+    modal.querySelectorAll('[data-demo-close]').forEach((b) => {
+      b.addEventListener('click', closeDemo);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeDemo();
+    });
+  })();
 })();

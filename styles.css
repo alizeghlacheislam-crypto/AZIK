@@ -3063,28 +3063,14 @@ html[data-theme="light"] .to-top {
   inset: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: clamp(20px, 3vw, 32px);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(245, 245, 247, 0.45);
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
 }
+/* في الطبقة المقصوصة يجب أن تبقى الصورة بعرض الحاوية كاملاً حتى لا تنضغط */
 .ba-before .ba-media {
   width: 980px;
   max-width: none;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(140, 140, 160, 0.25), transparent 60%),
-    linear-gradient(135deg, #2a2d3a 0%, #1a1d2a 100%);
-}
-.ba-after .ba-media {
-  background:
-    radial-gradient(circle at 70% 50%, rgba(255, 107, 0, 0.18), transparent 55%),
-    linear-gradient(135deg, #1a1d2a 0%, #090A0F 100%);
-  color: var(--brand-orange, #FF6B00);
 }
 @media (max-width: 1020px) {
   .ba-before .ba-media { width: 96vw; }
@@ -3147,4 +3133,193 @@ html[data-theme="light"] .to-top {
 @media (prefers-reduced-motion: reduce) {
   .read-progress span { transition: none; }
   .to-top { transition: opacity .2s; }
+}
+
+/* ==============================================
+   LIVE WORK — بطاقة تجربة حية واحدة بدل bento كامل
+   ============================================== */
+.live-work {
+  position: relative;
+  z-index: 3;
+  background: transparent !important;
+}
+.live-card {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  background:
+    radial-gradient(120% 120% at 80% 0%, rgba(255, 107, 0, 0.10), transparent 60%),
+    linear-gradient(160deg, rgba(255, 107, 0, 0.05), transparent 55%),
+    rgba(18, 20, 28, 0.6);
+  box-shadow: var(--shadow-soft, 0 14px 38px -16px rgba(0,0,0,0.6));
+  transition: transform .45s var(--ease), border-color .4s, box-shadow .4s;
+}
+.live-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 107, 0, 0.5);
+  box-shadow: 0 28px 60px -24px rgba(0, 0, 0, 0.65);
+}
+.portfolio-link {
+  position: absolute;
+  inset: 0;
+  display: block;
+  text-decoration: none;
+  z-index: 1;
+}
+img.portfolio-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  z-index: 0;
+}
+.portfolio-live {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #062019;
+  background: linear-gradient(135deg, #7fffd4, #1aaa8a);
+  box-shadow: 0 6px 18px -6px rgba(26, 170, 138, 0.7);
+  transition: transform .25s var(--ease);
+}
+.portfolio-live svg { width: 14px; height: 14px; }
+.live-card:hover .portfolio-live { transform: translateY(-2px); }
+.portfolio-link:focus-visible {
+  outline: 2px solid var(--brand-orange, #FF6B00);
+  outline-offset: 3px;
+}
+.portfolio-cap {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: 2;
+  padding: 28px 24px 22px;
+  background: linear-gradient(to top,
+    rgba(9,10,15,0.95) 0%,
+    rgba(9,10,15,0.65) 55%,
+    transparent 100%);
+}
+.portfolio-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-orange, #FF6B00);
+  margin-bottom: 8px;
+}
+.portfolio-cap h3 {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0;
+}
+
+/* ==============================================
+   DEMO MODAL — التجربة الحية داخل الصفحة
+   ============================================== */
+.demo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.demo-modal.open { display: flex; animation: demoFade .25s ease; }
+@keyframes demoFade { from { opacity: 0; } to { opacity: 1; } }
+.demo-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 12, 0.78);
+  backdrop-filter: blur(6px);
+}
+.demo-shell {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: #0a1512;
+  border: 1px solid rgba(255, 107, 0, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8);
+  animation: demoRise .32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes demoRise {
+  from { transform: translateY(18px) scale(.97); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+.demo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 107, 0, 0.08), transparent);
+  flex-shrink: 0;
+}
+.demo-bar-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff5ee;
+}
+.demo-bar-actions { display: flex; align-items: center; gap: 6px; }
+.demo-open, .demo-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 245, 238, 0.75);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.demo-close { font-size: 22px; line-height: 1; }
+.demo-open svg { width: 16px; height: 16px; }
+.demo-open:hover, .demo-close:hover {
+  background: rgba(255, 107, 0, 0.14);
+  color: #fff;
+  border-color: rgba(255, 107, 0, 0.4);
+}
+.demo-frame-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #06201d;
+}
+.demo-frame {
+  width: 100%;
+  height: 760px;
+  max-height: none;
+  border: 0;
+  display: block;
+}
+@media (max-width: 520px) {
+  .demo-modal { padding: 0; }
+  .demo-shell { width: 100%; height: 100%; max-height: 100%; border-radius: 0; }
 }

@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيادة الأمل — نظام حجز المواعيد</title>
+</head>
+<body style="margin:0;background:#06201d;">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.app{font-family:'Cairo',sans-serif;direction:rtl;min-height:680px;background:linear-gradient(160deg,#0a3d3a 0%,#0d5c52 45%,#1a7a6e 75%,#083530 100%);border-radius:16px;overflow:hidden;position:relative;}
+.overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 75%,rgba(0,180,150,.12) 0%,transparent 55%),radial-gradient(ellipse at 75% 20%,rgba(0,120,100,.18) 0%,transparent 50%);z-index:0;}
+.wrap{position:relative;z-index:1;padding:20px 20px 28px;}
+
+/* Role Switcher */
+.role-bar{display:flex;background:rgba(0,0,0,.25);border-radius:14px;padding:4px;gap:4px;margin-bottom:22px;}
+.role-btn{flex:1;padding:10px 8px;border:none;border-radius:10px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;color:rgba(255,255,255,.55);background:transparent;}
+.role-btn.active-booker{background:linear-gradient(135deg,#1aaa8a,#0f7a6a);color:#fff;box-shadow:0 2px 12px rgba(0,180,140,.35);}
+.role-btn.active-admin{background:linear-gradient(135deg,#c97a20,#a05a10);color:#fff;box-shadow:0 2px 12px rgba(200,120,30,.35);}
+
+/* Shared Title */
+.pg-title{font-size:26px;font-weight:900;color:#fff;text-align:center;margin-bottom:4px;text-shadow:0 2px 16px rgba(0,0,0,.35);}
+.pg-sub{font-size:12px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:20px;}
+
+/* Days Grid */
+.days-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.day-card{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.65);border-radius:16px;padding:16px 10px 14px;cursor:pointer;transition:all .22s;min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;backdrop-filter:blur(3px);}
+.day-card:hover{background:rgba(255,255,255,.16);border-color:#fff;transform:translateY(-2px);}
+.day-card.sel{background:rgba(127,255,212,.14);border-color:#7fffd4;box-shadow:0 0 0 1px rgba(127,255,212,.3);}
+.day-card.admin-sel{background:rgba(255,165,80,.14);border-color:#ffa550;box-shadow:0 0 0 1px rgba(255,165,80,.3);}
+.day-card.closed-day{opacity:.45;border-style:dashed;}
+.day-name{font-size:16px;font-weight:700;color:#fff;}
+.day-meta{font-size:11px;color:rgba(255,255,255,.5);}
+.badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;}
+.badge-green{background:rgba(127,255,212,.2);color:#7fffd4;}
+.badge-orange{background:rgba(255,165,80,.2);color:#ffa550;}
+.badge-red{background:rgba(255,100,100,.2);color:#ff8080;}
+
+/* Panel */
+.panel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:18px;backdrop-filter:blur(5px);animation:su .28s ease;}
+@keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.panel-head{font-size:15px;font-weight:700;color:#fff;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.panel-head span{font-size:12px;font-weight:400;color:rgba(255,255,255,.5);}
+
+/* Slots */
+.slots-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px;}
+.slot{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:9px;padding:7px 3px;color:#fff;font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;text-align:center;}
+.slot:hover:not(.booked):not(.blocked):not(.sel-slot){background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);}
+.slot.sel-slot{background:rgba(127,255,212,.25);border-color:#7fffd4;color:#7fffd4;}
+.slot.booked{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.25);cursor:default;text-decoration:line-through;}
+.slot.blocked{background:rgba(255,80,80,.08);border-color:rgba(255,80,80,.25);color:rgba(255,120,120,.4);cursor:pointer;}
+.slot.blocked:hover{background:rgba(255,80,80,.15);}
+
+/* Admin slot */
+.slot.admin-booked{background:rgba(255,165,80,.15);border-color:rgba(255,165,80,.5);color:#ffa550;cursor:pointer;}
+.slot.admin-booked:hover{background:rgba(255,165,80,.25);}
+.slot.admin-open{background:rgba(127,255,212,.1);border-color:rgba(127,255,212,.3);color:rgba(127,255,212,.8);cursor:pointer;}
+.slot.admin-open:hover{background:rgba(127,255,212,.2);}
+.slot.admin-blocked{background:rgba(255,80,80,.08);border-color:rgba(255,80,80,.2);color:rgba(255,120,120,.45);cursor:pointer;}
+.slot.admin-blocked:hover{background:rgba(255,80,80,.18);}
+
+/* Form */
+.form-col{display:flex;flex-direction:column;gap:9px;animation:su .22s ease;}
+.inp{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:9px;padding:9px 12px;color:#fff;font-family:'Cairo',sans-serif;font-size:13px;outline:none;width:100%;}
+.inp::placeholder{color:rgba(255,255,255,.38);}
+.inp:focus{border-color:rgba(127,255,212,.6);background:rgba(255,255,255,.14);}
+.inp.err{border-color:rgba(255,100,100,.7);}
+.btn-confirm{background:linear-gradient(135deg,#0f7a6a,#1aaa90);border:none;border-radius:11px;padding:11px;color:#fff;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;width:100%;}
+.btn-confirm:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-cancel{background:transparent;border:1px solid rgba(255,255,255,.25);border-radius:11px;padding:9px;color:rgba(255,255,255,.65);font-family:'Cairo',sans-serif;font-size:13px;cursor:pointer;width:100%;transition:all .2s;}
+.btn-cancel:hover{background:rgba(255,255,255,.08);color:#fff;}
+
+/* Booking items */
+.b-item{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;background:rgba(255,255,255,.07);border-radius:9px;margin-bottom:6px;font-size:12px;}
+.b-name{font-weight:700;color:#fff;}
+.b-time{color:rgba(255,255,255,.5);margin-right:8px;}
+.b-phone{color:rgba(255,255,255,.35);font-size:11px;}
+.b-del{background:none;border:none;color:rgba(255,100,100,.6);cursor:pointer;font-size:13px;padding:2px 6px;border-radius:6px;transition:.2s;}
+.b-del:hover{background:rgba(255,100,100,.15);color:#ff8080;}
+
+/* Admin controls */
+.admin-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.6);}
+.leg-dot{width:8px;height:8px;border-radius:50%;}
+.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.stat-card{background:rgba(255,255,255,.08);border-radius:10px;padding:10px;text-align:center;}
+.stat-num{font-size:20px;font-weight:900;color:#fff;}
+.stat-label{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+/* Toast */
+.toast{background:rgba(127,255,212,.12);border:1px solid rgba(127,255,212,.35);border-radius:10px;padding:11px 14px;color:#7fffd4;font-size:13px;font-weight:600;text-align:center;animation:su .28s ease;margin-bottom:12px;}
+.toast-warn{background:rgba(255,165,80,.12);border-color:rgba(255,165,80,.35);color:#ffa550;}
+
+/* Detail popup */
+.detail-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,165,80,.3);border-radius:12px;padding:14px;margin-top:10px;animation:su .22s ease;}
+.detail-row{display:flex;gap:8px;margin-bottom:6px;font-size:13px;}
+.detail-lbl{color:rgba(255,255,255,.5);min-width:70px;}
+.detail-val{color:#fff;font-weight:600;}
+
+/* Close btn */
+.x-btn{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:18px;line-height:1;padding:0 4px;transition:.2s;}
+.x-btn:hover{color:#fff;}
+
+.divider{height:1px;background:rgba(255,255,255,.1);margin:12px 0;}
+</style>
+
+<div class="app">
+  <div class="overlay"></div>
+  <div class="wrap">
+
+    <div class="role-bar">
+      <button class="role-btn active-booker" id="btnBooker" onclick="switchRole('booker')">🗓 الحاجز</button>
+      <button class="role-btn" id="btnAdmin" onclick="switchRole('admin')">⚙️ المستقبل</button>
+    </div>
+
+    <div id="mainView"></div>
+  </div>
+</div>
+
+<script>
+const DAYS=[
+  {id:'sat',name:'السبت'},{id:'sun',name:'الأحد'},{id:'mon',name:'الاثنين'},
+  {id:'tue',name:'الثلاثاء'},{id:'wed',name:'الأربعاء'},{id:'thu',name:'الخميس'}
+];
+const ALL_SLOTS=['9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','1:00','1:30','2:00','2:30','3:00','3:30','4:00','4:30'];
+
+let role='booker';
+let bookings={};    // {dayId:[{slot,name,phone,note}]}
+let blocked={};     // {dayId:[slot,...]}  — admin blocked slots
+let closedDays={}; // {dayId:true}
+
+let bSelDay=null, bSelSlot=null, bStep=1;
+let aSelDay=null, aViewSlot=null;
+let toast=null, toastTimer=null;
+
+function showToast(msg,warn=false){
+  toast={msg,warn};
+  render();
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{toast=null;render();},3000);
+}
+
+function switchRole(r){
+  role=r;
+  bSelDay=null;bSelSlot=null;bStep=1;
+  aSelDay=null;aViewSlot=null;toast=null;
+  document.getElementById('btnBooker').className='role-btn'+(r==='booker'?' active-booker':'');
+  document.getElementById('btnAdmin').className='role-btn'+(r==='admin'?' active-admin':'');
+  render();
+}
+
+function render(){
+  document.getElementById('mainView').innerHTML = role==='booker' ? renderBooker() : renderAdmin();
+}
+
+/* ─── BOOKER ─── */
+function renderBooker(){
+  const toastHtml=toast?`<div class="toast${toast.warn?' toast-warn':''}">${toast.msg}</div>`:'';
+  const daysHtml=DAYS.map(d=>{
+    const cnt=(bookings[d.id]||[]).length;
+    const isBlocked=closedDays[d.id];
+    const sel=bSelDay===d.id;
+    return`<div class="day-card${sel?' sel':''}${isBlocked?' closed-day':''}" onclick="bSelectDay('${d.id}')">
+      <div class="day-name">${d.name}</div>
+      ${isBlocked?'<span class="badge badge-red">مغلق</span>':cnt>0?`<span class="badge badge-green">${cnt} حجز</span>`:'<div class="day-meta">متاح</div>'}
+    </div>`;
+  }).join('');
+
+  let panelHtml='';
+  if(bSelDay){
+    const day=DAYS.find(d=>d.id===bSelDay);
+    const isClose=closedDays[bSelDay];
+    if(isClose){
+      panelHtml=`<div class="panel"><div style="text-align:center;color:rgba(255,255,255,.5);padding:20px 0;font-size:14px;">هذا اليوم مغلق حالياً</div></div>`;
+    } else {
+      const slotsHtml=ALL_SLOTS.map(s=>{
+        const isBooked=(bookings[bSelDay]||[]).some(b=>b.slot===s);
+        const isBlk=(blocked[bSelDay]||[]).includes(s);
+        const isSel=bSelSlot===s;
+        let cls='slot';
+        if(isBooked||isBlk) cls+=' booked';
+        else if(isSel) cls+=' sel-slot';
+        return`<button class="${cls}" onclick="bSelectSlot('${s}')">${s}</button>`;
+      }).join('');
+
+      const myBookings=(bookings[bSelDay]||[]);
+      const myListHtml=myBookings.length?`<div class="divider"></div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">الحجوزات الحالية</div>`+
+        myBookings.map(b=>`<div class="b-item">
+          <div><span class="b-name">${b.name}</span><span class="b-time">${b.slot}</span>${b.phone?`<span class="b-phone">${b.phone}</span>`:''}</div>
+          <button class="b-del" onclick="bDelete('${bSelDay}','${b.slot}')">✕</button>
+        </div>`).join(''):'';
+
+      const formHtml=bSelSlot&&bStep===3?`<div class="divider"></div>
+        <div style="font-size:12px;color:rgba(127,255,212,.8);margin-bottom:8px;">📅 ${day.name} — الساعة ${bSelSlot}</div>
+        <div class="form-col">
+          <input class="inp" id="bName" placeholder="الاسم الكامل *" />
+          <input class="inp" id="bPhone" placeholder="رقم الهاتف (اختياري)" type="tel"/>
+          <input class="inp" id="bNote" placeholder="ملاحظة (اختياري)" />
+          <button class="btn-confirm" onclick="bConfirm()">✓ تأكيد الحجز</button>
+          <button class="btn-cancel" onclick="bCancelForm()">إلغاء</button>
+        </div>`:'';
+
+      panelHtml=`<div class="panel">
+        <div class="panel-head">يوم ${day.name}<span>اضغط على الوقت لحجزه</span></div>
+        <div class="slots-grid">${slotsHtml}</div>
+        ${myListHtml}
+        ${formHtml}
+      </div>`;
+    }
+  }
+  return`
+    <div class="pg-title">مواعيد الحجز</div>
+    <div class="pg-sub">اختر اليوم والوقت المناسب</div>
+    ${toastHtml}
+    <div class="days-grid">${daysHtml}</div>
+    ${panelHtml}`;
+}
+
+function bSelectDay(id){
+  if(bSelDay===id){bSelDay=null;bStep=1;}else{bSelDay=id;bStep=2;bSelSlot=null;}
+  render();
+}
+
+function bSelectSlot(s){
+  const isBooked=(bookings[bSelDay]||[]).some(b=>b.slot===s);
+  const isBlk=(blocked[bSelDay]||[]).includes(s);
+  if(isBooked||isBlk) return;
+  bSelSlot=s;bStep=3;render();
+}
+
+function bCancelForm(){bSelSlot=null;bStep=2;render();}
+
+function bConfirm(){
+  const name=(document.getElementById('bName')||{}).value?.trim();
+  const phone=(document.getElementById('bPhone')||{}).value?.trim();
+  const note=(document.getElementById('bNote')||{}).value?.trim();
+  if(!name){const el=document.getElementById('bName');if(el){el.className='inp err';el.focus();}return;}
+  if(!bookings[bSelDay]) bookings[bSelDay]=[];
+  bookings[bSelDay].push({slot:bSelSlot,name,phone,note});
+  const s=bSelSlot; bSelSlot=null;bStep=2;
+  showToast(`✅ تم حجز موعد ${name} بنجاح — الساعة ${s}`);
+}
+
+function bDelete(dayId,slot){
+  bookings[dayId]=(bookings[dayId]||[]).filter(b=>b.slot!==slot);
+  if(bSelSlot===slot) bSelSlot=null;
+  render();
+}
+
+/* ─── ADMIN ─── */
+function renderAdmin(){
+  const toastHtml=toast?`<div class="toast${toast.warn?' toast-warn':''}">${toast.msg}</div>`:'';
+  const totalB=Object.values(bookings).reduce((a,v)=>a+v.length,0);
+  const totalBlk=Object.values(blocked).reduce((a,v)=>a+v.length,0);
+  const closedCnt=Object.values(closedDays).filter(Boolean).length;
+
+  const statsHtml=`<div class="admin-stats">
+    <div class="stat-card"><div class="stat-num" style="color:#7fffd4;">${totalB}</div><div class="stat-label">حجز مؤكد</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#ffa550;">${totalBlk}</div><div class="stat-label">وقت محجوب</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#ff8080;">${closedCnt}</div><div class="stat-label">يوم مغلق</div></div>
+  </div>`;
+
+  const daysHtml=DAYS.map(d=>{
+    const cnt=(bookings[d.id]||[]).length;
+    const blkCnt=(blocked[d.id]||[]).length;
+    const isClosed=closedDays[d.id];
+    const sel=aSelDay===d.id;
+    return`<div class="day-card${sel?' admin-sel':''}${isClosed?' closed-day':''}" onclick="aSelectDay('${d.id}')">
+      <div class="day-name">${d.name}</div>
+      ${isClosed?'<span class="badge badge-red">مغلق</span>':
+        cnt>0?`<span class="badge badge-orange">${cnt} حجز</span>`:
+        blkCnt>0?`<span class="badge badge-red">${blkCnt} محجوب</span>`:
+        '<div class="day-meta">متاح</div>'}
+    </div>`;
+  }).join('');
+
+  let panelHtml='';
+  if(aSelDay){
+    const day=DAYS.find(d=>d.id===aSelDay);
+    const isClosed=closedDays[aSelDay];
+
+    const legendHtml=`<div class="admin-legend">
+      <div class="leg"><div class="leg-dot" style="background:#7fffd4;"></div>متاح</div>
+      <div class="leg"><div class="leg-dot" style="background:#ffa550;"></div>محجوز</div>
+      <div class="leg"><div class="leg-dot" style="background:#ff8080;"></div>محجوب</div>
+    </div>`;
+
+    const slotsHtml=ALL_SLOTS.map(s=>{
+      const bk=(bookings[aSelDay]||[]).find(b=>b.slot===s);
+      const isBlk=(blocked[aSelDay]||[]).includes(s);
+      let cls='slot ';
+      if(bk) cls+='admin-booked';
+      else if(isBlk) cls+='admin-blocked';
+      else cls+='admin-open';
+      return`<button class="${cls}" onclick="aSlotClick('${s}')">${s}</button>`;
+    }).join('');
+
+    let detailHtml='';
+    if(aViewSlot){
+      const bk=(bookings[aSelDay]||[]).find(b=>b.slot===aViewSlot);
+      const isBlk=(blocked[aSelDay]||[]).includes(aViewSlot);
+      if(bk){
+        detailHtml=`<div class="detail-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:13px;font-weight:700;color:#ffa550;">تفاصيل الحجز — ${aViewSlot}</span>
+            <button class="x-btn" onclick="aViewSlot=null;render()">✕</button>
+          </div>
+          <div class="detail-row"><span class="detail-lbl">الاسم:</span><span class="detail-val">${bk.name}</span></div>
+          ${bk.phone?`<div class="detail-row"><span class="detail-lbl">الهاتف:</span><span class="detail-val">${bk.phone}</span></div>`:''}
+          ${bk.note?`<div class="detail-row"><span class="detail-lbl">ملاحظة:</span><span class="detail-val">${bk.note}</span></div>`:''}
+          <button class="b-del" style="margin-top:8px;font-size:12px;padding:5px 12px;" onclick="aDeleteBooking('${aSelDay}','${aViewSlot}')">🗑 حذف الحجز</button>
+        </div>`;
+      } else if(isBlk){
+        detailHtml=`<div class="detail-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:700;color:#ff8080;">وقت محجوب — ${aViewSlot}</span>
+            <button class="x-btn" onclick="aViewSlot=null;render()">✕</button>
+          </div>
+          <button class="btn-confirm" style="background:linear-gradient(135deg,#0f7a6a,#1aaa90);" onclick="aUnblock('${aSelDay}','${aViewSlot}')">✓ فتح هذا الوقت</button>
+        </div>`;
+      } else {
+        detailHtml=`<div class="detail-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:700;color:#7fffd4;">وقت متاح — ${aViewSlot}</span>
+            <button class="x-btn" onclick="aViewSlot=null;render()">✕</button>
+          </div>
+          <button class="btn-cancel" onclick="aBlock('${aSelDay}','${aViewSlot}')">🚫 حجب هذا الوقت</button>
+        </div>`;
+      }
+    }
+
+    const allDayBookings=(bookings[aSelDay]||[]);
+
+    const closeBtn=isClosed
+      ?`<button class="btn-confirm" style="background:linear-gradient(135deg,#0f7a6a,#1aaa90);margin-top:10px;" onclick="aOpenDay('${aSelDay}')">✓ فتح يوم ${day.name}</button>`
+      :`<button class="btn-cancel" style="border-color:rgba(255,80,80,.4);color:rgba(255,120,120,.8);margin-top:10px;" onclick="aCloseDay('${aSelDay}')">🚫 إغلاق يوم ${day.name} كاملاً</button>`;
+
+    panelHtml=`<div class="panel">
+      <div class="panel-head">إدارة يوم ${day.name}<span>اضغط على وقت لإدارته</span></div>
+      ${legendHtml}
+      <div class="slots-grid">${slotsHtml}</div>
+      ${detailHtml}
+      ${allDayBookings.length>0?`<div class="divider"></div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">جميع الحجوزات</div>`+
+        allDayBookings.map(b=>`<div class="b-item">
+          <div><span class="b-name">${b.name}</span><span class="b-time">${b.slot}</span>${b.phone?`<span class="b-phone">${b.phone}</span>`:''}</div>
+          <button class="b-del" onclick="aDeleteBooking('${aSelDay}','${b.slot}')">✕</button>
+        </div>`).join(''):''}
+      ${closeBtn}
+    </div>`;
+  }
+
+  return`
+    <div class="pg-title">لوحة المستقبل</div>
+    <div class="pg-sub">إدارة المواعيد والحجوزات</div>
+    ${toastHtml}
+    ${statsHtml}
+    <div class="days-grid">${daysHtml}</div>
+    ${panelHtml}`;
+}
+
+function aSelectDay(id){aSelDay=aSelDay===id?null:id;aViewSlot=null;render();}
+
+function aSlotClick(s){aViewSlot=aViewSlot===s?null:s;render();}
+
+function aBlock(dayId,slot){
+  if(!blocked[dayId]) blocked[dayId]=[];
+  if(!blocked[dayId].includes(slot)) blocked[dayId].push(slot);
+  aViewSlot=null;showToast(`⛔ تم حجب الوقت ${slot}`,true);
+}
+
+function aUnblock(dayId,slot){
+  blocked[dayId]=(blocked[dayId]||[]).filter(s=>s!==slot);
+  aViewSlot=null;showToast(`✅ تم فتح الوقت ${slot}`);
+}
+
+function aDeleteBooking(dayId,slot){
+  bookings[dayId]=(bookings[dayId]||[]).filter(b=>b.slot!==slot);
+  aViewSlot=null;showToast(`🗑 تم حذف الحجز بنجاح`,true);
+}
+
+function aCloseDay(dayId){
+  closedDays[dayId]=true;
+  aViewSlot=null;showToast(`🚫 تم إغلاق اليوم`,true);
+}
+
+function aOpenDay(dayId){
+  delete closedDays[dayId];
+  showToast(`✅ تم فتح اليوم`);
+}
+
+render();
+</script>
+</body>
+</html>

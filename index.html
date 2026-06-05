@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
 
   <!-- Supabase JS client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -431,12 +431,12 @@
            aria-label="مقارنة قبل وبعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
         <!-- بعد (الطبقة السفلية الكاملة) -->
         <div class="ba-layer ba-after">
-          <div class="ba-media">AZIK · After</div>
+          <img class="ba-media" src="assets/sunvest-after.png" alt="Sunvest — التصميم الجديد بعد إعادة التصميم">
           <span class="ba-tag ba-tag-after" data-ar="بعد" data-en="After" data-fr="Après">بعد</span>
         </div>
         <!-- قبل (الطبقة العلوية المقصوصة) -->
         <div class="ba-layer ba-before" id="baBefore">
-          <div class="ba-media">Old Design · Before</div>
+          <img class="ba-media" src="assets/sunvest-before.png" alt="Sunvest — التصميم القديم قبل إعادة التصميم">
           <span class="ba-tag ba-tag-before" data-ar="قبل" data-en="Before" data-fr="Avant">قبل</span>
         </div>
         <!-- المقبض -->
@@ -447,6 +447,42 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Live Work — تجربة حية -->
+  <section class="live-work" id="live-work">
+    <div class="container">
+      <div class="section-header reveal" data-num="08">
+        <span class="sub-title" data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
+        <h2>
+          <span data-ar="جرّب" data-en="Try" data-fr="Essayez">جرّب</span>
+          <span class="accent" data-ar="مشروعاً صنعناه." data-en="something we built." data-fr="ce qu'on a créé.">مشروعاً صنعناه.</span>
+        </h2>
+        <p data-ar="اضغط على البطاقة لفتح التطبيق داخل الصفحة وتجربته بنفسك."
+           data-en="Tap the card to open the live app inside this page and try it yourself."
+           data-fr="Cliquez sur la carte pour ouvrir l'application en direct et l'essayer.">
+          اضغط على البطاقة لفتح التطبيق داخل الصفحة وتجربته بنفسك.
+        </p>
+      </div>
+
+      <article class="portfolio-item live-card reveal">
+        <a class="portfolio-link js-demo"
+           href="booking_dual_role_app.html"
+           data-demo="booking_dual_role_app.html"
+           data-demo-title="عيادة الأمل — نظام حجز المواعيد"
+           aria-label="عيادة الأمل — نظام حجز المواعيد (افتح التجربة الحية)">
+          <img class="portfolio-media" src="assets/al-amal-clinic.png" alt="نظام حجز مواعيد عيادة الأمل">
+          <span class="portfolio-live" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
+            <span data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
+          </span>
+          <div class="portfolio-cap">
+            <span class="portfolio-tag" data-ar="تطبيق حجز مواعيد" data-en="Booking app" data-fr="App de réservation">تطبيق حجز مواعيد</span>
+            <h3 data-ar="عيادة الأمل" data-en="Al-Amal Clinic" data-fr="Clinique Al-Amal">عيادة الأمل</h3>
+          </div>
+        </a>
+      </article>
     </div>
   </section>
 
@@ -924,6 +960,25 @@
           data-fr="Contactez-nous sur WhatsApp">تواصل عبر واتساب</span>
   </a>
 
+  <!-- Live demo modal — نافذة تجربة حيّة داخل الصفحة -->
+  <div class="demo-modal" id="demoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="تجربة حية">
+    <div class="demo-backdrop" data-demo-close></div>
+    <div class="demo-shell">
+      <div class="demo-bar">
+        <span class="demo-bar-title" id="demoTitle">تجربة حية</span>
+        <div class="demo-bar-actions">
+          <a class="demo-open" id="demoOpen" href="#" target="_blank" rel="noopener" title="فتح في تبويب">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
+          </a>
+          <button class="demo-close" data-demo-close aria-label="إغلاق" type="button">&times;</button>
+        </div>
+      </div>
+      <div class="demo-frame-wrap">
+        <iframe class="demo-frame" id="demoFrame" title="تجربة حية" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- Back to top — زر العودة للأعلى -->
   <button class="to-top" id="toTop" type="button" aria-label="العودة للأعلى">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -931,6 +986,6 @@
     </svg>
   </button>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
