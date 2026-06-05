@@ -39,7 +39,6 @@
   } else {
     try {
       sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      console.log('[AZIK] Supabase client ready:', SUPABASE_URL);
     } catch (e) {
       console.error('[AZIK] Supabase init failed:', e);
     }
@@ -555,6 +554,15 @@
       }
 
       const fd = new FormData(contactForm);
+
+      // honeypot: إذا اتعمّر هذا الحقل المخفي = بوت. نوقفو بصمت ونوهمو بالنجاح.
+      if ((fd.get('website') || '').toString().trim() !== '') {
+        formStatus.className = 'form-status success';
+        formStatus.textContent = FORM_MSG.success[currentLang];
+        contactForm.reset();
+        return;
+      }
+
       const payload = {
         name: (fd.get('name') || '').toString().trim(),
         email: (fd.get('email') || '').toString().trim(),
@@ -566,7 +574,8 @@
         language: currentLang
       };
 
-      if (!payload.name || !payload.email || !payload.message) {
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
+      if (!payload.name || !payload.email || !payload.message || !emailOk) {
         formStatus.className = 'form-status error';
         formStatus.textContent = FORM_MSG.error[currentLang];
         return;
@@ -577,7 +586,6 @@
       formStatus.textContent = FORM_MSG.loading[currentLang];
 
       try {
-        console.log('[AZIK] Submitting lead:', payload);
         const { error } = await sb
           .from('leads')
           .insert(payload);
@@ -586,7 +594,6 @@
           console.error('[AZIK] Supabase error full:', JSON.stringify(error, null, 2));
           throw error;
         }
-        console.log('[AZIK] Lead saved successfully');
 
         trackEvent('form_submit', { package: payload.project_type });
 

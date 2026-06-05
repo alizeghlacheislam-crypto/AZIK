@@ -783,6 +783,12 @@
       </div>
 
       <form class="contact-form" id="contactForm" novalidate>
+        <!-- honeypot ضد البوتات — مخفي عن المستخدم الحقيقي، يملؤه البوت فقط -->
+        <div class="hp-field" aria-hidden="true">
+          <label>اترك هذا الحقل فارغاً
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
         <div class="form-grid">
           <label class="field">
             <span class="field-label" data-ar="الاسم الكامل" data-en="Full name" data-fr="Nom complet">الاسم الكامل</span>
