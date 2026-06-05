@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 
   <!-- Supabase JS client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -77,8 +77,7 @@
 
       <ul class="nav-links">
         <li><a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a></li>
-        <li><a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a></li>
-        <li><a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a></li>
+        <li><a href="#portfolio" data-ar="تجربة حية" data-en="Live demo" data-fr="Démo">تجربة حية</a></li>
         <li><a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a></li>
         <li><a href="#faq" data-ar="أسئلة" data-en="FAQ" data-fr="FAQ">أسئلة</a></li>
       </ul>
@@ -113,8 +112,7 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <a href="#services" data-ar="الخدمات" data-en="Services" data-fr="Services">الخدمات</a>
-      <a href="#portfolio" data-ar="أعمالنا" data-en="Work" data-fr="Réalisations">أعمالنا</a>
-      <a href="#testimonials" data-ar="آراء العملاء" data-en="Clients" data-fr="Avis">آراء العملاء</a>
+      <a href="#portfolio" data-ar="تجربة حية" data-en="Live demo" data-fr="Démo">تجربة حية</a>
       <a href="#pricing" data-ar="الأسعار" data-en="Pricing" data-fr="Tarifs">الأسعار</a>
       <a href="#faq" data-ar="أسئلة شائعة" data-en="FAQ" data-fr="FAQ">أسئلة شائعة</a>
       <a href="#pricing" class="btn btn-primary"
@@ -235,83 +233,39 @@
     </div>
   </section>
 
-  <!-- Portfolio — أعمالنا -->
+  <!-- Portfolio — تجربة حية -->
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-header reveal" data-num="02">
-        <span class="sub-title" data-ar="أعمالنا" data-en="Our work" data-fr="Réalisations">أعمالنا</span>
+        <span class="sub-title" data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
         <h2>
-          <span data-ar="أعمال" data-en="Work we're" data-fr="Des projets">أعمال</span>
-          <span class="accent" data-ar="نفخر بها." data-en="proud of." data-fr="dont on est fiers.">نفخر بها.</span>
+          <span data-ar="جرّب" data-en="Try" data-fr="Essayez">جرّب</span>
+          <span class="accent" data-ar="مشروعاً صنعناه." data-en="something we built." data-fr="ce qu'on a créé.">مشروعاً صنعناه.</span>
         </h2>
-        <p data-ar="نماذج من مشاريع نفّذناها — من الهوية البصرية إلى المواقع ولوحات التحكم."
-           data-en="A selection of projects we delivered — from brand identities to websites and dashboards."
-           data-fr="Une sélection de projets réalisés — de l'identité visuelle aux sites et dashboards.">
-          نماذج من مشاريع نفّذناها — من الهوية البصرية إلى المواقع ولوحات التحكم.
+        <p data-ar="نموذج حيّ من تطبيق حجز مواعيد — اضغط البطاقة لفتح التطبيق وتجربته بنفسك."
+           data-en="A live sample of an appointment-booking app — tap the card to try it in-page."
+           data-fr="Un exemple en direct d'une app de réservation — cliquez pour essayer.">
+          نموذج حيّ من تطبيق حجز مواعيد — اضغط البطاقة لفتح التطبيق وتجربته بنفسك.
         </p>
       </div>
 
-      <div class="portfolio-grid">
-
-        <article class="portfolio-item p-tall reveal" data-spotlight>
-          <image-slot id="pf-1" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
+      <article class="portfolio-item live-card reveal">
+        <a class="portfolio-link js-demo"
+           href="booking_dual_role_app.html"
+           data-demo="booking_dual_role_app.html"
+           data-demo-title="عيادة الأمل — نظام حجز المواعيد"
+           aria-label="عيادة الأمل — نظام حجز المواعيد (افتح التجربة الحية)">
+          <img class="portfolio-media" src="assets/al-amal-clinic.png" alt="نظام حجز مواعيد عيادة الأمل">
+          <span class="portfolio-live" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
+            <span data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
+          </span>
           <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="هوية بصرية" data-en="Brand identity" data-fr="Identité">هوية بصرية</span>
-            <h3 data-ar="بهجة للقهوة" data-en="Bahdja Coffee" data-fr="Bahdja Coffee">بهجة للقهوة</h3>
+            <span class="portfolio-tag" data-ar="تطبيق حجز مواعيد" data-en="Booking app" data-fr="App de réservation">تطبيق حجز مواعيد</span>
+            <h3 data-ar="عيادة الأمل" data-en="Al-Amal Clinic" data-fr="Clinique Al-Amal">عيادة الأمل</h3>
           </div>
-        </article>
-
-        <article class="portfolio-item p-wide reveal" data-spotlight>
-          <image-slot id="pf-2" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
-          <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="متجر إلكتروني" data-en="E-commerce" data-fr="E-commerce">متجر إلكتروني</span>
-            <h3 data-ar="نسمة سْتور" data-en="Nesma Store" data-fr="Nesma Store">نسمة سْتور</h3>
-          </div>
-        </article>
-
-        <article class="portfolio-item p-small reveal" data-spotlight>
-          <image-slot id="pf-3" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
-          <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="لوحة تحكم" data-en="Dashboard" data-fr="Dashboard">لوحة تحكم</span>
-            <h3 data-ar="وصّلني" data-en="Wassalni" data-fr="Wassalni">وصّلني</h3>
-          </div>
-        </article>
-
-        <article class="portfolio-item p-small reveal" data-spotlight>
-          <a class="portfolio-link js-demo"
-             href="booking_dual_role_app.html"
-             data-demo="booking_dual_role_app.html"
-             data-demo-title="عيادة الأمل — نظام حجز المواعيد"
-             aria-label="عيادة الأمل — نظام حجز المواعيد (افتح التجربة الحية)">
-            <img class="portfolio-media" src="assets/al-amal-clinic.png" alt="نظام حجز مواعيد عيادة الأمل">
-            <span class="portfolio-live" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M17 7H8M17 7v9"/></svg>
-              <span data-ar="تجربة حية" data-en="Live demo" data-fr="Démo live">تجربة حية</span>
-            </span>
-            <div class="portfolio-cap">
-              <span class="portfolio-tag" data-ar="تطبيق حجز مواعيد" data-en="Booking app" data-fr="App de réservation">تطبيق حجز مواعيد</span>
-              <h3 data-ar="عيادة الأمل" data-en="Al-Amal Clinic" data-fr="Clinique Al-Amal">عيادة الأمل</h3>
-            </div>
-          </a>
-        </article>
-
-        <article class="portfolio-item p-wide reveal" data-spotlight>
-          <image-slot id="pf-5" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
-          <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="موقع تعريفي" data-en="Website" data-fr="Site web">موقع تعريفي</span>
-            <h3 data-ar="مخبر المغرب" data-en="Maghreb Lab" data-fr="Maghreb Lab">مخبر المغرب</h3>
-          </div>
-        </article>
-
-        <article class="portfolio-item p-small reveal" data-spotlight>
-          <image-slot id="pf-6" class="portfolio-media" shape="rect" placeholder="أفلت صورة المشروع"></image-slot>
-          <div class="portfolio-cap">
-            <span class="portfolio-tag" data-ar="هوية + متجر" data-en="Brand + store" data-fr="Marque + boutique">هوية + متجر</span>
-            <h3 data-ar="سهم" data-en="Sahm" data-fr="Sahm">سهم</h3>
-          </div>
-        </article>
-
-      </div>
+        </a>
+      </article>
     </div>
   </section>
 
@@ -406,96 +360,6 @@
     </div>
   </section>
 
-
-  <!-- Testimonials Bento Grid -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-header reveal" data-num="04">
-        <span class="sub-title" data-ar="آراء العملاء" data-en="Testimonials" data-fr="Témoignages">آراء العملاء</span>
-        <h2>
-          <span data-ar="عملاء" data-en="Clients who" data-fr="Des clients">عملاء</span>
-          <span class="accent" data-ar="يثقون بنا." data-en="trust us." data-fr="qui nous font confiance.">يثقون بنا.</span>
-        </h2>
-        <p data-ar="قصص نجاح حقيقية من شركات اختارتنا لبناء هويتها الرقمية."
-           data-en="Real success stories from companies that chose us to build their digital brand."
-           data-fr="Histoires de réussite de marques qui nous ont choisis pour bâtir leur présence digitale.">
-          قصص نجاح حقيقية من شركات اختارتنا لبناء هويتها الرقمية.
-        </p>
-      </div>
-
-      <div class="bento-grid testimonials-grid">
-
-        <div class="testimonial-card reveal t-large">
-          <div class="stars" aria-label="5 / 5">★★★★★</div>
-          <p class="quote"
-             data-ar="من أول جلسة، حسّيت بليهم يفهمو رؤيتنا. الهوية اللي صمموها رفعت مستوى الماركة كاملة، والنتيجة فاقت توقعاتي بمراحل."
-             data-en="From the first call, I knew they understood our vision. The identity they delivered elevated our entire brand — well beyond expectations."
-             data-fr="Dès le premier échange, j'ai senti qu'ils comprenaient notre vision. L'identité livrée a élevé toute la marque, bien au-delà de mes attentes.">
-            من أول جلسة، حسّيت بليهم يفهمو رؤيتنا. الهوية اللي صمموها رفعت مستوى الماركة كاملة، والنتيجة فاقت توقعاتي بمراحل.
-          </p>
-          <div class="author">
-            <div class="avatar">YM</div>
-            <div class="author-info">
-              <span class="name" data-ar="ياسين مرابطي" data-en="Yacine Merabti" data-fr="Yacine Merabti">ياسين مرابطي</span>
-              <span class="company" data-ar="مؤسس · Atlas Capital" data-en="Founder · Atlas Capital" data-fr="Fondateur · Atlas Capital">مؤسس · Atlas Capital</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card reveal t-tall">
-          <div class="stars" aria-label="5 / 5">★★★★★</div>
-          <p class="quote"
-             data-ar="موقع رفع تحويلاتي للضعف في أول شهر بعد الإطلاق."
-             data-en="Our conversions doubled in the first month after launch."
-             data-fr="Nos conversions ont doublé dès le premier mois.">
-            موقع رفع تحويلاتي للضعف في أول شهر بعد الإطلاق.
-          </p>
-          <div class="author">
-            <div class="avatar">SB</div>
-            <div class="author-info">
-              <span class="name" data-ar="سارة بن عيسى" data-en="Sara Benaissa" data-fr="Sara Benaissa">سارة بن عيسى</span>
-              <span class="company" data-ar="مديرة تسويق · Souk Digital" data-en="Marketing · Souk Digital" data-fr="Marketing · Souk Digital">مديرة تسويق · Souk Digital</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card reveal t-small">
-          <div class="stars" aria-label="5 / 5">★★★★★</div>
-          <p class="quote"
-             data-ar="Dashboard يفهم البيانات بنظرة واحدة."
-             data-en="A dashboard you grasp at a glance."
-             data-fr="Un dashboard que l'on comprend d'un coup d'œil.">
-            Dashboard يفهم البيانات بنظرة واحدة.
-          </p>
-          <div class="author">
-            <div class="avatar">KZ</div>
-            <div class="author-info">
-              <span class="name" data-ar="كريم زغلاش" data-en="Karim Zeghlache" data-fr="Karim Zeghlache">كريم زغلاش</span>
-              <span class="company" data-ar="CTO · Maghreb Lab" data-en="CTO · Maghreb Lab" data-fr="CTO · Maghreb Lab">CTO · Maghreb Lab</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card reveal t-wide">
-          <div class="stars" aria-label="5 / 5">★★★★★</div>
-          <p class="quote"
-             data-ar="تجربة مستخدم مذهلة، مدروسة بأدق التفاصيل، وفريق محترف من البداية حتى التسليم. أنصح بهم بقوة."
-             data-en="Stunning UX, attention to every detail, and a pro team from kickoff to delivery. Highly recommended."
-             data-fr="UX impressionnante, attention aux moindres détails, équipe pro du début à la livraison. Hautement recommandé.">
-            تجربة مستخدم مذهلة، مدروسة بأدق التفاصيل، وفريق محترف من البداية حتى التسليم. أنصح بهم بقوة.
-          </p>
-          <div class="author">
-            <div class="avatar">LB</div>
-            <div class="author-info">
-              <span class="name" data-ar="لينا بوزيدي" data-en="Lina Bouzidi" data-fr="Lina Bouzidi">لينا بوزيدي</span>
-              <span class="company" data-ar="مديرة المنتج · Quantum App" data-en="Product Lead · Quantum App" data-fr="Product Lead · Quantum App">مديرة المنتج · Quantum App</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- Infinite Marquee — كلمات الهوية بخط مفرّغ ضخم -->
   <div class="marquee" aria-hidden="true">
@@ -1004,6 +868,6 @@
   </button>
 
   <script src="image-slot.js"></script>
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

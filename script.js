@@ -627,62 +627,8 @@
     });
   }
 
-  /* ============================================
-     CMS LOADER — Testimonials only
-     - Fetches from Supabase if configured
-     - Falls back gracefully to hardcoded HTML if not
-     ============================================ */
-  async function loadCMS() {
-    if (!sb) return;
-
-    try {
-      const { data: tests } = await sb
-        .from('testimonials')
-        .select('*')
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true });
-
-      if (tests && tests.length) renderTestimonials(tests);
-    } catch (e) { /* silent — keep hardcoded */ }
-  }
-
-  function renderTestimonials(items) {
-    const grid = document.querySelector('.testimonials-grid');
-    if (!grid) return;
-    const sizeClass = {
-      large: 't-large',
-      tall: 't-tall',
-      small: 't-small',
-      wide: 't-wide'
-    };
-    grid.innerHTML = items.map((t) => {
-      const sk = sizeClass[t.size] || 't-small';
-      const stars = '★'.repeat(Math.max(1, Math.min(5, t.rating || 5)));
-      const initials = t.initials || (t.name || '?').split(' ').map(s => s[0]).join('').slice(0, 2).toUpperCase();
-      return `
-        <div class="testimonial-card ${sk}">
-          <div class="stars" aria-label="${t.rating || 5} / 5">${stars}</div>
-          <p class="quote"
-             data-ar="${esc(t.quote_ar)}"
-             data-en="${esc(t.quote_en)}"
-             data-fr="${esc(t.quote_fr)}">${esc(t.quote_ar)}</p>
-          <div class="author">
-            <div class="avatar">${esc(initials)}</div>
-            <div class="author-info">
-              <span class="name">${esc(t.name || '')}</span>
-              <span class="company"
-                    data-ar="${esc(t.role_ar)}"
-                    data-en="${esc(t.role_en)}"
-                    data-fr="${esc(t.role_fr)}">${esc(t.role_ar)}</span>
-            </div>
-          </div>
-        </div>`;
-    }).join('');
-    document.querySelectorAll('.testimonials-grid [data-ar]').forEach((el) => {
-      const v = el.dataset[currentLang];
-      if (v !== undefined) el.textContent = v;
-    });
-  }
+  /* Testimonials loader removed — section deleted until real testimonials exist */
+  async function loadCMS() { /* placeholder for future CMS hooks */ }
 
   function esc(s) {
     if (s == null) return '';
