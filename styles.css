@@ -2577,29 +2577,26 @@ html[data-theme="light"] .to-top {
 .ba-layer {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
-.ba-before {
-  width: 50%;
-  overflow: hidden;
-  border-inline-end: 2px solid rgba(255, 107, 0, 0.9);
-  z-index: 2;
-}
+/* الصورتان متطابقتان تماماً: نفس الإطار، نفس الـ object-fit/position */
 .ba-media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
   pointer-events: none;
 }
-/* في الطبقة المقصوصة يجب أن تبقى الصورة بعرض الحاوية كاملاً حتى لا تنضغط */
-.ba-before .ba-media {
-  width: 980px;
-  max-width: none;
-}
-@media (max-width: 1020px) {
-  .ba-before .ba-media { width: 96vw; }
+/* الطبقة "قبل" تُقصّ بـ clip-path من اليمين — لا تغيير في حجم/موضع الصورة */
+.ba-before {
+  z-index: 2;
+  clip-path: inset(0 calc(100% - var(--ba-pct, 50%)) 0 0);
+  -webkit-clip-path: inset(0 calc(100% - var(--ba-pct, 50%)) 0 0);
+  transition: clip-path 0.05s linear, -webkit-clip-path 0.05s linear;
 }
 .ba-tag {
   position: absolute;
@@ -2616,9 +2613,10 @@ html[data-theme="light"] .to-top {
   color: #fff;
   backdrop-filter: blur(6px);
 }
-.ba-tag-before { inset-inline-start: 16px; }
+/* مواضع ثابتة فيزيائياً (مش logical) باش تطابق اتجاه clip ثابت في RTL و LTR */
+.ba-tag-before { left: 16px; }
 .ba-tag-after {
-  inset-inline-end: 16px;
+  right: 16px;
   color: var(--brand-orange, #FF6B00);
   border-color: rgba(255, 107, 0, 0.4);
 }

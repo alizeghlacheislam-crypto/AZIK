@@ -970,7 +970,8 @@
 
     function setPos(pct) {
       pct = Math.max(0, Math.min(100, pct));
-      before.style.width = pct + '%';
+      // CSS variable يتحكم في clip-path للطبقة "قبل" — الصورتان تبقيان بنفس الحجم تماماً
+      wrap.style.setProperty('--ba-pct', pct + '%');
       handle.style.left = pct + '%';
       wrap.setAttribute('aria-valuenow', Math.round(pct));
     }
