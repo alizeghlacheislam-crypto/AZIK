@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /booking_dual_role_app.html
+
+Sitemap: https://friendly-bonbon-0ac336.netlify.app/sitemap.xml

@@ -18,6 +18,29 @@
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
+  /* Hero video gate — يحمّل الفيديو فقط على Desktop بدون save-data
+     على الموبايل/save-data/connection بطيء: يبقى الـ poster فقط */
+  (function gateHeroVideo() {
+    const v = document.querySelector('video.hero-video-bg');
+    if (!v) return;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    const slowConn = navigator.connection &&
+      /^(slow-2g|2g|3g)$/.test(navigator.connection.effectiveType || '');
+    const skip = isTouch || saveData || slowConn || prefersReducedMotion;
+    if (skip) return; // poster image only
+
+    const src = v.dataset.src;
+    if (!src) return;
+    const source = document.createElement('source');
+    source.src = src;
+    source.type = 'video/mp4';
+    v.appendChild(source);
+    v.setAttribute('preload', 'metadata');
+    v.load();
+    const tryPlay = () => v.play().catch(() => {});
+    if (v.readyState >= 2) tryPlay(); else v.addEventListener('loadeddata', tryPlay, { once: true });
+  })();
+
   const html = document.documentElement;
 
   /* ============================================
