@@ -847,7 +847,7 @@
     try { saved = localStorage.getItem('azik-lang'); } catch (e) {}
     const lang = saved || html.getAttribute('lang') || 'ar';
     setLang(lang);
-    // typer سيبدأ بعد انتهاء الـ Preloader (في runPreloader)
+    if (typer) typer.start();
   })();
 
   /* ============================================
@@ -894,58 +894,6 @@
     if (!prefersReducedMotion) {
       window.addEventListener('scroll', onScroll, { passive: true });
     }
-  })();
-
-  /* ============================================
-     PREMIUM PRELOADER — عدّاد من 00 إلى 100 + slide-up
-     ============================================ */
-  (function runPreloader() {
-    const overlay = document.getElementById('preloader');
-    const counter = document.getElementById('preloaderCounter');
-    const bar = document.getElementById('preloaderBar');
-
-    const onDone = () => {
-      if (typer) typer.start();
-    };
-
-    if (!overlay) { onDone(); return; }
-
-    document.body.classList.add('preloading');
-
-    const duration = prefersReducedMotion ? 400 : 2200;
-    const start = performance.now();
-
-    function tick(now) {
-      const elapsed = now - start;
-      const p = Math.min(1, elapsed / duration);
-      // ease-out cubic (سريع البداية، يبطئ في النهاية)
-      const eased = 1 - Math.pow(1 - p, 3);
-      const value = Math.floor(eased * 100);
-
-      if (counter) counter.textContent = String(value).padStart(2, '0');
-      if (bar) bar.style.width = value + '%';
-
-      if (p < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        if (counter) counter.textContent = '100';
-        if (bar) bar.style.width = '100%';
-
-        // انتظار قصير عند 100% قبل الـ slide-up
-        setTimeout(() => {
-          overlay.classList.add('done');
-          document.body.classList.remove('preloading');
-          document.body.classList.add('loaded');
-          onDone();
-          // إزالة العنصر من الـ DOM بعد انتهاء الـ transition
-          setTimeout(() => {
-            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-          }, 1200);
-        }, 280);
-      }
-    }
-
-    requestAnimationFrame(tick);
   })();
 
   // Load CMS data after init (non-blocking)
