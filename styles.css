@@ -2570,33 +2570,37 @@ html[data-theme="light"] .to-top {
   user-select: none;
   touch-action: pan-y;
   outline: none;
+  /* قيمة افتراضية للقصّ — JS يحدّثها أثناء السحب */
+  --ba-pct: 50%;
 }
 .ba-compare:focus-visible {
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.5), var(--shadow-soft);
 }
 .ba-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 /* الصورتان متطابقتان تماماً: نفس الإطار، نفس الـ object-fit/position */
 .ba-media {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
   pointer-events: none;
+  -webkit-user-drag: none;
 }
-/* الطبقة "قبل" تُقصّ بـ clip-path من اليمين — لا تغيير في حجم/موضع الصورة */
+/* الطبقة "قبل" تُقصّ بـ clip-path من اليمين — بدون transition باش الـ handle يتطابق مع حافة القصّ تماماً أثناء السحب */
 .ba-before {
   z-index: 2;
-  clip-path: inset(0 calc(100% - var(--ba-pct, 50%)) 0 0);
-  -webkit-clip-path: inset(0 calc(100% - var(--ba-pct, 50%)) 0 0);
-  transition: clip-path 0.05s linear, -webkit-clip-path 0.05s linear;
+  clip-path: inset(0 calc(100% - var(--ba-pct)) 0 0);
+  -webkit-clip-path: inset(0 calc(100% - var(--ba-pct)) 0 0);
 }
 .ba-tag {
   position: absolute;

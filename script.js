@@ -975,6 +975,8 @@
       handle.style.left = pct + '%';
       wrap.setAttribute('aria-valuenow', Math.round(pct));
     }
+    // initial sync: نضمن أن الـ handle و clip-path يبدآن من نفس النقطة
+    setPos(50);
     let pendingPct = null, raf = null;
     function schedule(pct) {
       pendingPct = pct;
