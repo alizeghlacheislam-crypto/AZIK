@@ -33,9 +33,18 @@
   <meta name="twitter:description" content="هوية بصرية، مواقع، لوحات تحكم — بأسعار شفافة وملكية كاملة للملفات.">
   <meta name="twitter:image" content="https://friendly-bonbon-0ac336.netlify.app/logo.png">
 
-  <!-- Favicon -->
+  <!-- Favicon + PWA icons -->
   <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
+
+  <!-- PWA manifest — تثبيت اختياري على Desktop و Mobile -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AZIK">
+  <meta name="mobile-web-app-capable" content="yes">
 
   <!-- Schema.org structured data — Organization + LocalBusiness + Services -->
   <script type="application/ld+json">
@@ -957,5 +966,29 @@
 
   <script src="image-slot.js"></script>
   <script src="script.js?v=16"></script>
+
+  <!-- PWA Service Worker registration — اختياري، صامت، fail-safe.
+       يتجاهل localhost / 127.0.0.1 / 192.168.x / 10.x باش ما يعطّلش التطوير.
+       فشل التسجيل = الموقع يخدم عادي بدون أي تأثير. -->
+  <script>
+    (function registerSW() {
+      if (!('serviceWorker' in navigator)) return;
+      try {
+        var host = location.hostname;
+        var isLocal =
+          host === 'localhost' ||
+          host === '127.0.0.1' ||
+          /^192\.168\./.test(host) ||
+          /^10\./.test(host) ||
+          /^172\.(1[6-9]|2[0-9]|3[01])\./.test(host);
+        if (isLocal) return; // skip dev
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/service-worker.js', { scope: '/' })
+            .catch(function () { /* silent — الموقع لا يعتمد على PWA */ });
+        });
+      } catch (e) { /* silent */ }
+    })();
+  </script>
 </body>
 </html>
