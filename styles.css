@@ -1792,7 +1792,9 @@ p,
 /* ==============================================
    SCROLL REVEAL — fade + slide-in عند الظهور
    ============================================== */
-.reveal {
+/* Reveal: مخفي فقط لو JS شغّال (html.js يُضاف من inline script في head)
+   لو JS مش فعّال، المحتوى يبقى مرئي مباشرة — fail-safe */
+html.js .reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1800,6 +1802,7 @@ p,
   will-change: opacity, transform;
 }
 
+html.js .reveal.visible,
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
